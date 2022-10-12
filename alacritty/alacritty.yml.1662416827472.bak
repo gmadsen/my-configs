@@ -1,0 +1,67 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Import additional configuration files
+#import:
+  # - /home/madsen/.config/alacritty/fonts.yml
+  # - /home/madsen/.config/alacritty/colors.yml
+
+shell:
+  program: /usr/bin/fish
+  args:
+    - --login
+
+window:
+  dimensions:
+    columns: 84
+    lines: 22
+  padding:
+    x: 10
+    y: 10
+
+  decorations: full
+  startup_mode: Windowed
+  dynamic_title: true
+
+scrolling:
+  history: 10000
+  multiplier: 3
+  ## Mouse Options
+  #mouse:
+
+## Cursor
+cursor:
+  style:
+    shape: Block
+    blinking: On
+  unfocused_hollow: false
+
+## Reload config changes automatically 
+live_config_reload: true
+colors:
+  # Default colors
+  primary:
+    background: '#282a36'
+    foreground: '#f8f8f2'
+
+  # Normal colors
+  normal:
+    black: '#000000'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#caa9fa'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#bfbfbf'
+
+  # Bright colors
+  bright:
+    black: '#575b70'
+    red: '#ff6e67'
+    green: '#5af78e'
+    yellow: '#f4f99d'
+    blue: '#caa9fa'
+    magenta: '#ff92d0'
+    cyan: '#9aedfe'
+    white: '#e6e6e6'
+theme: Dracula
