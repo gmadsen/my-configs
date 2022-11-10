@@ -192,12 +192,14 @@ return packer.startup {
 				{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' }, -- nvim-cmp source for vim cmdline
 				{ 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp', commit = commits.cmp_nvim_lsp_signature_help }, -- nvim-cmp source for displaying function signatures with the current parameter emphasized:
 				{ 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', commit = commits.cmp_luasnip }, -- luasnip completion source for nvim-cmp
+				{ 'zbirenbaum/copilot-cmp', after = { "copilot.lua", "nvim-cmp" }, config = function () require("copilot_cmp").setup() end }
 			},
 			config = [[
 				require('plugins/nvim-cmp')
 				require('plugins/LuaSnip')
 			]]
 		}
+
 		use { -- Find, Filter, Preview, Pick. All lua, all the time.
 			'nvim-telescope/telescope.nvim',
 			commit = commits.telescope_nvim,
@@ -321,12 +323,27 @@ return packer.startup {
 			'simrat39/rust-tools.nvim',
 			config = [[ require('plugins/rust-tools') ]]
 		}
+
+--		use { -- tools for haskell
+--			'MrcJkb/haskell-tools.nvim',
+--			requires = {
+--				'neovim/nvim-lspconfig',
+--				'nvim-lua/plenary.nvim',
+--				'nvim-telescope/telescope.nvim',
+--			},
+--			config = [[ require('plugins/haskell-tools') ]]
+--		}
+
 		use { -- floating terming
 			'numToStr/FTerm.nvim',
 			config = [[ require('plugins/fterm_nvim') ]]
 		}
 		use { -- debug adapter
 			'mfussenegger/nvim-dap'
+		}
+		use { -- copilot in nvim
+			'zbirenbaum/copilot.lua',
+			config = [[ require('plugins/copilot') ]]
 		}
 
 		-- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --

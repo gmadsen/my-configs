@@ -52,26 +52,26 @@ local on_attach = function(client, bufnr)
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	-- ───────────────────────────────────────────────── --
-	buf_set_keymap('n', '<Space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', options)
-	buf_set_keymap('n', '<Space>q', '<cmd>lua vim.diagnostic.set_loclist({})<CR>', options)
-	buf_set_keymap('n', '<Space>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', options)
-	buf_set_keymap('n', '<Space>b', '<cmd>lua vim.diagnostic.goto_prev()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>q', '<cmd>lua vim.diagnostic.set_loclist({})<CR>', options)
+	buf_set_keymap('n', '<Space><Space>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>b', '<cmd>lua vim.diagnostic.goto_prev()<CR>', options)
 
-	buf_set_keymap('n', '<Space>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
-	buf_set_keymap('n', '<Space>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>', options)
-	buf_set_keymap('n', '<Space>T', '<cmd>lua vim.lsp.buf.type_definition()<CR>', options)
-	buf_set_keymap('n', '<Space>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
-	buf_set_keymap('n', '<Space>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', options)
-	buf_set_keymap('n', '<Space>h', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
-	buf_set_keymap('n', '<Space>r', '<cmd>Telescope lsp_references<CR>', options)
-	buf_set_keymap("n", "<Space>f", '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>T', '<cmd>lua vim.lsp.buf.type_definition()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>h', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>r', '<cmd>Telescope lsp_references<CR>', options)
+	buf_set_keymap("n", "<Space><Space>f", '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', options)
 
-	buf_set_keymap('n', '<Space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', options)
-	buf_set_keymap('x', '<Space>a', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', options)
+	buf_set_keymap('x', '<Space><Space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', options)
 
-	buf_set_keymap('n', '<Space>wa',   '<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>', options)
-	buf_set_keymap('n', '<Space>wr',   '<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>', options)
-	buf_set_keymap('n', '<Space>wl',   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>', options)
+	buf_set_keymap('n', '<Space><Space>wa',   '<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>wr',   '<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>', options)
+	buf_set_keymap('n', '<Space><Space>wl',   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>', options)
 end
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
