@@ -51,6 +51,7 @@ return packer.startup {
 			cmd = 'git', -- The base command for git operations
 			depth = 1, -- Git clone depth
 			clone_timeout = 600, -- Timeout, in seconds, for git clones
+
 		},
 	},
 
@@ -311,6 +312,10 @@ return packer.startup {
 			'anuvyklack/hydra.nvim'
 		}
 
+		use { -- markdown generator
+			'ellisonleao/glow.nvim'
+		}
+
 		-- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
 		use { -- tools for rust
 			'simrat39/rust-tools.nvim',
@@ -320,7 +325,9 @@ return packer.startup {
 			'numToStr/FTerm.nvim',
 			config = [[ require('plugins/fterm_nvim') ]]
 		}
-
+		use { -- debug adapter
+			'mfussenegger/nvim-dap'
+		}
 
 		-- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --
 		-- Automatically set up your configuration after cloning packer.nvim
