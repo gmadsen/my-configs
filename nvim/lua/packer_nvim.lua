@@ -213,7 +213,7 @@ return packer.startup({
 				}, -- luasnip completion source for nvim-cmp
 				{
 					"zbirenbaum/copilot-cmp",
-					after = {"copilot.lua", "nvim-cmp"},
+					after = {"copilot", "nvim-cmp"},
 					config = function() require("copilot_cmp").setup() end,
 				},
 			},
@@ -358,7 +358,7 @@ return packer.startup({
 		})
 		use({ -- advanced search and search highlighing
 			"kevinhwang91/nvim-hlslens",
-			config = [[ require('plugins/hlslens') ]],
+            config = [[ require('plugins/hlslens') ]],
 		})
 
 
