@@ -88,7 +88,8 @@ opt.lazyredraw = true -- faster scrolling
 opt.wildignore = opt.wildignore + '*.o,*.rej,*.so' -- patterns to ignore during file-navigation
 -- opt.wildmenu.Enable = true
 opt.wildmode = 'list:longest' -- command-line completion mode
-opt.completeopt = 'menuone,noselect,noinsert' -- completion options
+-- opt.completeopt = 'menuone,noselect,noinsert' -- completion options
+opt.completeopt = 'menu', 'menuone', 'noselect' -- completion options
 opt.shortmess = opt.shortmess + {c = true}
 api.nvim_set_option('updatetime', 300)
 opt.encoding = 'utf-8' -- the encoding written to a file
