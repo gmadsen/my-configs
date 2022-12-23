@@ -19,10 +19,11 @@ vim.g.maplocalleader = '|'
 require('plugins/impatient_nvim')   -- impatient needs to be setup before any other lua plugin is loaded so it is recommended you add the following near the start of your
 
 require('configs')                  -- plugin independent configs
-require('mappings')                 -- plugin independent mappings
 
 -- loading plugins and its configs are managed in seperate config file, ~/.config/nvim/lua/plugins/packer_nvim.lua
 require('packer_nvim')
+
+require('mappings')                 -- plugin independent mappings
 
 -- set colorscheme
 pcall(vim.cmd,'colorscheme nightfox')
