@@ -4,23 +4,17 @@
 --   Github:    github.com/neovim/nvim-lspconfig
 -- ───────────────────────────────────────────────── --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
-
-
-
-
 -- ───────────────────────────────────────────────── --
-local lspconfig_imported, lspconfig = pcall(require, 'lspconfig')
+local lspconfig_imported, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_imported then return end
 
-local imported_mason, mason = pcall(require, 'mason')
+local imported_mason, mason = pcall(require, "mason")
 if not imported_mason then return end
 
 local lsp = vim.lsp
 local api = vim.api
 local handlers = lsp.handlers
 -- ───────────────────────────────────────────────── --
-
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━━ --
@@ -30,10 +24,8 @@ local handlers = lsp.handlers
 -- after the language server attaches to the current buffer
 -- ───────────────────────────────────────────────── --
 local on_attach = function(client, bufnr)
-
 	local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
 
-	local function buf_set_option(...) api.nvim_buf_set_option(bufnr, ...) end
 
 	---------------------
 	-- Avoiding LSP formatting conflicts
@@ -48,45 +40,59 @@ local on_attach = function(client, bufnr)
 	-- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	-- Mappings.
-	local options = { noremap = true, silent = true }
+	local options = {noremap = true, silent = true}
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	-- ───────────────────────────────────────────────── --
-	buf_set_keymap('n', '<Space><Space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>q', '<cmd>lua vim.diagnostic.set_loclist({})<CR>', options)
-	buf_set_keymap('n', '<Space><Space>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>b', '<cmd>lua vim.diagnostic.goto_prev()<CR>', options)
+	buf_set_keymap("n", "<Space><Space>e",
+	               "<cmd>lua vim.diagnostic.open_float()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>q",
+	               "<cmd>lua vim.diagnostic.set_loclist({})<CR>", options)
+	buf_set_keymap("n", "<Space><Space>n",
+	               "<cmd>lua vim.diagnostic.goto_next()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>b",
+	               "<cmd>lua vim.diagnostic.goto_prev()<CR>", options)
 
-	buf_set_keymap('n', '<Space><Space>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>D', '<Cmd>lua vim.lsp.buf.declaration()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>T', '<cmd>lua vim.lsp.buf.type_definition()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>h', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>r', '<cmd>Telescope lsp_references<CR>', options)
-	buf_set_keymap("n", "<Space><Space>f", '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', options)
+	buf_set_keymap("n", "<Space><Space>d", "<Cmd>lua vim.lsp.buf.definition()<CR>",
+	               options)
+	buf_set_keymap("n", "<Space><Space>D",
+	               "<Cmd>lua vim.lsp.buf.declaration()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>T",
+	               "<cmd>lua vim.lsp.buf.type_definition()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>i",
+	               "<cmd>lua vim.lsp.buf.implementation()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>s",
+	               "<cmd>lua vim.lsp.buf.signature_help()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>h", "<Cmd>lua vim.lsp.buf.hover()<CR>",
+	               options)
+	buf_set_keymap("n", "<Space><Space>r", "<cmd>Telescope lsp_references<CR>",
+	               options)
+	buf_set_keymap("n", "<Space><Space>f",
+	               "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", options)
 
-	buf_set_keymap('n', '<Space><Space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', options)
-	buf_set_keymap('x', '<Space><Space>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', options)
+	buf_set_keymap("n", "<Space><Space>ca",
+	               "<cmd>lua vim.lsp.buf.code_action()<CR>", options)
+	buf_set_keymap("x", "<Space><Space>ca",
+	               "<cmd>lua vim.lsp.buf.range_code_action()<CR>", options)
 
-	buf_set_keymap('n', '<Space><Space>wa',   '<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>wr',   '<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>', options)
-	buf_set_keymap('n', '<Space><Space>wl',   '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>', options)
+	buf_set_keymap("n", "<Space><Space>wa",
+	               "<cmd>lua vim.lsp.buf.add_workleader_folder()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>wr",
+	               "<cmd>lua vim.lsp.buf.remove_workleader_folder()<CR>", options)
+	buf_set_keymap("n", "<Space><Space>wl",
+	               "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workleader_folders()))<CR>",
+	               options)
 end
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end Mappings ❱━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
 local function setup_lsp_config()
-
 	-- options for lsp diagnostic
 	-- ───────────────────────────────────────────────── --
 	vim.diagnostic.config({
@@ -100,37 +106,44 @@ local function setup_lsp_config()
 		},
 	})
 
-	handlers["textDocument/publishDiagnostics"] = lsp.with(
-		lsp.diagnostic.on_publish_diagnostics,
-		{
-			underline = true,
-			signs = true,
-			update_in_insert = true,
-			virtual_text = {
-				true,
-				spacing = 6,
-				-- severity_limit='Error'  -- Only show virtual text on error
-			},
-		}
-	)
+	handlers["textDocument/publishDiagnostics"] =
+					lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+						underline = true,
+						signs = true,
+						update_in_insert = true,
+						virtual_text = {
+							true,
+							spacing = 6,
+							-- severity_limit='Error'  -- Only show virtual text on error
+						},
+					})
 
-	handlers["textDocument/hover"] = lsp.with(handlers.hover, { border = "rounded" })
-	handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, { border = "rounded" })
+	handlers["textDocument/hover"] = lsp.with(handlers.hover, {border = "rounded"})
+	handlers["textDocument/signatureHelp"] =
+					lsp.with(handlers.signature_help, {border = "rounded"})
 
 	-- show diagnostic on float window(like auto complete)
 	-- vim.api.nvim_command [[ autocmd CursorHold  *.lua,*.sh,*.bash,*.dart,*.py,*.cpp,*.c,js lua vim.lsp.diagnostic.show_line_diagnostics() ]]
 
 	-- set LSP diagnostic symbols/signs
 	-- ─────────────────────────────────────────────────--
-	api.nvim_command [[ sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl= ]]
-	api.nvim_command [[ sign define DiagnosticSignWarn  text= texthl=DiagnosticSignWarn  linehl= numhl= ]]
-	api.nvim_command [[ sign define DiagnosticSignInfo  text= texthl=DiagnosticSignInfo  linehl= numhl= ]]
-	api.nvim_command [[ sign define DiagnosticSignHint  text= texthl=DiagnosticSignHint  linehl= numhl= ]]
+	api.nvim_command(
+					[[ sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl= ]])
+	api.nvim_command(
+					[[ sign define DiagnosticSignWarn  text= texthl=DiagnosticSignWarn  linehl= numhl= ]])
+	api.nvim_command(
+					[[ sign define DiagnosticSignInfo  text= texthl=DiagnosticSignInfo  linehl= numhl= ]])
+	api.nvim_command(
+					[[ sign define DiagnosticSignHint  text= texthl=DiagnosticSignHint  linehl= numhl= ]])
 
-	api.nvim_command [[ hi DiagnosticUnderlineError cterm=underline gui=underline guisp=#840000 ]]
-	api.nvim_command [[ hi DiagnosticUnderlineHint cterm=underline  gui=underline guisp=#07454b ]]
-	api.nvim_command [[ hi DiagnosticUnderlineWarn cterm=underline  gui=underline guisp=#2f2905 ]]
-	api.nvim_command [[ hi DiagnosticUnderlineInfo cterm=underline  gui=underline guisp=#265478 ]]
+	api.nvim_command(
+					[[ hi DiagnosticUnderlineError cterm=underline gui=underline guisp=#840000 ]])
+	api.nvim_command(
+					[[ hi DiagnosticUnderlineHint cterm=underline  gui=underline guisp=#07454b ]])
+	api.nvim_command(
+					[[ hi DiagnosticUnderlineWarn cterm=underline  gui=underline guisp=#2f2905 ]])
+	api.nvim_command(
+					[[ hi DiagnosticUnderlineInfo cterm=underline  gui=underline guisp=#265478 ]])
 
 	-- Auto-format files prior to saving them
 	-- vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
@@ -148,111 +161,82 @@ end
 -- setup LSPs
 -- ───────────────────────────────────────────────── --
 local function setup_lsp(mason_lspconfig)
-
 	local tbl_deep_extend = vim.tbl_deep_extend
 	local capabilities = lsp.protocol.make_client_capabilities()
 	local lsp_options = {
 		on_attach = on_attach,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		capabilities = capabilities
+		flags = {debounce_text_changes = 150},
+		capabilities = capabilities,
 	}
-	local import_cmp_lsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+	local import_cmp_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 	if import_cmp_lsp then
 		lsp_options.capabilities = (cmp_lsp).default_capabilities(capabilities)
 	end
 
-
 	mason_lspconfig.setup_handlers({
 
-		function(server_name)
-			require("lspconfig")[server_name].setup(lsp_options)
-		end,
+		function(server_name) require("lspconfig")[server_name].setup(lsp_options) end,
 
 		["clangd"] = function()
-			lspconfig.clangd.setup(
-				tbl_deep_extend(
-					"force", lsp_options,
-					{ capabilities = { offsetEncoding = { "utf-16" } } }
-				)
-			)
+			lspconfig.clangd.setup(tbl_deep_extend("force", lsp_options, {
+				capabilities = {offsetEncoding = {"utf-16"}},
+			}))
 		end,
 
 		["pylsp"] = function()
-			lspconfig.pylsp.setup(
-				tbl_deep_extend(
-					"force", lsp_options,
-					{
-						settings = {
-							pylsp = {
-								plugins = {
-									pydocstyle = { enabled = false },
-									pycodestyle = { enabled = false },
-									pyflakes = { enabled = true },
-									pylint = { enabled = true },
-									pyright = { enabled = true },
-									pyright_disable = { "reportMissingImports" },
-									jedi_completion = { enabled = true },
-								},
-							},
+			lspconfig.pylsp.setup(tbl_deep_extend("force", lsp_options, {
+				settings = {
+					pylsp = {
+						plugins = {
+							pydocstyle = {enabled = false},
+							pycodestyle = {enabled = false},
+							pyflakes = {enabled = true},
+							pylint = {enabled = true},
+							pyright = {enabled = true},
+							pyright_disable = {"reportMissingImports"},
+							jedi_completion = {enabled = true},
 						},
-					}
-				)
-			)
+					},
+				},
+			}))
 		end,
 
 		["html"] = function()
-			lspconfig.html.setup(
-				tbl_deep_extend(
-					"force", lsp_options,
-					{ filetypes = { "html", "htmldjango" } }
-				)
-			)
+			lspconfig.html.setup(tbl_deep_extend("force", lsp_options,
+			                                     {filetypes = {"html", "htmldjango"}}))
 		end,
 
 		["cssls"] = function()
-			lspconfig.cssls.setup(
-				tbl_deep_extend(
-					"force", lsp_options,
-					{
-						capabilities = {
-							textDocument = { completion = { completionItem = { snippetSupport = true } } }
-						},
-					}
-				)
-			)
+			lspconfig.cssls.setup(tbl_deep_extend("force", lsp_options, {
+				capabilities = {
+					textDocument = {completion = {completionItem = {snippetSupport = true}}},
+				},
+			}))
 		end,
 
 		["sumneko_lua"] = function()
-			lspconfig.sumneko_lua.setup(
-				tbl_deep_extend(
-					"force", lsp_options,
-					{
-						settings = {
-							Lua = {
-								diagnostics = {
-									-- Get the language server to recognize the 'vim', 'use' global
-									globals = { 'vim', 'use', 'require' },
-								},
-								workspace = {
-									-- Make the server aware of Neovim runtime files
-									library = api.nvim_get_runtime_file("", true),
-								},
-								-- Do not send telemetry data containing a randomized but unique identifier
-								telemetry = { enable = false },
-							},
-						}
-					}
-				)
-			)
+			lspconfig.sumneko_lua.setup(tbl_deep_extend("force", lsp_options, {
+				settings = {
+					Lua = {
+						diagnostics = {
+							-- Get the language server to recognize the 'vim', 'use' global
+							globals = {"vim", "use", "require"},
+						},
+						workspace = {
+							-- Make the server aware of Neovim runtime files
+							library = api.nvim_get_runtime_file("", true),
+						},
+						-- Do not send telemetry data containing a randomized but unique identifier
+						telemetry = {enable = false},
+					},
+				},
+			}))
 		end,
 	})
 end
 
 -- make sure `lspconfig` is not loaded after `mason-lspconfig`.
 -- Also, make sure not to set up any servers via `lspconfig` _before_ calling `mason-lspconfig`'s setup function.
-
 
 -- require("mason-lspconfig").setup_handlers({
 local import_mlspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
@@ -269,7 +253,6 @@ setup_lsp(mason_lspconfig) -- setup lsp (like pyright, ccls ...)
 -- ───────────────────────────────────────────────── --
 -- end LSP setup
 -- ───────────────────────────────────────────────── --
-
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --

@@ -8,14 +8,10 @@
 
 
 
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
 
 local import_cmp, cmp = pcall(require, 'cmp')
 if not import_cmp then return end
@@ -25,13 +21,17 @@ if not import_luasnip then return end
 
 
 cmp.setup({
-
-	completion = {
-		-- completeopt = 'menu,menuone,noinsert',
-	},
-
 	snippet = {
 		expand = function(args) luasnip.lsp_expand(args.body) end,
+	},
+
+	window = {
+		documentation = {
+			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
+		},
+		completion = {
+			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
+		}
 	},
 
 	formatting = {
@@ -54,7 +54,7 @@ cmp.setup({
 
 			-- set a name for each source
 			vim_item.menu = ({
-				--copilot = "[Pilot]",
+				copilot = "[Pilot]",
 				buffer = "[Buff]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[LuaSnip]",
@@ -71,20 +71,12 @@ cmp.setup({
 		{name = 'nvim_lua'},
 		{name = 'path'},
 		{name = 'luasnip'},
-		--{name = 'copilot'},
+		{name = 'copilot'},
 		{name = 'cmdline', keyword_length = 2},
 		{name = 'buffer', keyword_length = 1},
 		-- {name = 'calc'},
 	},
 
-	window = {
-		documentation = {
-			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
-		},
-		completion = {
-			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
-		}
-	},
 
 	experimental = {
 		-- ghost_text = true,

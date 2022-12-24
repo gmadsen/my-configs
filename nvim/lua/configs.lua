@@ -19,7 +19,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- set theme
 -- vim.g.indentLine_enabled = 1
-vim.g.indentLine_char_list = {  '|', '¦', '┆', '┊' }
+--vim.g.indentLine_char_list = {  '|', '¦', '┆', '┊' }
 -- vim.g.indentLine_color_gui = '#222F22'
 opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 opt.list = true -- show whitespace

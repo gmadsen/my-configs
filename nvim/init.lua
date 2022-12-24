@@ -27,7 +27,8 @@ require('packer_nvim')
 
 
 -- set colorscheme
-pcall(vim.cmd,'colorscheme nightfox')
+-- pcall(vim.cmd,'colorscheme nightfox')
+require('nightfox').load()
 
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
