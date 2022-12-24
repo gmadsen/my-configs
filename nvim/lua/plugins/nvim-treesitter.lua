@@ -8,8 +8,6 @@
 
 
 
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
@@ -31,8 +29,6 @@ treesitter.setup {
 
 	ensure_installed  = { "python", "rust", "lua", "fish", "bash", "c", "cpp", "toml", "yaml", "javascript"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 	auto_install = true,
-	-- ignore_install    = { "javascript" }, -- List of parsers to ignore installing
-
 	highlight = {
 		enable = true, -- {"c", "cpp", "dart", "python", "javascript"}, enable = true (false will disable the whole extension)
 		-- disable lighlight if file is too long
@@ -55,11 +51,11 @@ treesitter.setup {
 		rainbow = {enable = true, extended_mode = true, max_file_lines = 1000},
 	},
 
-	playground = {
-		enable = true,
-		disable = {},
-		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-		persist_queries = false, -- Whether the query persists across vim sessions
+	-- playground = {
+	-- 	enable = true,
+	-- 	disable = {},
+	-- 	updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+	-- 	persist_queries = false, -- Whether the query persists across vim sessions
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
@@ -83,10 +79,9 @@ treesitter.setup {
 		--     goto_node = '<cr>',
 		--     show_help = '?'
 		-- }
-	},
+	-- },
+-- }
 }
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end Mappings ❱━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-

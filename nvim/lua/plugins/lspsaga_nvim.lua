@@ -8,8 +8,6 @@
 
 
 
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━--
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
@@ -24,7 +22,7 @@ saga.init_lsp_saga({
 border_style = "single",
 --the range of 0 for fully opaque window (disabled) to 100 for fully
 --transparent background. Values between 0-30 are typically most useful.
-saga_winblend = 0,
+saga_winblend = 10,
 -- when cursor in saga window you config these to move
 move_in_saga = { prev = '<C-p>',next = '<C-n>'},
 -- Error, Warn, Info, Hint
@@ -39,17 +37,17 @@ move_in_saga = { prev = '<C-p>',next = '<C-n>'},
 -- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
 diagnostic_header = { " ", " ", " ", "ﴞ " },
 -- preview lines of lsp_finder and definition preview
-max_preview_lines = 10,
+max_preview_lines = 20,
 -- use emoji lightbulb in default
 code_action_icon = "💡",
 -- if true can press number to execute the codeaction in codeaction window
 code_action_num_shortcut = true,
 -- same as nvim-lightbulb but async
 code_action_lightbulb = {
-    enable = false,
+    enable = true,
     enable_in_insert = true,
     cache_code_action = true,
-    sign = true,
+    sign = false,
     update_time = 150,
     sign_priority = 20,
     virtual_text = true,

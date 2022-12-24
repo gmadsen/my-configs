@@ -15,7 +15,12 @@
 local opt = vim.opt
 local api = vim.api
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- set theme
+-- vim.g.indentLine_enabled = 1
+vim.g.indentLine_char_list = {  '|', '¦', '┆', '┊' }
+-- vim.g.indentLine_color_gui = '#222F22'
 opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 opt.list = true -- show whitespace
 opt.listchars = {
@@ -51,7 +56,7 @@ opt.clipboard = vim.opt.clipboard + "unnamedplus" -- copy & paste
 opt.wrap = false -- don't automatically wrap on load
 opt.showmatch = true -- show the matching part of the pair for [] {} and ()
 
-opt.cursorline = true -- highlight current line
+opt.cursorline = false -- highlight current line
 opt.number = true -- show line numbers
 opt.relativenumber = true -- show relative line number
 
@@ -89,7 +94,7 @@ opt.wildignore = opt.wildignore + '*.o,*.rej,*.so' -- patterns to ignore during 
 -- opt.wildmenu.Enable = true
 opt.wildmode = 'list:longest' -- command-line completion mode
 -- opt.completeopt = 'menuone,noselect,noinsert' -- completion options
-opt.completeopt = 'menu', 'menuone', 'noselect' -- completion options
+opt.completeopt = 'menu,menuone,noselect' -- completion options
 opt.shortmess = opt.shortmess + {c = true}
 api.nvim_set_option('updatetime', 300)
 opt.encoding = 'utf-8' -- the encoding written to a file
@@ -99,8 +104,7 @@ opt.fileencoding = 'utf-8' -- the encoding written to a file
 -- opt.sessionoptions = 'blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal' -- options to save in session files
 opt.breakindent = true -- wrap lines with indent
 opt.signcolumn = 'yes' -- always show sign column
-opt.cmdheight = 1 -- hide cmd bar
-
+opt.cmdheight = 0 -- hide cmd bar
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ Automate ❱━━━━━━━━━━━━━━━━━━━━ --
 

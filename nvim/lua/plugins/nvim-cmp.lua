@@ -54,7 +54,7 @@ cmp.setup({
 
 			-- set a name for each source
 			vim_item.menu = ({
-				copilot = "[Pilot]",
+				--copilot = "[Pilot]",
 				buffer = "[Buff]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[LuaSnip]",
@@ -71,7 +71,7 @@ cmp.setup({
 		{name = 'nvim_lua'},
 		{name = 'path'},
 		{name = 'luasnip'},
-		{name = 'copilot'},
+		--{name = 'copilot'},
 		{name = 'cmdline', keyword_length = 2},
 		{name = 'buffer', keyword_length = 1},
 		-- {name = 'calc'},

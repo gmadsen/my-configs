@@ -53,7 +53,7 @@ components.active[1] = {
 	{
 		provider = {
 			name = "file_info",
-			opts = { type = "relative-short" }
+			opts = { type = "unique" }
 		},
 		hl = {fg = 'black', bg = 'f_color', style = 'italic'},
 		left_sep = {

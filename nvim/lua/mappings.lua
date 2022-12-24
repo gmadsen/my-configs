@@ -11,10 +11,10 @@
         set to the "default of '\'.
         i defined leader on very start of init.lua file so that every
         keymap would work
---]===] local keymap = vim.api.nvim_set_keymap
+--]===]
 local map = vim.keymap.set
 local cmd = vim.cmd
-local options = {noremap = true, silent = true}
+local options = { noremap = true, silent = true }
 
 -- smart deletion, dd
 -- It solves the issue, where you want to delete empty line, but dd will override you last yank.
@@ -27,33 +27,29 @@ local function smart_dd()
 		return "dd"
 	end
 end
-vim.keymap.set("n", "dd", smart_dd, {noremap = true, expr = true})
+map("n", "dd", smart_dd, { noremap = true, expr = true })
 
 -- Edit and reload nvim config file quickly
-map("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>",
-    {silent = true, desc = "open init.lua"})
+map("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", { silent = true, desc = "open init.lua" })
 
 -- Close buffer
 cmd([[ autocmd BufEnter * nmap <silent> <buffer> <leader>q :bd<CR> ]])
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = {"man", "help", "lspinfo", "null-ls-info", "mason"},
+	pattern = { "man", "help", "lspinfo", "null-ls-info", "mason" },
 	command = "nnoremap <silent> <buffer> <leader>q :close<CR>",
 })
 
 -- map ctl+z to nothing so that it don't suspend terminal
-vim.api.nvim_create_autocmd("BufEnter",
-                            {pattern = "*", command = "nnoremap <c-z> <nop>"})
+vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "nnoremap <c-z> <nop>" })
 
 -- scroll window up/down
 map("i", "<C-e>", "<ESC><C-e>")
 map("i", "<C-y>", "<ESC><C-y>")
--- clear Search Results
-map("n", "??", ":noh <CR>")
 -- remap the key used to leave insert mode
 map("i", "jk", "<Esc>", {})
 -- Remap for dealing with word wrap
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 -- Y yank until the end of line  (note: this is now a default on master)
 map("n", "Y", "y$", {})
 -- tabs and buffers, I don't like
@@ -75,16 +71,16 @@ map("n", "<leader>cd", ":cd %:p:h<cr>:pwd<cr>")
       Try to go into visual mode (v), thenselect several lines of code
       here and then press ``>`` several times.
 --]]
-keymap("v", "<", "<gv", options)
-keymap("v", ">", ">gv", options)
+map("v", "<", "<gv", options)
+map("v", ">", ">gv", options)
 
 -- going back to normal mode which works even in vim's terminal
 -- you will need this if you use floaterm to escape terminal
-keymap("t", "<Esc>", "<c-\\><c-n>", options)
+map("t", "<Esc>", "<c-\\><c-n>", options)
 
 -- move selected line(s) up or down
-keymap("v", "J", ":m '>+1<CR>gv=gv", options)
-keymap("v", "K", ":m '<-2<CR>gv=gv", options)
+map("v", "J", ":m '>+1<CR>gv=gv", options)
+map("v", "K", ":m '<-2<CR>gv=gv", options)
 
 -------------------------------- Plugin Mappings
 
@@ -97,7 +93,7 @@ map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
 map("n", "<leader>n", ":NvimTreeToggle<CR>")
 
 ----------------------------- Hop ------------------------
-map("n", "F", "<cmd>lua require'hop'.hint_words()<cr>", options)
+map("n", "F", "<cmd>lua require('hop').hint_words()<cr>", options)
 ---------------------------- BufferLine
 -- go to buffer number
 map("n", "<Leader>1", ":BufferLineGoToBuffer 1<CR>", options)
@@ -109,31 +105,25 @@ map("n", "<Leader>6", ":BufferLineGoToBuffer 6<CR>", options)
 map("n", "<Leader>7", ":BufferLineGoToBuffer 7<CR>", options)
 map("n", "<Leader>8", ":BufferLineGoToBuffer 8<CR>", options)
 map("n", "<Leader>9", ":BufferLineGoToBuffer 9<CR>", options)
+
+map("n", "<Leader>bq",":BufferClose<CR>", options)
+
 -- Telescope Mappings
 --      --> Launch Telescope without any argument
-map("n", "<leader>ft", "<cmd>lua require('telescope.builtin').builtin() <CR>",
-    options)
+map("n", "<leader>ft", "<cmd>lua require('telescope.builtin').builtin() <CR>", options)
 --      --> Lists available Commands
-map("n", "<leader>fc", "<cmd>lua require('telescope.builtin').commands() <CR>",
-    options)
+map("n", "<leader>fc", "<cmd>lua require('telescope.builtin').commands() <CR>", options)
 --      --> Lists available help tags and opens a new window with the relevant help info on
-map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags() <CR>",
-    options)
+map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags() <CR>", options)
 --       --> show all availabe MAPPING
-map("n", "<leader>fm", "<cmd>lua require('telescope.builtin').keymaps() <CR>",
-    options)
+map("n", "<leader>fm", "<cmd>lua require('telescope.builtin').keymaps() <CR>", options)
 --       --> show buffers/opened files
-map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers() <CR>",
-    options)
+map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers() <CR>", options)
 --       --> show and grep current buffer
-map("n", "<leader>fw",
-    "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find() <CR>",
-    options)
-map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep() <CR>",
-    options)
+map("n", "<leader>fw", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find() <CR>", options)
+map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep() <CR>", options)
 --       --> show all files from current working directory
-map("n", "<leader>fp",
-    "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
+map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>") -- { cwd = vim.fn.expand('%:p:h') }) <CR>")
 
 -------------- floaterm
@@ -141,12 +131,12 @@ map("n", "<A-i>", '<CMD>lua require("FTerm").toggle()<CR>')
 map("t", "<A-i>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 ---------------- LSP saga
-map("n", "<Space>r", "<cmd>Lspsaga lsp_finder<CR>", {silent = true})
-map({"n", "v"}, "<Space>a", "<cmd>Lspsaga code_action<CR>")
+map("n", "<Space>r", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+map({ "n", "v" }, "<Space>a", "<cmd>Lspsaga code_action<CR>")
 map("n", "<Space>d", "<cmd>Lspsaga peek_definition<CR>")
 map("n", "<Space>l", "<cmd>Lspsaga show_line_diagnostics<CR>")
 map("n", "<Space>L", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
-map("n", "<Space>o", "<cmd>LSoutlineToggle<CR>")
+map("n", "<Space>o", "<cmd>Lspsaga outline<CR>")
 map("n", "<Space>k", "<cmd>Lspsaga hover_doc<CR>")
 
 -- Diagnsotic jump can use `<c-o>` to jump back
@@ -164,37 +154,30 @@ map("n", "]E", function()
 	})
 end)
 
+-- This Hydra lets you scroll sideways is a sane way
 local Hydra = require("hydra")
 Hydra({
 	name = "Side scroll",
 	mode = "n",
 	body = "z",
 	heads = {
-		{"h", "5zh"},
-		{"l", "5zl", {desc = "←/→"}},
-		{"H", "zH"},
-		{"L", "zL", {desc = "half screen ←/→"}},
+		{ "h", "5zh" },
+		{ "l", "5zl", { desc = "←/→" } },
+		{ "H", "zH" },
+		{ "L", "zL", { desc = "half screen ←/→" } },
 	},
 })
 
-local kopts = {noremap = true, silent = true}
+-- hlslens , which makes search more fancy
+map("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "<Leader>l", ":noh<CR>", options)
 
-vim.api.nvim_set_keymap("n", "n",
-                        [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-                        kopts)
-vim.api.nvim_set_keymap("n", "N",
-                        [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-                        kopts)
-vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]],
-                        kopts)
-vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]],
-                        kopts)
-vim.api.nvim_set_keymap("n", "g*",
-                        [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap("n", "g#",
-                        [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
-vim.api.nvim_set_keymap("n", "<Leader>l", ":noh<CR>", kopts)
 -- local ht = require('haskell-tools')
 -- Toggle a GHCi repl for the current package
 -- vim.keymap.set('n', '<leader>rr', ht.repl.toggle)
