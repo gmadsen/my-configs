@@ -177,7 +177,6 @@ map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
 map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
 map("n", "<Leader>l", ":noh<CR>", options)
 
-
 -- local ht = require('haskell-tools')
 -- Toggle a GHCi repl for the current package
 -- vim.keymap.set('n', '<leader>rr', ht.repl.toggle)

@@ -4,6 +4,7 @@
 import:
   - /home/madsen/.config/alacritty/fonts.yml
   - /home/madsen/external_pkgs/alacritty-theme/themes/gruvbox_material.yaml
+
 shell:
   program: /usr/bin/fish
   args:
@@ -15,8 +16,12 @@ window:
     columns: 200 #84
     lines: 100 #22
   padding:
-    x: 2
+    x: 1
+    y: 1
+  position:
+    x: 0
     y: 0
+
 
   decorations: full
   startup_mode: Windowed
@@ -38,20 +43,8 @@ cursor:
 
 font:
   size: 13
-  builtin_box_drawing: true
-  draw_bold_text_with_bright_colors: true
-
-colors:
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
-  hints:
-    start:
-      foreground: CellForeground
-      background: CellBackground
-    end:
-      foreground: CellForeground
-      background: CellBackground
+  builtin_box_drawing: false
+  draw_bold_text_with_bright_colors: false
 
 ## Reload config changes automatically
 live_config_reload: true
