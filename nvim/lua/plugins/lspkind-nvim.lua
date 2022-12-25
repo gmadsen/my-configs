@@ -15,8 +15,7 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local lspkind_imported_ok, lspkind = pcall(require, "lspkind")
-if not lspkind_imported_ok then return end
+local lspkind = require("lspkind")
 
 lspkind.init({
 	-- enables text annotations (default: true)
@@ -48,9 +47,11 @@ lspkind.init({
 		EnumMember = '',
 		Constant = '',
 		Struct = '',
+		Copilot = "",
 	},
 })
 
+-- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

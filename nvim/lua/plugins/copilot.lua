@@ -7,11 +7,9 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-local import_copilot, copilot = pcall(require, "copilot")
-if not import_copilot then return end
-
-copilot.setup({
-	require("copilot").setup({
+local copilot = require("copilot")
+vim.defer_fn(function()
+	copilot.setup({
 		panel = {
 			enabled = true,
 			auto_refresh = false,
@@ -48,5 +46,5 @@ copilot.setup({
 		copilot_node_command = "node", -- Node version must be < 18
 		plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
 		server_opts_overrides = {},
-	}),
-})
+	})
+end, 100)

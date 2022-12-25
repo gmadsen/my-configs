@@ -29,8 +29,8 @@ indent.setup {
 	show_trailing_blankline_indent = false,
 	use_treesitter = true,
 
-	--char_list = { '|', '¦', '┆', '┊'},
-	char_list = {'┊'},
+	char_list = { '|', '¦', '┆', '┊'},
+	char = '▏',
 
 
 	filetype_exclude = {

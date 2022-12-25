@@ -125,7 +125,6 @@ map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep() <CR>",
 --       --> show all files from current working directory
 map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>") -- { cwd = vim.fn.expand('%:p:h') }) <CR>")
-
 -------------- floaterm
 map("n", "<A-i>", '<CMD>lua require("FTerm").toggle()<CR>')
 map("t", "<A-i>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')

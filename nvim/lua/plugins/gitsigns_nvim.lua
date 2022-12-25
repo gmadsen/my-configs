@@ -120,6 +120,16 @@ gitsigns.setup {
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+
+gitsigns.setup({
+  signs = {
+    add = {text = '▎'},
+    change = {text = '▎'},
+    delete = {text = '➤'},
+    topdelete = {text = '➤'},
+    changedelete = {text = '▎'},
+  }
+})
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

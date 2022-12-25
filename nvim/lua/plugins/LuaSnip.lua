@@ -24,34 +24,9 @@ luasnip.config.set_config({
 })
 
 
--- enable html snippets in javascript/javascript(REACT)
-luasnip.filetype_extend("javascriptreact", {"html"})
-luasnip.filetype_extend("typescriptreact", {"html"})
+require("luasnip.loaders.from_vscode").lazy_load()
 
--- enable html snippets in Django (htmldjango)
-luasnip.filetype_extend("htmldjango", {"html"})
 
--- this will lazy load all filetypes
-require("luasnip/loaders/from_vscode").lazy_load()
-
--- lazy loading so you only get in memory snippets of languages you use
-require'luasnip/loaders/from_vscode'.lazy_load({
-	paths = {"~/.config/nvim/extra/snippets"},
-})
-
--- ───────────────────────────────────────────────── --
--- NOTE: not working, need some fix
--- firendl-snippets
-local filetype = vim.bo.filetype
-
-if filetype == "javascriptreact" then
-	require("luasnip/loaders/from_vscode").load({include = {"javascriptreact"}})
-	return
-end
-if filetype == "typescriptreact" then
-	require("luasnip/loaders/from_vscode").load({include = {"typescriptreact"}})
-	return
-end
 -- ───────────────────────────────────────────────── --
 
 

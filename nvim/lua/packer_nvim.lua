@@ -65,9 +65,23 @@ return packer.startup({
 			"kyazdani42/nvim-web-devicons",
 			config = [[ require('plugins/nvim-web-devicons') ]],
 		})
-		-- ━━━━━━━━━━━━━━━━❰ end Required Plugin ❱━━━━━━━━━━━━━━━━ --
+
+
+		-- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
 
 		use("EdenEast/nightfox.nvim")
+
+		use({
+			"rcarriga/nvim-notify",
+			config = function() vim.notify = require("notify") end,
+		})
+
+		use({
+			"folke/noice.nvim",
+			config = function() require('noice').setup() end,
+			requires = { "MunifTanjim/nui.nvim", "rarriga/nvim-notify" }
+		})
+
 
 		-- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
 		use({ -- A collection of common configurations for Neovim's built-in language server client
@@ -98,18 +112,13 @@ return packer.startup({
 			requires = "kyazdani42/nvim-web-devicons",
 			config = [[ require('plugins/trouble_nvim') ]],
 		})
-		use({ -- Standalone UI for nvim-lsp progress
-			"j-hui/fidget.nvim",
-			after = "nvim-lspconfig",
-			event = "BufRead",
-			config = [[ require('plugins/fidget_nivm') ]],
-		})
 		use({ -- A Neovim plugin that provides a colors for text diagnostics display.
 			"folke/lsp-colors.nvim",
 			config = [[ require('plugins/lsp-colors') ]],
 		})
 		use({ -- copilot in nvim
 			"zbirenbaum/copilot.lua",
+			event = "VimEnter",
 			config = [[ require('plugins/copilot') ]],
 		})
 
@@ -147,7 +156,8 @@ return packer.startup({
 				{ -- Snippet Engine for Neovim written in Lua.
 					"L3MON4D3/LuaSnip",
 					module = "luasnip",
-					requires = {"rafamadriz/friendly-snippets", after = "LuaSnip"}, -- Snippets collection for a set of different programming languages for faster development.
+					requires = "rafamadriz/friendly-snippets", -- Snippets collection for a set of different programming languages for faster development.
+					config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
 				},
 				{ -- autopairs for Neovim. It support multiple character.
 					"windwp/nvim-autopairs",
@@ -188,6 +198,7 @@ return packer.startup({
 
 
 
+		-- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
 		use({ -- A File Explorer For Neovim Written In Lua
 			"kyazdani42/nvim-tree.lua",
 			config = [[ require('plugins/nvim-tree') ]],
@@ -248,10 +259,10 @@ return packer.startup({
 			"karb94/neoscroll.nvim",
 			config = [[ require('plugins/neoscroll_nvim') ]],
 		})
-		use({ -- autocomplete for cmdline
-			"gelguy/wilder.nvim",
-			config = [[ require('plugins/wilder') ]],
-		})
+		-- use({ -- autocomplete for cmdline
+		-- 	"gelguy/wilder.nvim",
+		-- 	config = [[ require('plugins/wilder') ]],
+		-- })
 		use({ -- auto save files
 			"Pocco81/auto-save.nvim",
 			config = [[ require('plugins/auto-save') ]],
