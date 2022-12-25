@@ -26,7 +26,6 @@ local handlers = lsp.handlers
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) api.nvim_buf_set_keymap(bufnr, ...) end
 
-
 	---------------------
 	-- Avoiding LSP formatting conflicts
 	-- ref: https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts

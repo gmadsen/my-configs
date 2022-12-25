@@ -19,7 +19,6 @@ if not import_cmp then return end
 local import_luasnip, luasnip = pcall(require, 'luasnip')
 if not import_luasnip then return end
 
-
 cmp.setup({
 	snippet = {
 		expand = function(args) luasnip.lsp_expand(args.body) end,
@@ -31,11 +30,14 @@ cmp.setup({
 		},
 		completion = {
 			border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"},
-		}
+			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+			col_offset = -3,
+			side_padding = 0,
+		},
 	},
 
 	formatting = {
-
+		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- fancy icons and a name of kind
 			local import_lspkind, lspkind = pcall(require, "lspkind")
@@ -57,27 +59,27 @@ cmp.setup({
 				copilot = "[Pilot]",
 				buffer = "[Buff]",
 				nvim_lsp = "[LSP]",
+				nvim_lsp_signature_help = "[Sig]",
 				luasnip = "[LuaSnip]",
 				nvim_lua = "[Lua]",
 				latex_symbols = "[Latex]",
+				path = "[Path]",
 			})[entry.source.name]
 			return vim_item
 		end,
 	},
 
 	sources = {
-		{name = 'nvim_lsp'},
-		{name = 'nvim_lsp_signature_help' },
-		{name = 'nvim_lua'},
-		{name = 'path'},
-		{name = 'luasnip'},
-		{name = 'copilot'},
-		{name = 'cmdline', keyword_length = 2},
-		{name = 'buffer', keyword_length = 1},
+		{name = 'nvim_lsp', keyword_length = 1},
+		{name = 'nvim_lsp_signature_help' ,keyword_length = 1},
+		{name = 'nvim_lua',keyword_length = 1},
+		{name = 'path',keyword_length = 1},
+		{name = 'luasnip',keyword_length = 1},
+		{name = 'copilot',keyword_length = 1},
+		{name = 'cmdline', keyword_length = 1},
+		{name = 'buffer', keyword_length = 2},
 		-- {name = 'calc'},
 	},
-
-
 	experimental = {
 		-- ghost_text = true,
 	},
@@ -86,32 +88,32 @@ cmp.setup({
 
 
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
-	  { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-	  { name = 'buffer' },
-	})
-  })
+-- -- Set configuration for specific filetype.
+-- cmp.setup.filetype('gitcommit', {
+-- 	sources = cmp.config.sources({
+-- 	  { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+-- 	}, {
+-- 	  { name = 'buffer' },
+-- 	})
+--   })
 
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-	  { name = 'buffer' }
-	}
-  })
+--   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+--   cmp.setup.cmdline({ '/', '?' }, {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = {
+-- 	  { name = 'buffer' }
+-- 	}
+--   })
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-	  { name = 'path' }
-	}, {
-	  { name = 'cmdline' }
-	})
-  })
+--   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+--   cmp.setup.cmdline(':', {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = cmp.config.sources({
+-- 	  { name = 'path' }
+-- 	}, {
+-- 	  { name = 'cmdline' }
+-- 	})
+--   })
 
 
 
