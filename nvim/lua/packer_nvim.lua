@@ -77,67 +77,51 @@ return packer.startup({
 		use("EdenEast/nightfox.nvim")
 		vim.cmd("colorscheme nightfox")
 
-		use({
+		use({ -- fancy notify box
 			"rcarriga/nvim-notify",
 			config = function() vim.notify = require("notify") end,
 		})
 
-		use({
+		use({ --- new UI elements for most things
 			"folke/noice.nvim",
-			config = function()
-				require("noice").setup({
-					lsp = {
-						-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-						override = {
-							["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-							["vim.lsp.util.stylize_markdown"] = true,
-							["cmp.entry.get_documentation"] = true,
-						},
-					},
-					-- you can enable a preset for easier configuration
-					presets = {
-						bottom_search = true, -- use a classic bottom cmdline for search
-						command_palette = true, -- position the cmdline and popupmenu together
-						long_message_to_split = true, -- long messages will be sent to a split
-						inc_rename = false, -- enables an input dialog for inc-rename.nvim
-						lsp_doc_border = false, -- add a border to hover docs and signature help
-					},
-				})
-			end,
-			requires = {"MunifTanjim/nui.nvim", "rarriga/nvim-notify"},
+			config = [[ require('plugins/noice') ]],
+			requires = {
+				"MunifTanjim/nui.nvim",
+				"rarriga/nvim-notify",
+			},
 		})
 
 		-- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
-		use(
-						{ -- A collection of common configurations for Neovim's built-in language server client
-							"neovim/nvim-lspconfig",
-							event = "BufRead",
-							requires = {
-								{ -- Companion plugin for nvim-lspconfig that allows you to seamlessly install LSP servers locally (inside :echo stdpath("data")).
-									"williamboman/mason.nvim",
-									requires = {
-										{ -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
-											"williamboman/mason-lspconfig.nvim",
-										},
-										{ -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
-											"jose-elias-alvarez/null-ls.nvim",
-											after = "mason.nvim",
-										},
-									},
-								},
-							},
-							config = [[
+
+		use({ -- A collection of common configurations for Neovim's built-in language server client
+			"neovim/nvim-lspconfig",
+			event = "BufRead",
+			requires = {
+				{ -- Companion plugin for nvim-lspconfig that allows you to seamlessly install LSP servers locally (inside :echo stdpath("data")).
+					"williamboman/mason.nvim",
+					requires = {
+						{ -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+							"williamboman/mason-lspconfig.nvim",
+						},
+						{ -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
+							"jose-elias-alvarez/null-ls.nvim",
+							after = "mason.nvim",
+						},
+					},
+				},
+			},
+			config = [[
 				require('plugins/nvim-lspconfig')
 				require('plugins/null-ls_nvim')
 			]],
-						})
-		use(
-						{ -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
-							"folke/trouble.nvim",
-							after = "nvim-lspconfig",
-							requires = "kyazdani42/nvim-web-devicons",
-							config = [[ require('plugins/trouble_nvim') ]],
-						})
+		})
+
+		use({ -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
+			"folke/trouble.nvim",
+			after = "nvim-lspconfig",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = [[ require('plugins/trouble_nvim') ]],
+		})
 		use({ -- A Neovim plugin that provides a colors for text diagnostics display.
 			"folke/lsp-colors.nvim",
 			config = [[ require('plugins/lsp-colors') ]],
@@ -158,18 +142,11 @@ return packer.startup({
 				"nvim-treesitter/nvim-treesitter-textobjects",
 			},
 		})
-		use(
-						{ --  Use treesitter to auto close and auto rename html tag, work with html,tsx,vue,svelte,php.
-							"windwp/nvim-ts-autotag",
-							after = "nvim-treesitter",
-							config = [[ require('plugins/nvim-ts-autotag') ]],
-						})
-		use(
-						{ --  Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
-							"JoosepAlviste/nvim-ts-context-commentstring",
-							after = "nvim-treesitter",
-							config = [[ require('plugins/nvim-ts-context-commentstring') ]],
-						})
+		use({ --  Use treesitter to auto close and auto rename html tag, work with html,tsx,vue,svelte,php.
+			"windwp/nvim-ts-autotag",
+			after = "nvim-treesitter",
+			config = [[ require('plugins/nvim-ts-autotag') ]],
+		})
 		use({ -- Uses winscroll and TS to give context as you scroll down a file
 			"nvim-treesitter/nvim-treesitter-context",
 		})
