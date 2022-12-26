@@ -18,12 +18,11 @@ require('plugins/impatient_nvim')   -- impatient needs to be setup before any ot
 
 
 require('configs')                  -- plugin independent configs
-require('mappings')                 -- plugin independent mappings
+require('mappings')                 -- key mappings
+require('utilities')                -- utilities
 
 require('packer_nvim')              -- loading plugins and plugin configs
 
-
-require('nightfox').load()          -- set colorscheme
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 

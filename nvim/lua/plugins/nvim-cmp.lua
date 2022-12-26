@@ -16,7 +16,9 @@ cmp.setup({
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-
+	view = {
+		entries = "custom"
+	},
 	window = {
 		documentation = {
 			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },

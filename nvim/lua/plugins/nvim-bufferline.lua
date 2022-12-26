@@ -19,7 +19,7 @@ bufferline.setup({
 
 		mode = "buffers", -- set to "tabs" to only show tabpages instead
 		numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string
-		always_show_bufferline = false, -- don't show bufferline if there is only one file is opened
+		always_show_bufferline = true, -- don't show bufferline if there is only one file is opened
 
 		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 		right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -54,7 +54,7 @@ bufferline.setup({
 		max_prefix_length = 18, -- prefix used when a buffer is de-duplicate
 		tab_size = 16,
 		diagnostics = "nvim_lsp", -- | "coc",
-		diagnostics_update_in_insert = true,
+		diagnostics_update_in_insert = false,
 
 		color_icons = true,
 		show_close_icon = false,
@@ -62,18 +62,20 @@ bufferline.setup({
 		show_buffer_close_icons = false,
 		show_tab_indicators = false,
 		enforce_regular_tabs = false, -- if set true, tabs will be prevented from extending beyond the tab size and all tabs will be the same length
-		separator_style = "thin", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
+		separator_style = "padded_slant", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
 
 		view = "multiwindow",
 		-- can also be a table containing 2 custom separators
 		-- [focused and unfocused]. eg: { '|', '|' }
 		offsets = {
-			filetype = "NvimTree",
-			text = "Tree",
-			highlight = "Directory",
-			text_align = "center",
-			separator = true,
-		},
+			{
+				filetype = "NvimTree",
+				text = "Tree",
+				highlight = "Directory",
+				text_align = "center",
+				separator = true,
+			},
+		}
 	},
 
  	--highlights = {

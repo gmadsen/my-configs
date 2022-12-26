@@ -15,9 +15,7 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local imported_surround, surround = pcall(require, 'nvim-surround')
-if not imported_surround then return end
-
+local surround = require('nvim-surround')
 
 surround.setup({
 	keymaps = { -- vim-surround style keymaps

@@ -14,18 +14,17 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local import_autosave, autosave = pcall(require, "auto-save")
-if not import_autosave then return end
+local autosave = require("auto-save")
 
 autosave.setup {
     enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
-    execution_message = {
+    execution_message = {},
 		message = function() -- message to print on save
-			return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
+			-- return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
 		end,
-		dim = 0.18, -- dim the color of `message`
-		cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
-	},
+	-- 	dim = 0.18, -- dim the color of `message`
+	-- 	cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
+	-- },
     trigger_events = {"InsertLeave", "TextChanged"}, -- vim events that trigger auto-save. See :h events
 	-- function that determines whether to save the current buffer or not
 	-- return true: if buffer is ok to be saved
@@ -42,7 +41,7 @@ autosave.setup {
 		return false -- can't save
 	end,
     write_all_buffers = false, -- write all buffers when the current one meets `condition`
-    debounce_delay = 335, -- saves the file at most every `debounce_delay` milliseconds
+    debounce_delay = 535, -- saves the file at most every `debounce_delay` milliseconds
 	callbacks = { -- functions to be executed at different intervals
 		enabling = nil, -- ran when enabling auto-save
 		disabling = nil, -- ran when disabling auto-save

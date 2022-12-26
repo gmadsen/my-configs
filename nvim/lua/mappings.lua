@@ -2,15 +2,7 @@
 -- ━━━━━━━━━━━━━❰ Plugin-Independent Mapping ❱━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 --[===[
-        this config file contains the mapping that don't depends
-        on any plugin. mappings for plugins-dependent are in
-        lua/plugin" directory. each plugin has it's own config file
 
-        To see the current mapping for |<Leader>| type :echo mapleader.
-        If it reports an undefined variable it means the leader key is
-        set to the "default of '\'.
-        i defined leader on very start of init.lua file so that every
-        keymap would work
 --]===]
 local map = vim.keymap.set
 local cmd = vim.cmd
@@ -83,18 +75,19 @@ map("v", "J", ":m '>+1<CR>gv=gv", options)
 map("v", "K", ":m '<-2<CR>gv=gv", options)
 
 -------------------------------- Plugin Mappings
-
 -- Rename
 map("n", "<Space>R", "<cmd>Lspsaga rename<cr>")
 map("v", "<Space>R", "<cmd>Lspsaga rename<cr>")
 -- LSP
 map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
+
 -- -----------------------Toggle Nvim-Tree
 map("n", "<leader>n", ":NvimTreeToggle<CR>")
 
 ----------------------------- Hop ------------------------
 map("n", "F", "<cmd>lua require('hop').hint_words()<cr>", options)
----------------------------- BufferLine
+
+---------------------------- BufferLine----------------------
 -- go to buffer number
 map("n", "<Leader>1", ":BufferLineGoToBuffer 1<CR>", options)
 map("n", "<Leader>2", ":BufferLineGoToBuffer 2<CR>", options)
@@ -108,7 +101,7 @@ map("n", "<Leader>9", ":BufferLineGoToBuffer 9<CR>", options)
 
 map("n", "<Leader>bq",":BufferClose<CR>", options)
 
--- Telescope Mappings
+------------------------- Telescope Mappings --------------------------------
 --      --> Launch Telescope without any argument
 map("n", "<leader>ft", "<cmd>lua require('telescope.builtin').builtin() <CR>", options)
 --      --> Lists available Commands
@@ -125,7 +118,10 @@ map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep() <CR>",
 --       --> show all files from current working directory
 map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>") -- { cwd = vim.fn.expand('%:p:h') }) <CR>")
--------------- floaterm
+--       --> show undo history
+map("n", "<leader>fu", "<cmd>Telescope undo<cr>")
+
+-------------- floaterm------------------------------------
 map("n", "<A-i>", '<CMD>lua require("FTerm").toggle()<CR>')
 map("t", "<A-i>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 

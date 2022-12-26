@@ -88,10 +88,10 @@ opt.laststatus = 3 -- always show status line. 3 means Global Status Line
 opt.hidden = true -- allows you to hide buffers with unsaved changes without being prompted
 -- (i am using nosplit) opt.inccommand = 'split' -- live preview of :s results
 opt.shell = 'fish' -- shell to use for `!`, `:!`, `system()` etc.
-opt.lazyredraw = true -- faster scrolling
+opt.lazyredraw = false -- faster scrolling
 
 opt.wildignore = opt.wildignore + '*.o,*.rej,*.so' -- patterns to ignore during file-navigation
--- opt.wildmenu.Enable = true
+opt.wildmenu.Enable = true
 opt.wildmode = 'list:longest' -- command-line completion mode
 -- opt.completeopt = 'menuone,noselect,noinsert' -- completion options
 opt.completeopt = 'menu,menuone,noselect' -- completion options
@@ -99,85 +99,11 @@ opt.shortmess = opt.shortmess + {c = true}
 api.nvim_set_option('updatetime', 300)
 opt.encoding = 'utf-8' -- the encoding written to a file
 opt.fileencoding = 'utf-8' -- the encoding written to a file
--- configs that Im not sure what they do
--- opt.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
+opt.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
 -- opt.sessionoptions = 'blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos,terminal' -- options to save in session files
 opt.breakindent = true -- wrap lines with indent
 opt.signcolumn = 'yes' -- always show sign column
 opt.cmdheight = 0 -- hide cmd bar
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━❰ Automate ❱━━━━━━━━━━━━━━━━━━━━ --
-
-local group = api.nvim_create_augroup("GareAutoGroup", {clear=true})
-
-api.nvim_create_autocmd(
-	"TextYankPost",
-	{
-        desc = "highlight text on yank",
-        pattern = "*",
-		group = group,
-		callback = function()
-			vim.highlight.on_yank {
-				higroup="Search", timeout=150, on_visual=true
-			}
-        end,
-	}
-)
-
-api.nvim_create_autocmd(
-	"BufWinEnter",
-	{
-        desc = "jump to the last position when reopening a file",
-        pattern = "*",
-		group = group,
-		command = [[ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]]
-	}
-)
-
-api.nvim_create_autocmd(
-	"BufWritePre",
-	{
-		desc = "remove whitespaces on save",
-		pattern = "*",
-		group = group,
-		command = "%s/\\s\\+$//e",
-	}
-)
-
-api.nvim_create_autocmd(
-	{"BufEnter", "FileType"},
-	{
-		desc = "don't auto comment new line",
-		pattern = "*",
-		group = group,
-		command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
-	}
-)
-
-api.nvim_create_autocmd(
-	"VimResized",
-	{
-		desc = "auto resize splited windows",
-		pattern = "*",
-		group = group,
-		command = "tabdo wincmd =",
-	}
-)
-
-api.nvim_create_autocmd(
-	"BufWinEnter",
-	{
-		desc = "clear the last used search pattern",
-		pattern = "*",
-		group = group,
-		command = "let @/ = ''",
-	}
-)
-
--- ━━━━━━━━━━━━━━━━❰ end of Automate ❱━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━❰ end of Plugin-Independent Configs ❱━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

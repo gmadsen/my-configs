@@ -14,8 +14,7 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
 -- safely import telescope
-local telescope_imported_ok, telescope = pcall(require, 'telescope')
-if not telescope_imported_ok then return end
+local telescope = require('telescope')
 
 telescope.setup {
 
@@ -127,6 +126,15 @@ telescope.setup {
 			hijack_netrw = true,
 		},
 
+		undo = {
+			use_delta = true,
+			-- side_by_side = true,
+      		-- layout_strategy = "vertical",
+      		-- layout_config = {
+      		--  preview_height = 0.8,
+      		-- },
+		},
+
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {
 				winblend = 15,
@@ -159,6 +167,7 @@ telescope.load_extension('file_browser')
 telescope.load_extension('media_files')
 telescope.load_extension("ui-select")
 telescope.load_extension("projects")
+telescope.load_extension("undo")
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
