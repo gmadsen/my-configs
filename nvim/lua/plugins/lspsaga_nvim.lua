@@ -12,10 +12,7 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━--
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 
-local import_saga, saga = pcall(require, 'lspsaga')
-if not import_saga then return end
-
-
+local saga = require("lspsaga")
 saga.init_lsp_saga({
 -- Options with default value
 -- "single" | "double" | "rounded" | "bold" | "plus"
@@ -95,7 +92,7 @@ symbol_in_winbar = {
     -- if not set, use default value `%:t`
     -- more information see `vim.fn.expand` or `expand`
     -- ## only valid after set `show_file = true`
-    file_formatter = "",
+    -- file_formatter = "",
     -- click_support = ,
 },
 -- show outline
@@ -118,7 +115,7 @@ custom_kind = {},
 -- if you don't use nvim-lspconfig you must pass your server name and
 -- the related filetypes into this table
 -- like server_filetype_map = { metals = { "sbt", "scala" } }
-server_filetype_map = {},
+-- server_filetype_map = {},
 })
 
 

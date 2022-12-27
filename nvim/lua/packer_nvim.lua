@@ -101,10 +101,13 @@ return packer.startup({
 					requires = {
 						{ -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
 							"williamboman/mason-lspconfig.nvim",
+							"simrat39/rust-tools.nvim",
 						},
 						{ -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
 							"jose-elias-alvarez/null-ls.nvim",
-							after = "mason.nvim",
+							requires = {
+								"jayp0521/mason-null-ls.nvim",
+							},
 						},
 					},
 				},
@@ -114,6 +117,12 @@ return packer.startup({
 				require('plugins/null-ls_nvim')
 			]],
 		})
+
+		-- use({ -- i guess another signature popup
+		-- 	"ray-x/lsp_signature.nvim",
+		-- 	event = "InsertEnter",
+		-- 	config = [[ require('plugins/lspsignature') ]],
+		-- })
 
 		use({ -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
 			"folke/trouble.nvim",
@@ -182,7 +191,7 @@ return packer.startup({
 				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" }, -- nvim-cmp source for buffer words.
 				{ "hrsh7th/cmp-path", after = "nvim-cmp" }, -- nvim-cmp source for filesystem paths.
 				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }, -- nvim-cmp source for vim cmdline
-				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
+				-- { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
 				{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			},
 			config = [[
@@ -341,10 +350,10 @@ return packer.startup({
 			"mfussenegger/nvim-dap",
 		})
 		-- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
-		use({ -- tools for rust
-			"simrat39/rust-tools.nvim",
-			config = [[ require('plugins/rust-tools') ]],
-		})
+		-- use({ -- tools for rust
+		-- 	"simrat39/rust-tools.nvim",
+		-- 	--config = [[ require('plugins/rust-tools') ]],
+		-- })
 
 		use("EdenEast/nightfox.nvim")
 		vim.cmd("colorscheme nightfox")

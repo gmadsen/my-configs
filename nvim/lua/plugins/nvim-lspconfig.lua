@@ -132,14 +132,14 @@ local function setup_lsp(mason_lspconfig)
 
 	local cmp_lsp = require("cmp_nvim_lsp")
 	lsp_options.capabilities = (cmp_lsp).default_capabilities(capabilities)
-
+	local rt_config = require("plugins.rust-tools")
 	mason_lspconfig.setup_handlers({
 		function(server_name)
 			require("lspconfig")[server_name].setup(lsp_options)
 		end,
 
 		["rust_analyzer"] = function()
-			require("rust-tools").setup {}
+			require("rust-tools").setup(tbl_deep_extend("force", lsp_options, rt_config))
 		end,
 
 		["sumneko_lua"] = function()
