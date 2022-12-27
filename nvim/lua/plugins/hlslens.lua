@@ -10,10 +10,8 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local import_hlslens, hlslens = pcall(require, "hlslens")
-if not import_hlslens then return end
-
-hlslens.setup {
+local hlslens = require("hlslens")
+hlslens.setup({
     -- auto_enable = {
     --     description = [[Enable nvim-hlslens automatically]],
     --     default = true
@@ -62,5 +60,5 @@ hlslens.setup {
     --     ]],
     --     default = 10
     -- },
-}
+})
 

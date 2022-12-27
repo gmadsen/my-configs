@@ -10,13 +10,11 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
---              NOTE:1
 -- If you want to automatically ensure that packer.nvim is installed on any machine you clone your configuration to,
 -- add the following snippet (which is due to @Iron-E) somewhere in your config before your first usage of packer:
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath("data") ..
-					                     "/site/pack/packer/start/packer.nvim"
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({
 			"git",
@@ -36,7 +34,9 @@ local packer_bootstrap = ensure_packer()
 
 -- safely import packer
 local import_packer, packer = pcall(require, "packer")
-if not import_packer then return end
+if not import_packer then
+	return
+end
 
 return packer.startup({
 
@@ -46,7 +46,7 @@ return packer.startup({
 
 		display = {
 			open_fn = function()
-				return require("packer.util").float({border = "single"})
+				return require("packer.util").float({ border = "single" })
 			end,
 		},
 		git = {
@@ -74,12 +74,11 @@ return packer.startup({
 
 		-- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
 
-		use("EdenEast/nightfox.nvim")
-		vim.cmd("colorscheme nightfox")
-
 		use({ -- fancy notify box
 			"rcarriga/nvim-notify",
-			config = function() vim.notify = require("notify") end,
+			config = function()
+				vim.notify = require("notify")
+			end,
 		})
 
 		use({ --- new UI elements for most things
@@ -131,7 +130,9 @@ return packer.startup({
 			event = "VimEnter",
 			config = [[ require('plugins/copilot') ]],
 		})
-
+		use({ -- vscode-like pictograms for neovim lsp completion items Topics
+			"onsails/lspkind-nvim",
+		})
 		-- ━━━━━━━━━━━━━━━━❰ TS Plugins ❱━━━━━━━━━━━━━━━━ --
 		use({ -- Nvim Treesitter configurations and abstraction layer
 			"nvim-treesitter/nvim-treesitter",
@@ -156,15 +157,13 @@ return packer.startup({
 			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
 			requires = {
-				{ -- vscode-like pictograms for neovim lsp completion items Topics
-					"onsails/lspkind-nvim",
-					after = "nvim-cmp",
-				},
 				{ -- Snippet Engine for Neovim written in Lua.
 					"L3MON4D3/LuaSnip",
 					module = "luasnip",
 					requires = "rafamadriz/friendly-snippets", -- Snippets collection for a set of different programming languages for faster development.
-					config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
+					config = function()
+						require("luasnip.loaders.from_vscode").lazy_load()
+					end,
 				},
 				{ -- autopairs for Neovim. It support multiple character.
 					"windwp/nvim-autopairs",
@@ -173,16 +172,18 @@ return packer.startup({
 				},
 				{
 					"zbirenbaum/copilot-cmp",
-					after = {"copilot.lua", "nvim-cmp"},
-					config = function() require("copilot_cmp").setup() end,
+					after = { "copilot.lua", "nvim-cmp" },
+					config = function()
+						require("copilot_cmp").setup()
+					end,
 				},
-				{"hrsh7th/cmp-nvim-lsp", after = "nvim-cmp"}, -- nvim-cmp source for neovim builtin LSP client
-				{"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"}, -- nvim-cmp source for nvim lua
-				{"hrsh7th/cmp-buffer", after = "nvim-cmp"}, -- nvim-cmp source for buffer words.
-				{"hrsh7th/cmp-path", after = "nvim-cmp"}, -- nvim-cmp source for filesystem paths.
-				{"hrsh7th/cmp-cmdline", after = "nvim-cmp"}, -- nvim-cmp source for vim cmdline
-				{"hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp"}, -- nvim-cmp source for function signatures under curser
-				{"saadparwaiz1/cmp_luasnip", after = "nvim-cmp"},
+				{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }, -- nvim-cmp source for neovim builtin LSP client
+				{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }, -- nvim-cmp source for nvim lua
+				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" }, -- nvim-cmp source for buffer words.
+				{ "hrsh7th/cmp-path", after = "nvim-cmp" }, -- nvim-cmp source for filesystem paths.
+				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }, -- nvim-cmp source for vim cmdline
+				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
+				{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			},
 			config = [[
 				require('plugins/nvim-cmp')
@@ -196,7 +197,7 @@ return packer.startup({
 			"nvim-telescope/telescope.nvim",
 			requires = {
 				"nvim-lua/plenary.nvim",
-				{"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 				"nvim-telescope/telescope-file-browser.nvim",
 				"nvim-telescope/telescope-media-files.nvim",
 				"nvim-telescope/telescope-ui-select.nvim",
@@ -214,7 +215,9 @@ return packer.startup({
 		})
 		use({ --  Add/change/delete surrounding delimiter pairs with ease.
 			"kylechui/nvim-surround",
-			config = function() require("nvim-surround").setup({}) end,
+			config = function()
+				require("nvim-surround").setup({})
+			end,
 		})
 		use({ -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
 			"numToStr/Comment.nvim",
@@ -231,14 +234,14 @@ return packer.startup({
 		use({ -- fancy buffer line
 			"akinsho/bufferline.nvim",
 			tag = "v3.*",
-			requires = {"kyazdani42/nvim-web-devicons", opt = true},
+			requires = { { "EdenEast/nightfox.nvim" }, { "kyazdani42/nvim-web-devicons", opt = true } },
 			config = [[ require('plugins/nvim-bufferline') ]],
 		})
 		use({ -- fancy status line
 			"nvim-lualine/lualine.nvim",
 			requires = {
-				{"kyazdani42/nvim-web-devicons", opt = true},
-				{"arkav/lualine-lsp-progress"},
+				{ "kyazdani42/nvim-web-devicons", opt = true },
+				{ "arkav/lualine-lsp-progress" },
 			},
 			config = [[ require('plugins/lualine') ]],
 		})
@@ -250,12 +253,31 @@ return packer.startup({
 			"aserowy/tmux.nvim",
 			config = [[ require('plugins/tmux') ]],
 		})
-		use({ --  A simple wrapper around :mksession
-			"Shatur/neovim-session-manager",
-			config = [[ require('plugins/neovim-session-manager') ]],
+		-- use({ --  A simple wrapper around :mksession
+		-- 	"Shatur/neovim-session-manager",
+		-- 	config = [[ require('plugins/neovim-session-manager') ]],
+		-- })
+		-- use({ -- EditorConfig plugin for Neovim
+		-- 	"gpanders/editorconfig.nvim",
+		-- })
+		use({
+			"folke/todo-comments.nvim",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("todo-comments").setup({
+					-- your configuration comes here
+					-- or leave it empty to use the default settings
+					-- refer to the configuration section below
+				})
+			end,
 		})
-		use({ -- EditorConfig plugin for Neovim
-			"gpanders/editorconfig.nvim",
+		use({ -- auto save sessions on exit
+			"folke/persistence.nvim",
+			event = "BufReadPre",
+			module = "persistence",
+			config = function()
+				require("persistence").setup()
+			end,
 		})
 		use({ --  Neovim motions on speed!
 			"phaazon/hop.nvim",
@@ -271,7 +293,7 @@ return packer.startup({
 		})
 		use({ -- highlight arguments of a function call using treesitter
 			"m-demare/hlargs.nvim",
-			requires = {"nvim-treesitter/nvim-treesitter"},
+			requires = { "nvim-treesitter/nvim-treesitter" },
 		})
 		use({ -- Highlight other uses of word under cursor
 			"RRethy/vim-illuminate",
@@ -299,11 +321,21 @@ return packer.startup({
 			"kevinhwang91/nvim-hlslens",
 			config = [[ require('plugins/hlslens') ]],
 		})
-		use({"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"})
+		use({
+			"sindrets/diffview.nvim",
+			requires = {"nvim-lua/plenary.nvim"},
+		})
 
 		use({ -- floating terming
 			"numToStr/FTerm.nvim",
 			config = [[ require('plugins/fterm_nvim') ]],
+		})
+		use({
+			"andymass/vim-matchup",
+			setup = function()
+				-- may set any options here
+				vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			end,
 		})
 		use({ -- debug adapter
 			"mfussenegger/nvim-dap",
@@ -313,6 +345,9 @@ return packer.startup({
 			"simrat39/rust-tools.nvim",
 			config = [[ require('plugins/rust-tools') ]],
 		})
+
+		use("EdenEast/nightfox.nvim")
+		vim.cmd("colorscheme nightfox")
 
 		-- use { -- tools for haskell
 		--	'MrcJkb/haskell-tools.nvim',
@@ -327,7 +362,9 @@ return packer.startup({
 		-- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
-		if packer_bootstrap then packer.sync() end
+		if packer_bootstrap then
+			packer.sync()
+		end
 	end,
 })
 

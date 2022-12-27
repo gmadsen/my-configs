@@ -36,7 +36,7 @@ lualine.setup({
     lualine_c = {'diagnostics'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress','location'},
-    lualine_z = { "os.date('%a')", 'data'},
+    lualine_z = { "os.date('%b %d %Y %H:%M')",},
   },
   inactive_sections = {
     lualine_a = {},

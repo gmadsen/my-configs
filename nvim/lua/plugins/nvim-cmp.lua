@@ -11,25 +11,28 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 cmp.setup({
+	completion = {
+		completeopt = "menu,menuone,noinsert",
+	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-	view = {
-		entries = "custom"
-	},
-	window = {
-		documentation = {
-			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-		},
-		completion = {
-			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
-			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-			col_offset = -3,
-			side_padding = 0,
-		},
-	},
+	-- view = {
+	-- 	entries = "custom"
+	-- },
+	-- window = {
+	-- 	documentation = {
+	-- 		border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+	-- 	},
+	-- 	completion = {
+	-- 		border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+	-- 		winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+	-- 		col_offset = -3,
+	-- 		side_padding = 0,
+	-- 	},
+	-- },
 
 	formatting = {
 		fields = { "kind", "abbr", "menu" },

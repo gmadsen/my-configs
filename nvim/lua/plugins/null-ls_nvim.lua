@@ -14,15 +14,10 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
 
--- safley import null-ls
-local imported_null, null = pcall(require, "null-ls")
-if not imported_null then return end
+local null = require("null-ls")
+local packages = require("mason-registry")
 
--- Packages(LSP, Formatter, Linter, DAP) are installed and managed by 'williamboman/mason.nvim'
-local imported_packages, packages = pcall(require, "mason-registry")
-if not imported_packages then return end
 -- get all installed Packages
 local installed_packages = packages.get_installed_package_names()
 
