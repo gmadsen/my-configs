@@ -68,7 +68,7 @@ update_cmd = update_cmd .. " <CR><CR>"
 dashboard.section.buttons.val = {
 	dashboard.button("n", "  > New file", ":ene <BAR> startinsert <CR>", options),
 	dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>", options),
-	dashboard.button("<C-S>", "S  > Projects", ":Telescope projects<CR>", options),
+	-- dashboard.button("<C-S>", "S  > Projects", ":Telescope projects<CR>", options),
 	dashboard.button("f", "  > Find file", ":Telescope find_files<CR>", options),
 	dashboard.button("s", "  > Settings", ":e ~/.config/nvim/init.lua <CR>", options),
 	dashboard.button("u", "  > Update Plugins", update_cmd, options),

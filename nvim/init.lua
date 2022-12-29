@@ -14,15 +14,13 @@ vim.g.maplocalleader = ';'
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
 
-require('plugins/impatient_nvim')   -- impatient needs to be setup before any other lua plugin is loaded so it is recommended you add the following near the start of your
-
-
 require('configs')                  -- plugin independent configs
-require('mappings')                 -- key mappings
-require('utilities')                -- utilities
 
+require('plugins/impatient_nvim')   -- impatient needs to be setup before any other
 require('packer_nvim')              -- loading plugins and plugin configs
 
+require('mappings')                 -- key mappings
+require('utilities')                -- utilities
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 

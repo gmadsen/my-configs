@@ -16,7 +16,7 @@ local saga = require("lspsaga")
 saga.init_lsp_saga({
 -- Options with default value
 -- "single" | "double" | "rounded" | "bold" | "plus"
-border_style = "single",
+border_style = "bold",
 --the range of 0 for fully opaque window (disabled) to 100 for fully
 --transparent background. Values between 0-30 are typically most useful.
 saga_winblend = 10,
@@ -32,7 +32,8 @@ move_in_saga = { prev = '<C-p>',next = '<C-n>'},
 -- is function type it will have a param `entry`
 -- entry is a table type has these filed
 -- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
-diagnostic_header = { " ", " ", " ", "ﴞ " },
+-- diagnostic_header = { " ", " ", " ", "ﴞ " },
+diagnostic_header = { "😡", "😥", "😤", "😐" },
 -- preview lines of lsp_finder and definition preview
 max_preview_lines = 20,
 -- use emoji lightbulb in default
@@ -110,12 +111,7 @@ show_outline = {
   auto_refresh = true,
 },
 -- custom lsp kind
--- usage { Field = 'color code'} or {Field = {your icon, your color code}}
-custom_kind = {},
--- if you don't use nvim-lspconfig you must pass your server name and
--- the related filetypes into this table
--- like server_filetype_map = { metals = { "sbt", "scala" } }
--- server_filetype_map = {},
+custom_kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
 })
 
 

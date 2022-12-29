@@ -8,7 +8,7 @@
 
 local lsp = vim.lsp
 local api = vim.api
--- local handlers = lsp.handlers
+local handlers = lsp.handlers
 -- ───────────────────────────────────────────────── --
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
@@ -21,38 +21,38 @@ vim.keymap.set("n", "<Space><Space>q", "<cmd>lua vim.diagnostic.set_loclist({})<
 vim.keymap.set("n", "<Space><Space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", options)
 vim.keymap.set("n", "<Space><Space>b", "<cmd>lua vim.diagnostic.goto_prev()<CR>", options)
 
-
-
-
-
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 -- ───────────────────────────────────────────────── --
 local on_attach = function(client, bufnr)
-
 	-- Enable completion triggered by <c-x><c-o>
-	-- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-	vim.keymap.set("n", "<Space><Space>d", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "<Space><Space>D", "<Cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>T", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>r", "<cmd>Telescope lsp_references<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", bufopts)
+	vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "<leader><C-k>", vim.lsp.buf.signature_help, bufopts)
 
-	vim.keymap.set("n", "<Space><Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", bufopts)
-	vim.keymap.set("x", "<Space><Space>ca", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", bufopts)
+	vim.keymap.set("n", "<leader><space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set("n", "<leader><space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 
-	vim.keymap.set("n", "<Space><Space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", bufopts)
-	vim.keymap.set("n", "<Space><Space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", bufopts)
+	vim.keymap.set("n", "<leader><space>wl", function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
 
+
+	vim.keymap.set("n", "<leader><space>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<leader><space>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<leader><space>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, bufopts)
+
+	vim.keymap.set("n", "<leader><space>f", function()
+		vim.lsp.buf.format({ async = true })
+	end, bufopts)
 end
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
@@ -89,8 +89,24 @@ local function setup_lsp_config()
 	-- 					},
 	-- 				})
 
-	-- handlers["textDocument/hover"] = lsp.with(handlers.hover, {border = "rounded"})
-	-- handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, {border = "rounded"})
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = false,
+		signs = true,
+		update_in_insert = false,
+		underline = true,
+		severity_sort = true,
+		-- code_action_icon = signs.LightBulb,
+		float = {
+			focusable = false,
+			style = "minimal",
+			border = "rounded",
+			source = "always",
+			header = "",
+			prefix = "",
+		},
+	})
+	-- handlers["textDocument/hover"] = lsp.with(handlers.hover, { border = "rounded" })
+	-- handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, { border = "rounded" })
 
 	-- show diagnostic on float window(like auto complete)
 	-- vim.api.nvim_command [[ autocmd CursorHold  *.lua,*.sh,*.bash,*.dart,*.py,*.cpp,*.c,js lua vim.lsp.diagnostic.show_line_diagnostics() ]]
@@ -118,6 +134,7 @@ local function setup_lsp_config()
 	" highlight LspDiagnosticsUnderlineHint          guifg=#17EB7A gui=undercurl
 	--]]
 end
+
 -- ───────────────────────────────────────────────── --
 -- setup LSPs
 -- ───────────────────────────────────────────────── --

@@ -40,7 +40,7 @@ treesitter.setup {
 		-- disable = { "c", "rust" },  -- list of language that will be disabled
 		custom_captures = {
 			-- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-			["foo.bar"] = "Identifier",
+			-- ["foo.bar"] = "Identifier",
 		},
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -54,6 +54,7 @@ treesitter.setup {
 		enable = true,
 	},
 
+}
 	-- playground = {
 	-- 	enable = true,
 	-- 	disable = {},
@@ -84,7 +85,6 @@ treesitter.setup {
 		-- }
 	-- },
 -- }
-}
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end Mappings ❱━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

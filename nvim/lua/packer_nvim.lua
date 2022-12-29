@@ -48,8 +48,8 @@ return packer.startup({
 			open_fn = function()
 				return require("packer.util").float({ border = "single" })
 			end,
-		},
-		git = {
+        },
+        git = {
 			cmd = "git", -- The base command for git operations
 			depth = 1, -- Git clone depth
 			clone_timeout = 600, -- Timeout, in seconds, for git clones
@@ -63,8 +63,65 @@ return packer.startup({
 
 		use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
 
-		use("nvim-lua/plenary.nvim") -- comment functions for all plugins
+		use({
+			"catppuccin/nvim",
+			as = "catppuccin",
+			config = function()
+				require("catppuccin").setup({
+					integrations = {
+						cmp = true,
+						dashboard = true,
+						gitsigns = true,
+						hop = false,
+						illuminate = false,
+						leap = false,
+						lsp_saga = true,
+						lsp_trouble = true,
+						mason = true,
+						neotree = false,
+						noice = true,
+						notify = true,
+						nvimtree = false,
+						semantic_tokens = false,
+						symbols_outline = false,
+						telescope = true,
+						treesitter = true,
+						treesitter_context = true,
+						ts_rainbow = true,
+						which_key = true,
 
+						-- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
+						dap = {
+							enabled = false,
+							enable_ui = false,
+						},
+						indent_blankline = {
+							enabled = false,
+							colored_indent_levels = false,
+						},
+						native_lsp = {
+							enabled = true,
+							virtual_text = {
+								errors = { "italic" },
+								hints = { "italic" },
+								warnings = { "italic" },
+								information = { "italic" },
+							},
+							underlines = {
+								errors = { "underline" },
+								hints = { "underline" },
+								warnings = { "underline" },
+								information = { "underline" },
+							},
+						},
+					},
+				})
+			end,
+		})
+		vim.cmd.colorscheme("catppuccin")
+		-- use("EdenEast/nightfox.nvim")
+
+		use("nvim-lua/plenary.nvim") -- comment functions for all plugins
 		use("MunifTanjim/nui.nvim")
 
 		use({ -- lua `fork` of vim-web-devicons for neovim
@@ -88,6 +145,13 @@ return packer.startup({
 				"MunifTanjim/nui.nvim",
 				"rarriga/nvim-notify",
 			},
+		})
+
+		use({ ----- LUA NVIM DEVELOPMENT
+			"folke/neodev.nvim",
+			config = function()
+				require("neodev").setup({})
+			end,
 		})
 
 		-- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
@@ -191,7 +255,7 @@ return packer.startup({
 				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" }, -- nvim-cmp source for buffer words.
 				{ "hrsh7th/cmp-path", after = "nvim-cmp" }, -- nvim-cmp source for filesystem paths.
 				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }, -- nvim-cmp source for vim cmdline
-				-- { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
+				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
 				{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			},
 			config = [[
@@ -243,7 +307,10 @@ return packer.startup({
 		use({ -- fancy buffer line
 			"akinsho/bufferline.nvim",
 			tag = "v3.*",
-			requires = { { "EdenEast/nightfox.nvim" }, { "kyazdani42/nvim-web-devicons", opt = true } },
+			requires = {
+				{ "catppuccin" },
+				{ "kyazdani42/nvim-web-devicons", opt = true },
+			},
 			config = [[ require('plugins/nvim-bufferline') ]],
 		})
 		use({ -- fancy status line
@@ -262,13 +329,15 @@ return packer.startup({
 			"aserowy/tmux.nvim",
 			config = [[ require('plugins/tmux') ]],
 		})
-		-- use({ --  A simple wrapper around :mksession
-		-- 	"Shatur/neovim-session-manager",
-		-- 	config = [[ require('plugins/neovim-session-manager') ]],
-		-- })
-		-- use({ -- EditorConfig plugin for Neovim
-		-- 	"gpanders/editorconfig.nvim",
-		-- })
+		use({
+			"rmagatti/auto-session",
+			config = function()
+				require("auto-session").setup({
+					log_level = "error",
+					auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+				})
+			end,
+		})
 		use({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -280,14 +349,6 @@ return packer.startup({
 				})
 			end,
 		})
-		use({ -- auto save sessions on exit
-			"folke/persistence.nvim",
-			event = "BufReadPre",
-			module = "persistence",
-			config = function()
-				require("persistence").setup()
-			end,
-		})
 		use({ --  Neovim motions on speed!
 			"phaazon/hop.nvim",
 			config = [[ require('plugins/hop_nvim') ]],
@@ -295,10 +356,6 @@ return packer.startup({
 		use({ -- smooth scrolling for neovim
 			"karb94/neoscroll.nvim",
 			config = [[ require('plugins/neoscroll_nvim') ]],
-		})
-		use({ -- auto save files
-			"Pocco81/auto-save.nvim",
-			config = [[ require('plugins/auto-save') ]],
 		})
 		use({ -- highlight arguments of a function call using treesitter
 			"m-demare/hlargs.nvim",
@@ -316,10 +373,10 @@ return packer.startup({
 			"glepnir/lspsaga.nvim",
 			config = [[ require('plugins/lspsaga_nvim') ]],
 		})
-		use({ -- project manager, like rooter
-			"ahmedkhalf/project.nvim",
-			config = [[ require('plugins/project_nvim') ]],
-		})
+		-- use({ -- project manager, like rooter
+		-- 	"ahmedkhalf/project.nvim",
+		-- 	config = [[ require('plugins/project_nvim') ]],
+		-- })
 		use({ -- hydra to do cool repeater mappings
 			"anuvyklack/hydra.nvim",
 		})
@@ -332,7 +389,7 @@ return packer.startup({
 		})
 		use({
 			"sindrets/diffview.nvim",
-			requires = {"nvim-lua/plenary.nvim"},
+			requires = { "nvim-lua/plenary.nvim" },
 		})
 
 		use({ -- floating terming
@@ -350,13 +407,6 @@ return packer.startup({
 			"mfussenegger/nvim-dap",
 		})
 		-- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
-		-- use({ -- tools for rust
-		-- 	"simrat39/rust-tools.nvim",
-		-- 	--config = [[ require('plugins/rust-tools') ]],
-		-- })
-
-		use("EdenEast/nightfox.nvim")
-		vim.cmd("colorscheme nightfox")
 
 		-- use { -- tools for haskell
 		--	'MrcJkb/haskell-tools.nvim',

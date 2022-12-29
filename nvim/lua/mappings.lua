@@ -116,7 +116,7 @@ map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers() <CR>", o
 map("n", "<leader>fw", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find() <CR>", options)
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep() <CR>", options)
 --       --> show all files from current working directory
-map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
+-- map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects() <CR>")
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>") -- { cwd = vim.fn.expand('%:p:h') }) <CR>")
 --       --> show undo history
 map("n", "<leader>fu", "<cmd>Telescope undo<cr>")
@@ -148,20 +148,6 @@ map("n", "]E", function()
 		severity = vim.diagnostic.severity.ERROR,
 	})
 end)
-
--- This Hydra lets you scroll sideways is a sane way
-local Hydra = require("hydra")
-Hydra({
-	name = "Side scroll",
-	mode = "n",
-	body = "z",
-	heads = {
-		{ "h", "5zh" },
-		{ "l", "5zl", { desc = "←/→" } },
-		{ "H", "zH" },
-		{ "L", "zL", { desc = "half screen ←/→" } },
-	},
-})
 
 -- hlslens , which makes search more fancy
 map("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], options)

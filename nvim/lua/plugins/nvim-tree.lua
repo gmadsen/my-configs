@@ -17,28 +17,28 @@
 local import_ntree, nvim_tree = pcall(require, "nvim-tree")
 if not import_ntree then return end
 
-
+-- auto switches dark and light background
 local cmd = vim.cmd -- execute Vim commands
 cmd('autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None')
 cmd('autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg')
 
 
 nvim_tree.setup {
-	disable_netrw = false,
-	hijack_netrw = false,
-	open_on_setup = true,
+	disable_netrw = true,
+	hijack_netrw = true,
+	open_on_setup =false,
 	ignore_ft_on_setup = {},
 	-- auto_close = false,
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = true,
-	hijack_directories = {enable = true, auto_open = true},
+	hijack_directories = {enable = false, auto_open = false},
 	diagnostics = {
 		enable = true,
 		icons = {hint = "", info = "", warning = "", error = ""},
 	},
 	git = {enable = true},
-	update_focused_file = {enable = true, update_root = true, ignore_list = {}},
+	update_focused_file = {enable = false, update_root = true, ignore_list = {}},
 	system_open = {cmd = nil, args = {}},
 	filters = {dotfiles = false, custom = {}},
 

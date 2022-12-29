@@ -166,7 +166,7 @@ telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
 telescope.load_extension('media_files')
 telescope.load_extension("ui-select")
-telescope.load_extension("projects")
+-- telescope.load_extension("projects")
 telescope.load_extension("undo")
 
 

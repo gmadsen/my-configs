@@ -11,11 +11,11 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-
+vim.g.completeopt = "menu,menuone,noselect"
 cmp.setup({
 
 	completion = {
-		completeopt = "menu,menuone,noselect",
+		completeopt = "menu,menuone,noinsert",
 	},
 	snippet = {
 		expand = function(args)
@@ -41,27 +41,12 @@ cmp.setup({
 			},
 		}),
 	},
-	-- sources = cmp.config.sources({
-	-- 	{
-	-- 		{ name = "nvim_lua", keyword_length = 1 },
-	-- 		{ name = "copilot", keyword_length = 1 },
-	-- 		{ name = "luasnip", keyword_length = 1 },
-	-- 	},
-	-- 	{
-	--
-	-- 		{ name = "nvim_lsp", keyword_length = 1 },
-	-- 		{ name = "buffer", keyword_length = 3 },
-	-- 	},
-	-- 	{
-	-- 		{ name = "path", keyword_length = 1 },
-	-- 		{ name = "cmdline" },
-	-- 	},
-	-- }),
 	sources = {
 			{ name = "nvim_lua", keyword_length = 1 },
+            { name = "nvim_lsp", keyword_length = 1 },
 			{ name = "copilot", keyword_length = 1 },
 			{ name = "luasnip", keyword_length = 1 },
-			{ name = "nvim_lsp", keyword_length = 1 },
+			{ name = "nvim_lsp_signature_help", keyword_length = 1 },
 			{ name = "buffer", keyword_length = 3 },
 			{ name = "path", keyword_length = 1 },
 			{ name = "cmdline" },

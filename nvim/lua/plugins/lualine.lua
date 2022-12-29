@@ -13,7 +13,7 @@ local lualine = require("lualine")
 lualine.setup({
   options = {
     icons_enabled = true,
-    theme = 'nightfox',
+    theme = 'catppuccin',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
@@ -26,7 +26,7 @@ lualine.setup({
     globalstatus = true,
     refresh = {
       statusline = 1000,
-      tabline = 1000,
+      -- tabline = 1000,
       winbar = 1000,
     }
   },
@@ -35,7 +35,7 @@ lualine.setup({
     lualine_b = {'branch', 'diff',},
     lualine_c = {'diagnostics'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress','location'},
+    lualine_y = {require('auto-session-library').current_session_name, 'progress','location'},
     lualine_z = { "os.date('%b %d %Y %H:%M')",},
   },
   inactive_sections = {
@@ -71,6 +71,10 @@ lualine.setup({
 	},
 })
 
+require('lualine').hide({
+  place = {'tabline'}, -- The segment this change applies to.
+  unhide = false,  -- whether to reenable lualine again/
+})
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
