@@ -64,75 +64,6 @@ end
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
 local function setup_lsp_config()
-	-- options for lsp diagnostic
-	-- ───────────────────────────────────────────────── --
-	-- vim.diagnostic.config({
-	-- 	float = {
-	-- 		border = "rounded",
-	-- 		focusable = true,
-	-- 		style = "minimal",
-	-- 		source = "always",
-	-- 		header = "",
-	-- 		prefix = "",
-	-- 	},
-	-- })
-	--
-	-- handlers["textDocument/publishDiagnostics"] =
-	-- 				lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-	-- 					underline = true,
-	-- 					signs = true,
-	-- 					update_in_insert = true,
-	-- 					virtual_text = {
-	-- 						true,
-	-- 						spacing = 6,
-	-- 						-- severity_limit='Error'  -- Only show virtual text on error
-	-- 					},
-	-- 				})
-
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = false,
-		signs = true,
-		update_in_insert = false,
-		underline = true,
-		severity_sort = true,
-		-- code_action_icon = signs.LightBulb,
-		float = {
-			focusable = false,
-			style = "minimal",
-			border = "rounded",
-			source = "always",
-			header = "",
-			prefix = "",
-		},
-	})
-	-- handlers["textDocument/hover"] = lsp.with(handlers.hover, { border = "rounded" })
-	-- handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, { border = "rounded" })
-
-	-- show diagnostic on float window(like auto complete)
-	-- vim.api.nvim_command [[ autocmd CursorHold  *.lua,*.sh,*.bash,*.dart,*.py,*.cpp,*.c,js lua vim.lsp.diagnostic.show_line_diagnostics() ]]
-
-	-- set LSP diagnostic symbols/signs
-	-- ─────────────────────────────────────────────────--
-	-- api.nvim_command([[ sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl= ]])
-	-- api.nvim_command([[ sign define DiagnosticSignWarn  text= texthl=DiagnosticSignWarn  linehl= numhl= ]])
-	-- api.nvim_command([[ sign define DiagnosticSignInfo  text= texthl=DiagnosticSignInfo  linehl= numhl= ]])
-	-- api.nvim_command([[ sign define DiagnosticSignHint  text= texthl=DiagnosticSignHint  linehl= numhl= ]])
-	--
-	-- api.nvim_command([[ hi DiagnosticUnderlineError cterm=underline gui=underline guisp=#840000 ]])
-	-- api.nvim_command([[ hi DiagnosticUnderlineHint cterm=underline  gui=underline guisp=#07454b ]])
-	-- api.nvim_command([[ hi DiagnosticUnderlineWarn cterm=underline  gui=underline guisp=#2f2905 ]])
-	-- api.nvim_command([[ hi DiagnosticUnderlineInfo cterm=underline  gui=underline guisp=#265478 ]])
-	--
-	-- Auto-format files prior to saving them
-	-- vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
-
-	--[[
-	" to change colors, it's better to define in color scheme
-	" highlight LspDiagnosticsUnderlineError         guifg=#EB4917 gui=undercurl
-	" highlight LspDiagnosticsUnderlineWarning       guifg=#EBA217 gui=undercurl
-	" highlight LspDiagnosticsUnderlineInformation   guifg=#17D6EB gui=undercurl
-	" highlight LspDiagnosticsUnderlineHint          guifg=#17EB7A gui=undercurl
-	--]]
 end
 
 -- ───────────────────────────────────────────────── --
@@ -149,15 +80,19 @@ local function setup_lsp(mason_lspconfig)
 
 	local cmp_lsp = require("cmp_nvim_lsp")
 	lsp_options.capabilities = (cmp_lsp).default_capabilities(capabilities)
-	local rt_config = require("plugins.rust-tools")
+	-- local rt_config = require("plugins.rust-tools")
 	mason_lspconfig.setup_handlers({
 		function(server_name)
 			require("lspconfig")[server_name].setup(lsp_options)
 		end,
 
+
 		["rust_analyzer"] = function()
-			require("rust-tools").setup(tbl_deep_extend("force", lsp_options, rt_config))
-		end,
+            local rt_opts = vim.tbl_deep_extend("force", {}, lsp_options, {})
+            require("rust-tools").setup(rt_opts)
+        end, -- function()
+			-- require("rust-tools").setup(tbl_deep_extend("force", lsp_options, rt_config))
+		-- end,
 
 		["sumneko_lua"] = function()
 			require("lspconfig").sumneko_lua.setup(tbl_deep_extend("force", lsp_options, {
