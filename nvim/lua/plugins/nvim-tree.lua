@@ -19,6 +19,8 @@ if not import_ntree then return end
 
 -- auto switches dark and light background
 local cmd = vim.cmd -- execute Vim commands
+
+cmd.colorscheme "catppuccin"
 cmd('autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None')
 cmd('autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg')
 
@@ -58,7 +60,7 @@ nvim_tree.setup {
 	}
 }
 
-vim.cmd.colorscheme("catppuccin")
+-- vim.cmd.colorscheme("catppuccin")
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

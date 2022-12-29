@@ -94,7 +94,7 @@ opt.wildignore:append({ "*.o", "*.rej", "*.so" }) -- patterns to ignore during f
 -- o.wildmenu.enable = true
 o.wildmode = "list:longest" -- command-line completion mode
 o.completeopt = "menu,menuone,noselect" -- completion options
-opt.shortmess:append("sAIcCqS") -- short duration messages
+-- o.shortmess = "sAIcCqS" -- short duration messages
 o.encoding = "utf-8" -- the encoding written to a file
 o.fileencoding = "utf-8" -- the encoding written to a file
 o.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
