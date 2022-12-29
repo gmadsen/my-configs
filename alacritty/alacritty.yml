@@ -13,8 +13,8 @@ shell:
 window:
   dynamic_padding: false
   dimensions:
-    columns: 200 #84
-    lines: 100 #22
+    columns: 160 #84
+    lines: 80 #22
   padding:
     x: 1
     y: 1
@@ -42,7 +42,7 @@ cursor:
   unfocused_hollow: false # true
 
 font:
-  size: 13
+  size: 12
   builtin_box_drawing: false
   draw_bold_text_with_bright_colors: false
 

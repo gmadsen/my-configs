@@ -9,15 +9,27 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local null_ls = require("null-ls")
 require("mason-null-ls").setup({
 	automatic_installation = true,
 	automatic_setup = true,
 	ensure_installed = { "stylua", "prettier", "rustfmt", "clang_format" },
 })
 
--- local packages = require("mason-registry")
+local null_ls = require("null-ls")
+null_ls.setup({})
 
+
+require("mason-null-ls").setup_handlers({
+	function(source_name, methods)
+		-- hopefully this is the catch all
+		require("mason-null-ls.automatic_setup")(source_name, methods)
+	end,
+	stylua = function(source_name, methods)
+		null_ls.register(null_ls.builtins.formatting.stylua)
+	end,
+})
+null_ls.setup()
+-- local packages = require("mason-registry")
 -- get all installed Packages
 -- local installed_packages = packages.get_installed_package_names()
 
@@ -35,17 +47,6 @@ require("mason-null-ls").setup({
 
 -- null.setup({})
 
-require("mason-null-ls").setup_handlers({
-	function(source_name, methods)
-		-- hopefully this is the catch all
-
-		require("mason-null-ls.automatic_setup")(source_name, methods)
-	end,
-	stylua = function(source_name, methods)
-		null_ls.register(null_ls.builtins.formatting.stylua)
-	end,
-})
-null_ls.setup()
 -- ───────────────────────────────────────────────── --
 -- ─────────────────❰ FORMATTING ❱────────────────── --
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting

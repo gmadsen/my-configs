@@ -48,15 +48,15 @@ return packer.startup({
 			open_fn = function()
 				return require("packer.util").float({ border = "single" })
 			end,
-        },
-        git = {
+		},
+		git = {
 			cmd = "git", -- The base command for git operations
 			depth = 1, -- Git clone depth
 			clone_timeout = 600, -- Timeout, in seconds, for git clones
 		},
 	},
 
-	function()
+	function(use)
 		-- ━━━━━━━━━━━━━━━━━❰ Required plugins ❱━━━━━━━━━━━━━━━━━ --
 
 		use("wbthomason/packer.nvim") -- Packer can manage itself
@@ -81,7 +81,7 @@ return packer.startup({
 						neotree = false,
 						noice = true,
 						notify = true,
-						nvimtree = false,
+						nvimtree = true,
 						semantic_tokens = false,
 						symbols_outline = false,
 						telescope = true,
@@ -91,10 +91,7 @@ return packer.startup({
 						which_key = true,
 
 						-- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
-						dap = {
-							enabled = false,
-							enable_ui = false,
-						},
+						dap = { enabled = false, enable_ui = false },
 						indent_blankline = {
 							enabled = false,
 							colored_indent_levels = false,
@@ -141,10 +138,7 @@ return packer.startup({
 		use({ --- new UI elements for most things
 			"folke/noice.nvim",
 			config = [[ require('plugins/noice') ]],
-			requires = {
-				"MunifTanjim/nui.nvim",
-				"rarriga/nvim-notify",
-			},
+			requires = { "MunifTanjim/nui.nvim", "rarriga/nvim-notify" },
 		})
 
 		use({ ----- LUA NVIM DEVELOPMENT
@@ -160,7 +154,7 @@ return packer.startup({
 			"neovim/nvim-lspconfig",
 			event = "BufRead",
 			requires = {
-				{ -- Companion plugin for nvim-lspconfig that allows you to seamlessly install LSP servers locally (inside :echo stdpath("data")).
+				{ -- Companion plugin for nvim-lspconfig  install LSP servers locally (inside :echo stdpath("data")).
 					"williamboman/mason.nvim",
 					requires = {
 						{ -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
@@ -169,9 +163,7 @@ return packer.startup({
 						},
 						{ -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
 							"jose-elias-alvarez/null-ls.nvim",
-							requires = {
-								"jayp0521/mason-null-ls.nvim",
-							},
+							requires = { "jayp0521/mason-null-ls.nvim" },
 						},
 					},
 				},
@@ -188,7 +180,7 @@ return packer.startup({
 		-- 	config = [[ require('plugins/lspsignature') ]],
 		-- })
 
-		use({ -- A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
+		use({ -- A pretty diagnostics, references,tell the trouble your code is causing.
 			"folke/trouble.nvim",
 			after = "nvim-lspconfig",
 			requires = "kyazdani42/nvim-web-devicons",
@@ -233,7 +225,7 @@ return packer.startup({
 				{ -- Snippet Engine for Neovim written in Lua.
 					"L3MON4D3/LuaSnip",
 					module = "luasnip",
-					requires = "rafamadriz/friendly-snippets", -- Snippets collection for a set of different programming languages for faster development.
+					requires = "rafamadriz/friendly-snippets", -- Snippets collection
 					config = function()
 						require("luasnip.loaders.from_vscode").lazy_load()
 					end,
@@ -255,7 +247,7 @@ return packer.startup({
 				{ "hrsh7th/cmp-buffer", after = "nvim-cmp" }, -- nvim-cmp source for buffer words.
 				{ "hrsh7th/cmp-path", after = "nvim-cmp" }, -- nvim-cmp source for filesystem paths.
 				{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }, -- nvim-cmp source for vim cmdline
-				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- nvim-cmp source for function signatures under curser
+				{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- function signatures under cursers
 				{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			},
 			config = [[
@@ -306,12 +298,16 @@ return packer.startup({
 		})
 		use({ -- fancy buffer line
 			"akinsho/bufferline.nvim",
-			tag = "v3.*",
+			after = "catppuccin",
 			requires = {
 				{ "catppuccin" },
 				{ "kyazdani42/nvim-web-devicons", opt = true },
 			},
-			config = [[ require('plugins/nvim-bufferline') ]],
+			config = function()
+				require("bufferline").setup({
+					highlights = require("catppuccin.groups.integrations.bufferline").get(),
+				})
+			end, -- = [[ require('plugins/nvim-bufferline') ]],
 		})
 		use({ -- fancy status line
 			"nvim-lualine/lualine.nvim",
@@ -334,7 +330,12 @@ return packer.startup({
 			config = function()
 				require("auto-session").setup({
 					log_level = "error",
-					auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+					auto_session_suppress_dirs = {
+						"~/",
+						"~/Projects",
+						"~/Downloads",
+						"/",
+					},
 				})
 			end,
 		})
@@ -387,10 +388,7 @@ return packer.startup({
 			"kevinhwang91/nvim-hlslens",
 			config = [[ require('plugins/hlslens') ]],
 		})
-		use({
-			"sindrets/diffview.nvim",
-			requires = { "nvim-lua/plenary.nvim" },
-		})
+		use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
 		use({ -- floating terming
 			"numToStr/FTerm.nvim",
