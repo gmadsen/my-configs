@@ -38,7 +38,7 @@ nvim_tree.setup {
 		icons = {hint = "", info = "", warning = "", error = ""},
 	},
 	git = {enable = true},
-	update_focused_file = {enable = false, update_root = true, ignore_list = {}},
+	update_focused_file = {enable = true, update_root = true, ignore_list = {}},
 	system_open = {cmd = nil, args = {}},
 	filters = {dotfiles = false, custom = {}},
 
@@ -47,7 +47,7 @@ nvim_tree.setup {
 		indent_markers = {
 			enable = false, -- show indent markers when folders are open
 		},
-		highlight_opened_files = "all", -- Highlight icons and/or names for opened files. Value can be `"none"`, `"icon"`, `"name"` or `"all"`.
+		highlight_opened_files = "all",
 	},
 
 	view = {
