@@ -36,20 +36,20 @@ g.loaded_netrwPlugin = 1
 opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 
 o.list = true -- show whitespace
-opt.listchars = { -- I think a plugin handles all the blank space
-    nbsp = "⦸", -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
-    extends = "»", -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
-    precedes = "«", -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
-    tab = "  ", -- '▷─' WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
-    trail = "•", -- BULLET (U+2022, UTF-8: E2 80 A2)
-    space = " ",
-}
-opt.fillchars = {
-    -- diff = '∙', -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
-    eob = " ", -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
-    -- fold = '·', -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
-    -- vert = '│', -- window border when window splits vertically ─ ┴ ┬ ┤ ├ ┼
-}
+-- opt.listchars = { -- I think a plugin handles all the blank space
+--     nbsp = "⦸ ",   -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+--     extends = "»", -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+--     precedes = "«", -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+--     tab = " ",      --  ▷─ WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+--     trail = "•",    --  BULLET (U+2022, UTF-8: E2 80 A2)
+--     space = " ",
+-- }
+-- opt.fillchars = {
+--     -- diff = '∙', -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+--     eob = " ", -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
+--     -- fold = '·', -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+--     -- vert = '│', -- window border when window splits vertically ─ ┴ ┬ ┤ ├ ┼
+-- }
 opt.clipboard = vim.opt.clipboard + "unnamedplus" -- copy & paste
 o.wrap = false -- don't automatically wrap on load
 o.showmatch = true -- show the matching part of the pair for [] {} and ()

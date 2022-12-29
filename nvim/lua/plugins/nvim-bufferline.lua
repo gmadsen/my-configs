@@ -51,7 +51,7 @@ bufferline.setup({
 		-- left_trunc_marker = "",
 		-- right_trunc_marker = "",
 
-		max_name_length = 20,
+		max_name_length = 18,
 		max_prefix_length = 18, -- prefix used when a buffer is de-duplicate
 		tab_size = 22,
 		diagnostics = "nvim_lsp", -- | "coc",
@@ -61,13 +61,13 @@ bufferline.setup({
 		show_close_icon = true,
 		show_buffer_icons = true, -- disable filetype icons for buffers
 		show_buffer_close_icons = false,
-		separator_style = "padded_slant", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
+		separator_style = "thick", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
 		offsets = {
 			{
 				filetype = "nvim-tree",
 				text = "Tree",
 				highlight = "Directory",
-				text_align = "center",
+				text_align = "left",
 				separator = true,
 			},
 		},

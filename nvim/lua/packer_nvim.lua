@@ -72,13 +72,13 @@ return packer.startup({
 						cmp = true,
 						dashboard = true,
 						gitsigns = true,
-						hop = false,
+						hop = true,
 						illuminate = false,
 						leap = false,
 						lsp_saga = true,
 						lsp_trouble = true,
 						mason = true,
-						neotree = false,
+						neotree = true,
 						noice = true,
 						notify = true,
 						nvimtree = true,
@@ -115,7 +115,7 @@ return packer.startup({
 				})
 			end,
 		})
-		vim.cmd.colorscheme("catppuccin")
+		-- vim.cmd.colorscheme("catppuccin")
 		-- use("EdenEast/nightfox.nvim")
 
 		use("nvim-lua/plenary.nvim") -- comment functions for all plugins
@@ -146,6 +146,7 @@ return packer.startup({
 			config = function()
 				require("neodev").setup({})
 			end,
+            requires = {"nvim-lspconfig", "nvim-cmp"}
 		})
 
 		-- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
@@ -343,11 +344,7 @@ return packer.startup({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
 			config = function()
-				require("todo-comments").setup({
-					-- your configuration comes here
-					-- or leave it empty to use the default settings
-					-- refer to the configuration section below
-				})
+				require("todo-comments").setup({})
 			end,
 		})
 		use({ --  Neovim motions on speed!
@@ -386,7 +383,9 @@ return packer.startup({
 		})
 		use({ -- advanced search and search highlighing
 			"kevinhwang91/nvim-hlslens",
-			config = [[ require('plugins/hlslens') ]],
+			config = function()
+                require("hlslens").setup()
+            end,
 		})
 		use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
