@@ -1,8 +1,7 @@
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ───────────────────────────────────────────────── --
---   Plugin:    hlslens.nvim
---   Github:    github.com/kevinhwang91/hlslens.nvim
+--   Plugin:    rust-tools.nvim
+--   Github:    github.com/simrat39/rust-tools.nvim
 -- ───────────────────────────────────────────────── --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
@@ -10,7 +9,13 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local hlslens = require("hlslens")
-hlslens.setup({
-})
+local M = {
+  "simrat39/rust-tools.nvim",
+}
 
+function M.setup(options)
+
+  require("rust-tools").setup(options)
+end
+
+return M

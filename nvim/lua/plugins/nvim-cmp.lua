@@ -61,11 +61,11 @@ cmp.setup({
         { name = "path", keyword_length = 1 },
         -- { name = "cmdline" },
     },
-    experimental = {
-        ghost_text = {
-            hl_group = "LspCodeLens",
-        },
-    },
+    -- experimental = {
+    --     ghost_text = {
+    --         hl_group = "LspCodeLens",
+    --     },
+    -- },
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

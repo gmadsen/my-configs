@@ -6,7 +6,7 @@
 -- ───────────────────────────────────────────────── --
 -- ────────────────❰ Leader Mapping ❱─────────────── --
 -- mapping leader here. it will work for every mapped
-
+require('util.debug')
 vim.g.mapleader = ';'
 vim.g.maplocalleader = ';'
 -- ───────────────────────────────────────────────── --
