@@ -20,7 +20,8 @@ local M = {
 }
 
 function M.config()
-    local mocha = require("catppuccin.palettes").get_palette("mocha")
+    local mocha = require("catppuccin.palettes").get_palette()
+    mocha.none = "NONE"
     -- safely import bufferline
     local bufferline_imported, bufferline = pcall(require, "bufferline")
     if not bufferline_imported then
@@ -31,9 +32,9 @@ function M.config()
         highlights = require("catppuccin.groups.integrations.bufferline").get({
             styles = { "italic", "bold" },
             custom = {
-                all = { fill = { bg = "#000000" } },
+                -- all = { fill = { bg = "#000000" } },
                 mocha = { background = { fg = mocha.text } },
-                latte = { background = { fg = "#000000" } },
+                -- latte = { background = { fg = "#000000" } },
             },
         }),
     })

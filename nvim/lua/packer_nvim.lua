@@ -31,15 +31,12 @@ local ensure_packer = function()
     return false
 end
 
-
 local packer_bootstrap = ensure_packer()
 -- safely import packer
 local import_packer, packer = pcall(require, "packer")
 if not import_packer then
     return
 end
-
-
 
 return packer.startup({
     config = {
@@ -65,59 +62,7 @@ return packer.startup({
 
         local cat = require("config.plugins.catppuccin")
         use(cat)
-        --     "catppuccin/nvim",
-        --     as = "catppuccin",
-        --     config = function()
-        --         require("catppuccin").setup({
-        --             integrations = {
-        --                 cmp = true,
-        --                 dashboard = true,
-        --                 gitsigns = true,
-        --                 hop = true,
-        --                 illuminate = false,
-        --                 leap = false,
-        --                 lsp_saga = true,
-        --                 lsp_trouble = true,
-        --                 mason = true,
-        --                 neotree = true,
-        --                 noice = true,
-        --                 notify = true,
-        --                 nvimtree = true,
-        --                 semantic_tokens = false,
-        --                 symbols_outline = false,
-        --                 telescope = true,
-        --                 treesitter = true,
-        --                 treesitter_context = true,
-        --                 ts_rainbow = true,
-        --                 which_key = true,
-        --
-        --                 -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
-        --                 dap = { enabled = false, enable_ui = false },
-        --                 indent_blankline = {
-        --                     enabled = false,
-        --                     colored_indent_levels = false,
-        --                 },
-        --                 native_lsp = {
-        --                     enabled = true,
-        --                     virtual_text = {
-        --                         errors = { "italic" },
-        --                         hints = { "italic" },
-        --                         warnings = { "italic" },
-        --                         information = { "italic" },
-        --                     },
-        --                     underlines = {
-        --                         errors = { "underline" },
-        --                         hints = { "underline" },
-        --                         warnings = { "underline" },
-        --                         information = { "underline" },
-        --                     },
-        --                 },
-        --             },
-        --         })
-        --     end,
-        -- })
-        -- vim.cmd.colorscheme("catppuccin")
-        -- use("EdenEast/nightfox.nvim")
+        vim.cmd("colorscheme catppuccin")
 
         use("nvim-lua/plenary.nvim") -- comment functions for all plugins
         use("MunifTanjim/nui.nvim")
@@ -278,6 +223,14 @@ return packer.startup({
 
         use({ -- A File Explorer For Neovim Written In Lua
             "kyazdani42/nvim-tree.lua",
+            opt = true,
+            cmd = {
+                "NvimTreeToggle",
+                "NvimTreeOpen",
+                "NvimTreeFindFile",
+                "NvimTreeFindFileToggle",
+                "NvimTreeRefresh",
+            },
             config = [[ require('plugins/nvim-tree') ]],
         })
         use({ --  Add/change/delete surrounding delimiter pairs with ease.
@@ -291,21 +244,22 @@ return packer.startup({
             config = [[ require('plugins/Comment_nvim') ]],
         })
 
-
         local indent = require("config.plugins.indent-blankline")
         use(indent)
 
         local bufferline = require("config.plugins.bufferline")
         use(bufferline)
 
-
-
         use({ -- Git signs written in pure lua
             "lewis6991/gitsigns.nvim",
+            opt = true,
+            event = { "BufReadPost", "BufNewFile" },
             config = [[ require('plugins/gitsigns_nvim') ]],
         })
         use({ -- fancy status line
             "nvim-lualine/lualine.nvim",
+            opt = true,
+            after = "nvim-lspconfig",
             requires = {
                 { "kyazdani42/nvim-web-devicons", opt = true },
                 { "arkav/lualine-lsp-progress" },
@@ -314,6 +268,8 @@ return packer.startup({
         })
         use({ -- fast and highly customizable greeter for neovim.
             "goolord/alpha-nvim",
+            opt = true,
+            event = "BufWinEnter",
             config = [[ require('plugins/alpha-nvim') ]],
         })
         use({ -- tmux easy yank/past and window switching
