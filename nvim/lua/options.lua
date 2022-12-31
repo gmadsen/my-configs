@@ -33,6 +33,7 @@ o.shada = "'100,<50,f50,n" .. backup_dir .. "/shada/shada"
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+
 opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 
 o.list = true -- show whitespace-- I think a plugin handles all the blank space
@@ -111,17 +112,17 @@ o.numberwidth = 4 -- number width
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions" --- settings to save for sessions
 
 
-if vim.fn.has("nvim-0.8") == 1 then
-  vim.opt.cmdheight = 0
-  vim.opt.backupdir = vim.fn.stdpath("state") .. "/backup"
-end
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.splitkeep = "screen"
-  vim.o.shortmess = "filnxtToOFWIcC"
-end
-
-
+-- if vim.fn.has("nvim-0.8") == 1 then
+--   vim.opt.cmdheight = 0
+--   vim.opt.backupdir = vim.fn.stdpath("state") .. "/backup"
+-- end
+--
+-- if vim.fn.has("nvim-0.9.0") == 1 then
+--   vim.opt.splitkeep = "screen"
+--   vim.o.shortmess = "filnxtToOFWIcC"
+-- end
+--
+--
 
 
 

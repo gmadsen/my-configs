@@ -119,16 +119,16 @@ M.config = function()
                     StorageClass = { fg = cp.red, style = { "italic" } },
 
                     -- For native lsp configs.
-                    -- DiagnosticVirtualTextError = { bg = cp.none },
-                    -- DiagnosticVirtualTextWarn = { bg = cp.none },
-                    -- DiagnosticVirtualTextInfo = { bg = cp.none },
-                    -- DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
-                    --
-                    -- DiagnosticHint = { fg = cp.rosewater },
-                    -- LspDiagnosticsDefaultHint = { fg = cp.rosewater },
-                    -- LspDiagnosticsHint = { fg = cp.rosewater },
-                    -- -- LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
-                    -- LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
+                    DiagnosticVirtualTextError = { bg = cp.none },
+                    DiagnosticVirtualTextWarn = { bg = cp.none },
+                    DiagnosticVirtualTextInfo = { bg = cp.none },
+                    DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
+
+                    DiagnosticHint = { fg = cp.rosewater },
+                    LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+                    LspDiagnosticsHint = { fg = cp.rosewater },
+                    LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+                    LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
                     --
                     -- For fidget.
                     FidgetTask = { bg = cp.none, fg = cp.surface2 },

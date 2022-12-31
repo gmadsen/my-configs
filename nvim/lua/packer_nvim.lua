@@ -1,14 +1,9 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ───────────────────────────────────────────────── --
---    Plugin:    packer.nvim
---    Github:    github.com/wbthomason/packer.nvim
--- A use-package inspired plugin manager for Neovim.
--- Uses native packages, supports Luarocks dependencies,
--- written in Lua, allows for expressive config
 -- ───────────────────────────────────────────────── --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━━━━━━━❰ Packer Plugin Manager ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- If you want to automatically ensure that packer.nvim is installed on any machine you clone your configuration to,
 -- add the following snippet (which is due to @Iron-E) somewhere in your config before your first usage of packer:
@@ -60,8 +55,7 @@ return packer.startup({
     use("wbthomason/packer.nvim") -- Packer can manage itself
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
 
-    local cat = require("config.plugins.catppuccin")
-    use(cat)
+    use(require("config.plugins.catppuccin"))
     vim.cmd("colorscheme catppuccin")
 
     use("nvim-lua/plenary.nvim") -- comment functions for all plugins
@@ -73,14 +67,12 @@ return packer.startup({
     })
 
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
+    use(require("config.plugins.notify"))
+    vim.notify = require("notify")
 
-    use({ -- fancy notify box
-      "rcarriga/nvim-notify",
-      config = function()
-        vim.notify = require("notify")
-      end,
-    })
     use(require("config.plugins.noice"))
+
+    use("simrat39/rust-tools.nvim")
 
     use({ ----- LUA NVIM DEVELOPMENT
       "folke/neodev.nvim",
@@ -100,7 +92,6 @@ return packer.startup({
           requires = {
             { -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
               "williamboman/mason-lspconfig.nvim",
-              "simrat39/rust-tools.nvim",
             },
             { -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
               "jose-elias-alvarez/null-ls.nvim",
@@ -115,11 +106,11 @@ return packer.startup({
 			]],
     })
 
-    -- use({ -- i guess another signature popup
-    -- 	"ray-x/lsp_signature.nvim",
-    -- 	event = "InsertEnter",
-    -- 	config = [[ require('plugins/lspsignature') ]],
-    -- })
+    use({ -- i guess another signature popup
+      "ray-x/lsp_signature.nvim",
+      event = "InsertEnter",
+      config = [[ require('plugins/lspsignature') ]],
+    })
 
     use({ -- A pretty diagnostics, references,tell the trouble your code is causing.
       "folke/trouble.nvim",
@@ -158,75 +149,24 @@ return packer.startup({
       "nvim-treesitter/nvim-treesitter-context",
     })
 
-    -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
-    use({ -- A completion plugin for neovim coded in Lua.
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      requires = {
-        { -- Snippet Engine for Neovim written in Lua.
-          "L3MON4D3/LuaSnip",
-          module = "luasnip",
-          requires = "rafamadriz/friendly-snippets", -- Snippets collection
-          config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-          end,
-        },
-        { -- autopairs for Neovim. It support multiple character.
-          "windwp/nvim-autopairs",
-          after = "nvim-cmp",
-          config = [[ require('plugins/nvim-autopairs') ]],
-        },
-        {
-          "zbirenbaum/copilot-cmp",
-          after = { "copilot.lua", "nvim-cmp" },
-          config = function()
-            require("copilot_cmp").setup()
-          end,
-        },
-        { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" }, -- nvim-cmp source for neovim builtin LSP client
-        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" }, -- nvim-cmp source for nvim lua
-        { "hrsh7th/cmp-buffer", after = "nvim-cmp" }, -- nvim-cmp source for buffer words.
-        { "hrsh7th/cmp-path", after = "nvim-cmp" }, -- nvim-cmp source for filesystem paths.
-        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" }, -- nvim-cmp source for vim cmdline
-        { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }, -- function signatures under cursers
-        { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      },
-      config = [[
-				require('plugins/nvim-cmp')
-				require('plugins/LuaSnip')
-			]],
+    -- use(require("config.plugins.autopairs"))
+    use(require("config.plugins.luasnip"))
+    use({
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua", "nvim-cmp" },
+      config = function()
+        require("copilot_cmp").setup()
+      end,
     })
+    -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
+    use(require("config.plugins.cmp")) -- A completion plugin for neovim coded in Lua.
 
     -- ━━━━━━━━━━━━━━━━❰ Telescope Plugins ❱━━━━━━━━━━━━━━━━ --
-
-    use({ -- Find, Filter, Preview, Pick. All lua, all the time.
-      "nvim-telescope/telescope.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        "nvim-telescope/telescope-file-browser.nvim",
-        "nvim-telescope/telescope-media-files.nvim",
-        "nvim-telescope/telescope-ui-select.nvim",
-        "nvim-telescope/telescope-symbols.nvim",
-        "debugloop/telescope-undo.nvim",
-      },
-      config = [[ require('plugins/telescope_nvim') ]],
-    })
+    use(require("config.plugins.telescope"))
 
     -- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
+    use(require("config.plugins.nvim-tree"))
 
-    use({ -- A File Explorer For Neovim Written In Lua
-      "kyazdani42/nvim-tree.lua",
-      opt = true,
-      cmd = {
-        "NvimTreeToggle",
-        "NvimTreeOpen",
-        "NvimTreeFindFile",
-        "NvimTreeFindFileToggle",
-        "NvimTreeRefresh",
-      },
-      config = [[ require('plugins/nvim-tree') ]],
-    })
     use({ --  Add/change/delete surrounding delimiter pairs with ease.
       "kylechui/nvim-surround",
       config = function()
@@ -238,11 +178,9 @@ return packer.startup({
       config = [[ require('plugins/Comment_nvim') ]],
     })
 
-    local indent = require("config.plugins.indent-blankline")
-    use(indent)
-
-    local bufferline = require("config.plugins.bufferline")
-    use(bufferline)
+    use(require("config.plugins.indent-blankline"))
+    use(require("config.plugins.bufferline"))
+    use(require("config.plugins.lualine")) -- fancy status line
 
     use({ -- Git signs written in pure lua
       "lewis6991/gitsigns.nvim",
@@ -250,16 +188,7 @@ return packer.startup({
       event = { "BufReadPost", "BufNewFile" },
       config = [[ require('plugins/gitsigns_nvim') ]],
     })
-    use({ -- fancy status line
-      "nvim-lualine/lualine.nvim",
-      opt = true,
-      after = "nvim-lspconfig",
-      requires = {
-        { "kyazdani42/nvim-web-devicons", opt = true },
-        { "arkav/lualine-lsp-progress" },
-      },
-      config = [[ require('plugins/lualine') ]],
-    })
+
     use({ -- fast and highly customizable greeter for neovim.
       "goolord/alpha-nvim",
       opt = true,
@@ -315,16 +244,8 @@ return packer.startup({
       "glepnir/lspsaga.nvim",
       config = [[ require('plugins/lspsaga_nvim') ]],
     })
-    -- use({ -- project manager, like rooter
-    -- 	"ahmedkhalf/project.nvim",
-    -- 	config = [[ require('plugins/project_nvim') ]],
-    -- })
-    use({ -- hydra to do cool repeater mappings
-      "anuvyklack/hydra.nvim",
-    })
-    use({ -- markdown generator
-      "ellisonleao/glow.nvim",
-    })
+    use("anuvyklack/hydra.nvim")
+    use("ellisonleao/glow.nvim")
     use(require("config.plugins.hlslens")) -- advanced search and search highlighing
     use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
@@ -339,21 +260,7 @@ return packer.startup({
         vim.g.matchup_matchparen_offscreen = { method = "popup" }
       end,
     })
-    -- use({ -- debug adapter
-    --   "mfussenegger/nvim-dap",
-    -- })
     -- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
-
-    -- use { -- tools for haskell
-    --	'MrcJkb/haskell-tools.nvim',
-    --	requires = {
-    --		'neovim/nvim-lspconfig',
-    --		'nvim-lua/plenary.nvim',
-    --		'nvim-telescope/telescope.nvim',
-    --	},
-    --	config = [[ require('plugins/haskell-tools') ]]
-    -- }
-
     -- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

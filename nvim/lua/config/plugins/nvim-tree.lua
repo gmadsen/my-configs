@@ -6,26 +6,27 @@
 -- ───────────────────────────────────────────────── --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-
-
-
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local import_ntree, nvim_tree = pcall(require, "nvim-tree")
-if not import_ntree then return end
-
+local M = {
+    "nvim-tree/nvim-tree.lua",
+    cmd = {
+        "NvimTreeToggle",
+        "NvimTreeOpen",
+        "NvimTreeFindFile",
+        "NvimTreeFindFileToggle",
+        "NvimTreeRefresh",
+        "NvimTreeToggle",
+    }
+}
+function M.config()
 -- auto switches dark and light background
-local cmd = vim.cmd -- execute Vim commands
+vim.cmd('autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None')
+vim.cmd('autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg')
 
-cmd.colorscheme "catppuccin"
-cmd('autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None')
-cmd('autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg')
-
-
-nvim_tree.setup {
+require("nvim-tree").setup {
 	disable_netrw = true,
 	hijack_netrw = true,
 	open_on_setup =false,
@@ -59,16 +60,10 @@ nvim_tree.setup {
 		hide_root_folder = true,
 	}
 }
+end
 
--- vim.cmd.colorscheme("catppuccin")
+return M
+
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
-
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━❰ end Mappings ❱━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

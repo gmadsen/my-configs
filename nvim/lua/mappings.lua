@@ -2,11 +2,7 @@
 -- ━━━━━━━━━━━━━❰ Plugin-Independent Mapping ❱━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 --[===[
-
-
 --]===]
-
-
 
 local map = vim.keymap.set
 local cmd = vim.cmd
@@ -34,7 +30,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "man", "help", "lspinfo", "null-ls-info", "mason" },
 	command = "nnoremap <silent> <buffer> <leader>q :close<CR>",
 })
-
+map("n", "<leader>Q", ":qall<cr>")
+map("n", "<leader>w", ":wall<cr>")
 -- map ctl+z to nothing so that it don't suspend terminal
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "nnoremap <c-z> <nop>" })
 
@@ -71,22 +68,25 @@ map("n", "<leader>cd", ":cd %:p:h<cr>:pwd<cr>")
 map("v", "<", "<gv", options)
 map("v", ">", ">gv", options)
 
+
 -- going back to normal mode which works even in vim's terminal
 -- you will need this if you use floaterm to escape terminal
 map("t", "<Esc>", "<c-\\><c-n>", options)
+
 
 -- move selected line(s) up or down
 map("v", "J", ":m '>+1<CR>gv=gv", options)
 map("v", "K", ":m '<-2<CR>gv=gv", options)
 
+
 -------------------------------- Plugin Mappings
--- Rename
+---------------------- Rename
 map("n", "<Space>R", "<cmd>Lspsaga rename<cr>")
 map("v", "<Space>R", "<cmd>Lspsaga rename<cr>")
--- LSP
 map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
 
--- -----------------------Toggle Nvim-Tree
+
+-------------------------Toggle Nvim-Tree
 map("n", "<leader>n", ":NvimTreeToggle<CR>")
 
 ----------------------------- Hop ------------------------
@@ -162,6 +162,7 @@ map("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], options)
 map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
 map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
 map("n", "<Leader>l", ":noh<CR>", options)
+
 
 -- local ht = require('haskell-tools')
 -- Toggle a GHCi repl for the current package

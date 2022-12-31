@@ -6,7 +6,7 @@
 -- ───────────────────────────────────────────────── --
 -- ────────────────❰ Leader Mapping ❱─────────────── --
 -- mapping leader here. it will work for every mapped
-require('util.debug')
+-- require('util.debug')
 vim.g.mapleader = ';'
 vim.g.maplocalleader = ';'
 -- ───────────────────────────────────────────────── --
@@ -15,7 +15,9 @@ vim.g.maplocalleader = ';'
 -- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
 
 require('options')                  -- plugin independent configs
-require('plugins/impatient_nvim')   -- impatient needs to be setup before any other
+require('config.commands')          --  autocommands
+
+require('plugins.impatient_nvim')   -- impatient needs to be setup before any other
 require('packer_nvim')              -- loading plugins and plugin configs
 
 require('mappings')                 -- key mappings

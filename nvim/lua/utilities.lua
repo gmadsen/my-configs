@@ -11,6 +11,7 @@ local api = vim.api
 
 local group = api.nvim_create_augroup("GareAutoGroup", {clear=true})
 
+
 api.nvim_create_autocmd(
 	"TextYankPost",
 	{

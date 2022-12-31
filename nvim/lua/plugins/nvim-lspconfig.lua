@@ -31,27 +31,26 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-  vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "<leader><C-k>", vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set("n", "<leader><space>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>k", "<cmd>lua vim.lsp.buf.hover()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space><C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", bufopts)
 
-  vim.keymap.set("n", "<leader><space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set("n", "<leader><space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set("n", "<leader><space>wl", function()
+    print(vim.inspect("vim.lsp.buf.list_workspace_folders()"))
+  end, vim.tbl_deep_extend("force", bufopts, { desc = "list workspace folders" }))
 
-	vim.keymap.set("n", "<leader><space>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-
-  vim.keymap.set("n", "<leader><space>D", vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set("n", "<leader><space>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<leader><space>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, bufopts)
+  vim.keymap.set("n", "<leader><space>R", "<cmd>lua vim.lsp.buf.rename()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
 
   vim.keymap.set("n", "<leader><space>f", function()
     vim.lsp.buf.format({ async = true })
-  end, bufopts)
+  end, vim.tbl_deep_extend("force", bufopts, { desc = "format" }))
 end
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
@@ -79,55 +78,6 @@ local function setup_lsp(mason_lspconfig)
   local cmp_lsp = require("cmp_nvim_lsp")
   lsp_options.capabilities = (cmp_lsp).default_capabilities(capabilities)
 
-  local servers = {
-    rust_analyzer = {
-      tools = {
-        hover_with_actions = false,
-        inlay_hints = {
-          auto = true,
-          only_current_line = false,
-          show_parameter_hints = true,
-          parameter_hints_prefix = "  <-  ",
-          other_hints_prefix = "  =>  ",
-          max_len_align = false,
-          max_len_align_padding = 1,
-          right_align = false,
-          right_align_padding = 7,
-          highlight = "Comment",
-        },
-      },
-      server = {
-        settings = {
-          ["rust-analyzer"] = {
-            diagnostics = {
-              disabled = { "incorrect-ident-case" },
-            },
-            completion = {
-              postfix = {
-                enable = false,
-              },
-            },
-            checkOnSave = {
-              command = "clippy",
-            },
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      },
-    },
-  }
-  for server, opts in pairs(servers) do
-    if server == "rust_analyzer" then
-      -- rust-tools is special, and expects lsp server related configuration in the "server" key (everything else just uses the top level table)
-      opts.server = vim.tbl_deep_extend("force", {}, lsp_options, opts.server or {})
-      require("rust-tools").setup(opts)
-    else
-    end
-  end
-
-  -- local rt = require("config.plugins.rust-tools")
   mason_lspconfig.setup_handlers({
     function(server_name)
       require("lspconfig")[server_name].setup(lsp_options)
@@ -136,7 +86,7 @@ local function setup_lsp(mason_lspconfig)
     --           require("config.plugins.rust-tools").setup(lsp_options)
     --       end,
     -- ["rust_analyzer"] = function()
-    --        local opts = vim.tbl_extend("force", {},  lsp_options, rt.server or {})
+    --        local opts = vim.tbl_deep_extend("force", {},  lsp_options, rt.server or {})
     --           rt.setup(opts)
     --       end,
 
@@ -184,7 +134,7 @@ end
 -- set up mason lsp config
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
-  automatic_installation = false,
+  automatic_installation = true,
   ensure_installed = { "sumneko_lua", "rust_analyzer" },
 })
 
@@ -195,6 +145,18 @@ mason.setup(mconfig.setup) -- setup mason
 
 setup_lsp_config() -- setup lsp configs (mainly UI)
 setup_lsp(mason_lspconfig) -- setup lsp (like pyright, ccls ...)
+
+local rt = require("rust-tools")
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
 
 -- ───────────────────────────────────────────────── --
 -- end LSP setup
