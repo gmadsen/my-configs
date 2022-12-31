@@ -55,7 +55,7 @@ return packer.startup({
     use("wbthomason/packer.nvim") -- Packer can manage itself
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
     use(require("config.plugins"))
-    -- use(require("config.plugins.catppuccin"))
+    use(require("config.plugins.catppuccin"))
     -- vim.cmd("colorscheme catppuccin")
 
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --

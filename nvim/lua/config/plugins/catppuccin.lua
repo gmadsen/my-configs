@@ -1,6 +1,5 @@
 local M = {
     "catppuccin/nvim",
-    as = "catppuccin",
 }
 
 M.config = function()
@@ -223,7 +222,7 @@ M.config = function()
             end,
         },
     })
--- vim.cmd("colorscheme catpppuccin")
+vim.cmd("colorscheme catppuccin")
 end
 
 return M
