@@ -12,7 +12,8 @@ function M.config ()
     max_width = function()
       return math.floor(vim.o.columns * 0.75)
     end,
-} 
+}
 end
+-- vim.notify = require("notify")
 
 return M

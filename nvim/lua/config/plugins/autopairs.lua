@@ -16,8 +16,8 @@
 
 local M = {
     "windwp/nvim-autopairs" ,
-    as = "autopairs",
-}
+    require = "hrsh7th/nvim-cmp",
+  }
 
 function M.setup()
 local autopairs = require("autopairs")
@@ -41,7 +41,7 @@ autopairs.setup({
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('autopairs.completion.cmp')
 
-local cmp = pcall(require, 'cmp')
+local cmp = require('cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 local Rule = require('autopairs.rule')

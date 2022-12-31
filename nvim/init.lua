@@ -13,15 +13,13 @@ vim.g.maplocalleader = ';'
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
-
-require('options')                  -- plugin independent configs
-require('config.commands')          --  autocommands
-
-require('plugins.impatient_nvim')   -- impatient needs to be setup before any other
+require('options')
+-- require('config.commands')          --  autocommands
+-- require('utilities')                -- utilities
+-- require('plugins.impatient_nvim')   -- impatient needs to be setup before any other
 require('packer_nvim')              -- loading plugins and plugin configs
 
 require('mappings')                 -- key mappings
-require('utilities')                -- utilities
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
