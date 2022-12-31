@@ -54,9 +54,8 @@ return packer.startup({
     -- ━━━━━━━━━━━━━━━━━❰ Required plugins ❱━━━━━━━━━━━━━━━━━ --
     use("wbthomason/packer.nvim") -- Packer can manage itself
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
-    -- use(require("config.plugins.catppuccin"))
-    -- use("nvim-lua/plenary.nvim") -- comment functions for all plugins
     use(require("config.plugins"))
+    -- use(require("config.plugins.catppuccin"))
     -- vim.cmd("colorscheme catppuccin")
 
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
@@ -79,6 +78,15 @@ return packer.startup({
     --   requires = { "nvim-lspconfig", "hrsh7th/nvim-cmp" },
     -- })
 
+    use("anuvyklack/hydra.nvim")
+    use("ellisonleao/glow.nvim")
+    use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
+
+    use({ -- floating terming
+      "numToStr/FTerm.nvim",
+      config = [[ require('plugins/fterm_nvim') ]],
+    })
+    use(require("config.plugins.hlslens")) -- advanced search and search highlighing
     -- use("simrat39/rust-tools.nvim")
     -- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
     -- use({ -- A collection of common configurations for Neovim's built-in language server client
@@ -219,29 +227,9 @@ return packer.startup({
     --   "RRethy/vim-illuminate",
     --   config = [[ require('plugins/vim-illuminate') ]],
     -- })
-    -- -- use({ -- help remember keymaps
-    -- --   "folke/which-key.nvim",
-    -- --   config = [[ require('plugins/which-key') ]],
-    -- -- })
     -- use({ -- an lsp plugin to help stuff
     --   "glepnir/lspsaga.nvim",
     --   config = [[ require('plugins/lspsaga_nvim') ]],
-    -- })
-    -- use("anuvyklack/hydra.nvim")
-    -- use("ellisonleao/glow.nvim")
-    -- -- use(require("config.plugins.hlslens")) -- advanced search and search highlighing
-    -- use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
-
-    -- use({ -- floating terming
-    --   "numToStr/FTerm.nvim",
-    --   config = [[ require('plugins/fterm_nvim') ]],
-    -- })
-    -- use({
-    --   "andymass/vim-matchup",
-    --   setup = function()
-    --     -- may set any options here
-    --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    --   end,
     -- })
     -- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
     -- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --
