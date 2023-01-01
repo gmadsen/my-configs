@@ -1,5 +1,9 @@
 local M = {
   "williamboman/mason.nvim",
+  requires = {
+      "williamboman/mason-lspconfig.nvim",
+
+  }
 }
 
 M.tools = {
@@ -17,7 +21,11 @@ M.tools = {
 }
 
 function M.check()
-  local mr = require("mason-registry")
+
+  local h = require("util.helpers")
+  local ok, mr = h.safe_require("mason-registry")
+  if not ok then return end
+
   for _, tool in ipairs(M.tools) do
     local p = mr.get_package(tool)
     if not p:is_installed() then
@@ -27,9 +35,16 @@ function M.check()
 end
 
 function M.config()
-  require("mason").setup()
+  local h = require("util.helpers")
+  local ok, mason = h.safe_require("mason")
+  if not ok then return end
+  mason.setup()
+
   M.check()
-  require("mason-lspconfig").setup({
+  local con_ok, mlspconfig = h.safe_require("mason-lspconfig")
+  if not con_ok then return end
+
+  mlspconfig.setup({
     automatic_installation = true,
   })
 end

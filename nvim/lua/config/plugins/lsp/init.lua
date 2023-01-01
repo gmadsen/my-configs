@@ -1,7 +1,8 @@
 local M = {
   "neovim/nvim-lspconfig",
   event = "BufReadPre",
-  dependencies = {
+  requires = {
+    "williamboman/mason.nvim",
     "hrsh7th/cmp-nvim-lsp",
     { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
     {
@@ -17,10 +18,11 @@ local M = {
       },
     },
   },
-  pin = true,
+  -- pin = true,
 }
 
 function M.config()
+  local h = require("util.helpers")
   require("mason")
   require("config.plugins.lsp.diagnostics").setup()
 
@@ -143,11 +145,7 @@ function M.config()
 
   for server, opts in pairs(servers) do
     opts = vim.tbl_deep_extend("force", {}, options, opts or {})
-    if server == "tsserver" then
-      require("typescript").setup({ server = opts })
-    else
-      require("lspconfig")[server].setup(opts)
-    end
+    require("lspconfig")[server].setup(opts)
   end
 
   require("config.plugins.null-ls").setup(options)

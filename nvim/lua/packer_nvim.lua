@@ -115,10 +115,8 @@ return packer.startup({
    --          require("copilot-cmp").setup()
    --      end,
    --  })
-
-    use("ellisonleao/glow.nvim")
-
-    -- use("simrat39/rust-tools.nvim")
+   use("ellisonleao/glow.nvim")
+   use("simrat39/rust-tools.nvim")
 
 
     -- use({ -- i guess another signature popup
@@ -126,7 +124,9 @@ return packer.startup({
     --   event = "InsertEnter",
     --   config = [[ require('plugins/lspsignature') ]],
     -- })
-
+    use(require("config.plugins.mason"))
+    use(require("config.plugins.null-ls"))
+    use(require("config.plugins.lsp"))
     -- -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
 
     -- use({ -- A Neovim plugin that provides a colors for text diagnostics display.

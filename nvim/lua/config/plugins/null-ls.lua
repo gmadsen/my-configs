@@ -3,7 +3,10 @@ local M = {
 }
 
 function M.setup(options)
-  local nls = require("null-ls")
+  local h = require("util.helpers")
+  local ok, nls = h.safe_require("null-ls")
+  if not ok then return end
+
   nls.setup({
     debounce = 150,
     save_after_format = false,
