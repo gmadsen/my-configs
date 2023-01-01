@@ -1,6 +1,6 @@
 local M = {
   "folke/noice.nvim",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
 }
 
 function M.config()
@@ -68,11 +68,11 @@ function M.config()
     require("noice").redirect(vim.fn.getcmdline())
   end, { desc = "Redirect Cmdline" })
 
-  vim.keymap.set("n", "<leader>nl", function()
+  vim.keymap.set("n", "<leader>ml", function()
     require("noice").cmd("last")
   end, { desc = "Noice Last Message" })
 
-  vim.keymap.set("n", "<leader>nh", function()
+  vim.keymap.set("n", "<leader>mh", function()
     require("noice").cmd("history")
   end, { desc = "Noice History" })
 
@@ -80,17 +80,17 @@ function M.config()
     require("noice").cmd("all")
   end, { desc = "Noice All" })
 
-  vim.keymap.set("n", "<c-f>", function()
-    if not require("noice.lsp").scroll(4) then
-      return "<c-f>"
-    end
-  end, { silent = true, expr = true })
-
-  vim.keymap.set("n", "<c-b>", function()
-    if not require("noice.lsp").scroll(-4) then
-      return "<c-b>"
-    end
-  end, { silent = true, expr = true })
+  -- vim.keymap.set("n", "<c-f>", function()
+  --   if not require("noice.lsp").scroll(4) then
+  --     return "<c-f>"
+  --   end
+  -- end, { silent = true, expr = true })
+  --
+  -- vim.keymap.set("n", "<c-b>", function()
+  --   if not require("noice.lsp").scroll(-4) then
+  --     return "<c-b>"
+  --   end
+  -- end, { silent = true, expr = true })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",

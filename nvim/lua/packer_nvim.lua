@@ -57,7 +57,6 @@ return packer.startup({
     use(require("config.plugins"))
     use(require("config.plugins.whichkey"))
     use(require("config.plugins.catppuccin"))
-
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
     use(require("config.plugins.nvim-tree"))
 
@@ -68,8 +67,6 @@ return packer.startup({
 
 
     use(require("config.plugins.copilot")) -- copilot in nvim
-    use("onsails/lspkind-nvim")
-
 
     use({ --  Add/change/delete surrounding delimiter pairs with ease.
       "kylechui/nvim-surround",
@@ -103,23 +100,19 @@ return packer.startup({
 
 
     use(require("config.plugins.treesitter"))
-    --TODO it needs treesitter
 
     use(require("config.plugins.indent-blankline"))
     use(require("config.plugins.fterm")) -- floating terming
     use(require("config.plugins.telescope"))
     use(require("config.plugins.notify"))
-    --use(require("config.plugins.noice"))
-
+    use(require("config.plugins.noice"))
 
     use(require("config.plugins.lspsaga")) -- an lsp plugin to help stuff
-
-
     use(require("config.plugins.cmp")) -- A completion plugin for neovim coded in Lua.
-    -- use(require("config.plugins.autopairs"))
-    -- use(require("config.plugins.hlargs")) -- highlight arguments of a function call using treesitter
+    use(require("config.plugins.autopairs"))
 
 
+    -- use("simrat39/rust-tools.nvim")
 
 
     -- use({ ----- LUA NVIM DEVELOPMENT
@@ -131,24 +124,6 @@ return packer.startup({
     -- })
 
 
-    -- -- use({
-    -- --   "rmagatti/auto-session",
-    -- --   config = function()
-    -- --     require("auto-session").setup({
-    -- --       log_level = "error",
-    -- --       auto_session_suppress_dirs = {
-    -- --         "~/",
-    -- --         "~/Projects",
-    -- --         "~/Downloads",
-    -- --         "/",
-    -- --       },
-    -- --     })
-    -- --   end,
-    -- -- })
-
-
-
-    -- use("simrat39/rust-tools.nvim")
     -- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
     -- use({ -- A collection of common configurations for Neovim's built-in language server client
     --   "neovim/nvim-lspconfig",

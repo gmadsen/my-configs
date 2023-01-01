@@ -18,17 +18,14 @@ local M = {
 }
 
 function M.setup()
-
-local import_hlargs, hlargs = pcall(require, "hlargs")
-if not import_hlargs then
-    vim.notify("hlargs didn't load")
-    return {}
-end
+local h = require("util.helpers")
+local import_hlargs, hlargs = h.safe_require("hlargs")
+if not import_hlargs then return end
 
 hlargs.setup {
     color = '#ef9062',
     highlight = {},
-    excluded_filetypes = {},
+    excluded_filetypes = {"NvimTreek",},
     disable = function(lang, bufnr) -- If changed, `excluded_filetypes` will be ignored
       return vim.tbl_contains(bufnr.opts.excluded_filetypes, lang)
     end,

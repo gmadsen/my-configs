@@ -21,34 +21,27 @@ local M = {
 
 function M.setup()
 local h = require("util.helpers")
-local valid, autopairs = h.safe_require("autopairs")
+local valid, autopairs = h.safe_require("nvim-autopairs")
 if not valid then return end
 
 autopairs.setup({
-	enable_check_bracket_line = true, -- Don't add pairs if it already have a close pairs in same line
+	enable_check_bracket_line = false, -- Don't add pairs if it already have a close pairs in same line
 	disable_filetype = { "TelescopePrompt", "vim" }, --
 	enable_afterquote = false, -- add bracket pairs after quote
 	enable_moveright = true,
-
-	-- use treesitter to check for a pair.
-	check_ts = true,
-	ts_config = {
-		-- lua = {'string'},-- it will not add a pair on that treesitter node
-		-- javascript = {'template_string', 'string'},
-		-- java = false,-- don't check treesitter on java
-	}
-
+	check_ts = false,
 })
 
 -- this is nvim-cmp Plugin dependent setting
 -- If you want insert `(` after select function or method item
-local cmp_autopairs = require('autopairs.completion.cmp')
+local cmp_ap_ok, cmp_autopairs = h.safe_require("nvim-autopairs.completion.cmp")
+local cmp_ok, cmp = h.safe_require('cmp')
+if cmp_ok and cmp_ap_ok then
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+end
 
-local cmp = require('cmp')
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-local Rule = require('autopairs.rule')
-
+local rule_ok, Rule = h.safe_require("nvim-autopairs.rule")
+if rule_ok then
 autopairs.add_rules {
 	-- before   insert  after
 	--  (|)     ( |)	( | )
@@ -65,6 +58,7 @@ autopairs.add_rules {
 	Rule('[ ', ' ]'):with_pair(function() return false end):with_move(
 		function(opts) return opts.prev_char:match('.%]') ~= nil end):use_key(']'),
 }
+end
 end
 
 return M
