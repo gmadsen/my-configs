@@ -4,9 +4,9 @@
 --[===[
 --]===]
 
+local options = {noremap = true, silent = true }
 local map = vim.keymap.set
 local cmd = vim.cmd
-local options = { noremap = true, silent = true }
 
 -- smart deletion, dd
 -- It solves the issue, where you want to delete empty line, but dd will override you last yank.
@@ -19,7 +19,7 @@ local function smart_dd()
 		return "dd"
 	end
 end
-map("n", "dd", smart_dd, { noremap = true, expr = true })
+map("n", "dd", smart_dd, {expr = true })
 
 -- Edit and reload nvim config file quickly
 map("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", { silent = true, desc = "open init.lua" })
@@ -73,17 +73,11 @@ map("v", ">", ">gv", options)
 -- you will need this if you use floaterm to escape terminal
 map("t", "<Esc>", "<c-\\><c-n>", options)
 
-
 -- move selected line(s) up or down
 map("v", "J", ":m '>+1<CR>gv=gv", options)
 map("v", "K", ":m '<-2<CR>gv=gv", options)
 
-
 -------------------------------- Plugin Mappings
----------------------- Rename
-map({"n", "v"}, "<Space>R", "<cmd>Lspsaga rename<cr>")
-map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
-
 
 -------------------------Toggle Nvim-Tree
 map("n", "<leader>n", ":NvimTreeToggle<CR>")
@@ -125,44 +119,29 @@ map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>")
 --       --> show undo history
 map("n", "<leader>fu", "<cmd>Telescope undo<cr>")
 
+------------------ Terminal---------------------------
+map("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", options)
+map("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", options)
 
----------------- LSP saga
-map("n", "<Space>r", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-map({ "n", "v" }, "<Space>a", "<cmd>Lspsaga code_action<CR>")
-map("n", "<Space>d", "<cmd>Lspsaga peek_definition<CR>")
-map("n", "<Space>l", "<cmd>Lspsaga show_line_diagnostics<CR>")
-map("n", "<Space>L", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
-map("n", "<Space>o", "<cmd>Lspsaga outline<CR>")
-map("n", "<Space>k", "<cmd>Lspsaga hover_doc<CR>")
-
--- Diagnsotic jump can use `<c-o>` to jump back
-map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
--- Only jump to error
-map("n", "[E", function()
-	require("lspsaga.diagnostic").goto_prev({
-		severity = vim.diagnostic.severity.ERROR,
-	})
-end)
-map("n", "]E", function()
-	require("lspsaga.diagnostic").goto_next({
-		severity = vim.diagnostic.severity.ERROR,
-	})
-end)
 
 -------------------Trouble-----------------------------
-
-map("n", "<leader>xt", "<cmd>TroubleToggle<cr>", options)
-
-map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", { silent = true, noremap = true })
+map("n", "<leader>xt", "<cmd>TroubleToggle<cr>")
+map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>")
 map("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", { silent = true, noremap = true })
 map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
 map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
------------------- Terminal---------------------------
-map("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", options)
-map("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", options)
+
+-- hlslens , which makes search more fancy
+map("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "<Leader>l", ":noh<CR>", options)
+
 
 
 -- local ht = require('haskell-tools')

@@ -15,7 +15,12 @@ function M.config()
       focused = false
     end,
   })
-  require("noice").setup({
+
+  local h = require("util.helpers")
+  local ok, noice = h.safe_require("noice")
+  if not ok then return end
+
+  noice.setup({
     debug = false,
     lsp = {
       override = {
@@ -64,6 +69,8 @@ function M.config()
     },
   })
 
+  ------------------ KeyMaps -----------------------
+
   vim.keymap.set("c", "<S-Enter>", function()
     require("noice").redirect(vim.fn.getcmdline())
   end, { desc = "Redirect Cmdline" })
@@ -76,21 +83,9 @@ function M.config()
     require("noice").cmd("history")
   end, { desc = "Noice History" })
 
-  vim.keymap.set("n", "<leader>na", function()
+  vim.keymap.set("n", "<leader>ma", function()
     require("noice").cmd("all")
   end, { desc = "Noice All" })
-
-  -- vim.keymap.set("n", "<c-f>", function()
-  --   if not require("noice.lsp").scroll(4) then
-  --     return "<c-f>"
-  --   end
-  -- end, { silent = true, expr = true })
-  --
-  -- vim.keymap.set("n", "<c-b>", function()
-  --   if not require("noice.lsp").scroll(-4) then
-  --     return "<c-b>"
-  --   end
-  -- end, { silent = true, expr = true })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
@@ -100,6 +95,7 @@ function M.config()
       end)
     end,
   })
+
 end
 
 return M

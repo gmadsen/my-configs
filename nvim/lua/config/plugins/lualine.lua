@@ -11,11 +11,13 @@ local M = {
     "nvim-lualine/lualine.nvim"
 }
 
+
+function M.config()
 local function clock()
   return " " .. "os.date('%H:%M')"
 end
 
-function M.config()
+
 
 require("lualine").setup({
   options = {
@@ -47,21 +49,22 @@ require("lualine").setup({
         { 'filetype', icon_only=true},
     },
     lualine_y = {
-        {
-            function()
-                return require('auto-session-library').current_session_name
-            end,
-          cond = function()
-            if package.loaded["auto-session-library"] then
-              return true
-            end
-          end,
-      },
-
+          --   function()
+          --       return require('auto-session-library').current_session_name
+          --   end,
+          -- cond = function()
+          --   if package.loaded["auto-session-library"] then
+          --     return true
+          --   end
+          -- end,
+        { 'filename', path = 1 },
         {'progress'},
         {'location'},
-},
-    lualine_z = { "os.date('%b %d %Y %H:%M')", { clock, separator = { right = "" } }},
+    },
+    lualine_z = {
+        {"os.date('%b %d %Y %H:%M')"},
+        { clock(), separator = { right = "" } }
+    },
   },
   extensions = {'nvim-tree'},
 })

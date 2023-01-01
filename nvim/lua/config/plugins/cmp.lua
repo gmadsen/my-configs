@@ -68,8 +68,8 @@ function M.setup()
       end),
     }),
     sources = cmp.config.sources({
-      { name = "nvim_lsp", keyword_length = 1 },
       { name = "copilot", keyword_length = 1 },
+      { name = "nvim_lsp", keyword_length = 1 },
       { name = "luasnip", keyword_length = 1 },
       { name = "buffer", keyword_length = 3 },
       { name = "path", keyword_length = 1 },

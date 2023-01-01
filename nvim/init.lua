@@ -17,7 +17,7 @@ require('config.options')                  -- global options
 require('config.commands')                 -- auto commands
 require('config.mappings')                 -- key mappings
 
-require('plugins.impatient_nvim')   -- impatient needs to be setup before any other
+require('archive_plugins.impatient_nvim')   -- impatient needs to be setup before any other
 require('packer_nvim')              -- loading plugins and plugin configs
 
 vim.api.nvim_create_autocmd("User", {

@@ -11,14 +11,16 @@
 
 local M = {
   "folke/trouble.nvim",
-  cmd = {"TroubleToggle", "Trouble"},
+  -- cmd = {"TroubleToggle", "Trouble"},
   requires = "nvim-tree/nvim-web-devicons",
 }
 
 function M.setup()
+    local h = require("util.helpers")
+    local ok, trouble = h.safe_require("trouble")
+    if not ok then return end
 
-
-  require("trouble").setup({
+  trouble.setup({
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 7, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
@@ -72,6 +74,15 @@ function M.setup()
       next = "j", -- next item
     },
   })
+
+local map = vim.keymap.set
+-------------------Trouble-----------------------------
+map("n", "<leader>xt", "<cmd>TroubleToggle<cr>")
+map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>")
+map("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", { silent = true, noremap = true })
+map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
 end
 

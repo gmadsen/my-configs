@@ -6,6 +6,72 @@ function M.setup(client, buffer)
   local cap = client.server_capabilities
 
 
+local options = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<Space><Space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", options)
+vim.keymap.set("n", "<Space><Space>q", "<cmd>lua vim.diagnostic.set_loclist({})<CR>", options)
+vim.keymap.set("n", "<Space><Space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", options)
+vim.keymap.set("n", "<Space><Space>b", "<cmd>lua vim.diagnostic.goto_prev()<CR>", options)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+-- ───────────────────────────────────────────────── --
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- Mappings.
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set("n", "<leader><space>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>k", "<cmd>lua vim.lsp.buf.hover()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space><C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", bufopts)
+
+  vim.keymap.set("n", "<leader><space>wl", function()
+    print(vim.inspect("vim.lsp.buf.list_workspace_folders()"))
+  end, vim.tbl_deep_extend("force", bufopts, { desc = "list workspace folders" }))
+
+  vim.keymap.set("n", "<leader><space>R", "<cmd>lua vim.lsp.buf.rename()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", bufopts)
+  vim.keymap.set("n", "<leader><space>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
+
+  vim.keymap.set("n", "<leader><space>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, vim.tbl_deep_extend("force", bufopts, { desc = "format" }))
+end
+
+---------------------- Rename
+map({"n", "v"}, "<Space>R", "<cmd>Lspsaga rename<cr>")
+map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
+
+---------------- LSP saga
+map("n", "<Space>r", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+map({ "n", "v" }, "<Space>a", "<cmd>Lspsaga code_action<CR>")
+map("n", "<Space>d", "<cmd>Lspsaga peek_definition<CR>")
+map("n", "<Space>l", "<cmd>Lspsaga show_line_diagnostics<CR>")
+map("n", "<Space>L", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+map("n", "<Space>o", "<cmd>Lspsaga outline<CR>")
+map("n", "<Space>k", "<cmd>Lspsaga hover_doc<CR>")
+
+-- Diagnsotic jump can use `<c-o>` to jump back
+map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+-- Only jump to error
+map("n", "[E", function()
+	require("lspsaga.diagnostic").goto_prev({
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end)
+map("n", "]E", function()
+	require("lspsaga.diagnostic").goto_next({
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end)
+--
 
 end
 return M

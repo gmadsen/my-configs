@@ -52,22 +52,16 @@ return packer.startup({
   },
 
   function(use)
+    -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
     -- ━━━━━━━━━━━━━━━━━❰ Required plugins ❱━━━━━━━━━━━━━━━━━ --
     use("wbthomason/packer.nvim") -- Packer can manage itself
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
     use(require("config.plugins"))
     use(require("config.plugins.whichkey"))
     use(require("config.plugins.catppuccin"))
-    -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
     use(require("config.plugins.nvim-tree"))
-
-    use("anuvyklack/hydra.nvim")
-    use("ellisonleao/glow.nvim")
-    use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
+    use(require("config.plugins.hydra"))
     use(require("config.plugins.hlslens")) -- advanced search and search highlighing
-
-
-    use(require("config.plugins.copilot")) -- copilot in nvim
 
     use({ --  Add/change/delete surrounding delimiter pairs with ease.
       "kylechui/nvim-surround",
@@ -88,33 +82,57 @@ return packer.startup({
         require("hop").setup()
       end,
     })
-
-
+    use(require("config.plugins.diffview"))
+    use(require("config.plugins.gitsigns")) -- Git signs written in pure lua
     use(require("config.plugins.comment")) -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
+    use(require("config.plugins.illuminate")) -- Highlight other uses of word under cursor
+
     use(require("config.plugins.bufferline")) -- buffer line
     use(require("config.plugins.lualine")) -- fancy status line
-    use(require("config.plugins.gitsigns")) -- Git signs written in pure lua
     use(require("config.plugins.alpha")) -- fast and highly customizable greeter for neovim.
     use(require("config.plugins.tmux")) -- tmux easy yank/past and window switching
     use(require("config.plugins.neoscroll")) -- smooth scrolling for neovim
-    use(require("config.plugins.illuminate")) -- Highlight other uses of word under cursor
 
     use(require("config.plugins.treesitter"))
-
     use(require("config.plugins.indent-blankline"))
-    use(require("config.plugins.fterm")) -- floating terming
+    use(require("config.plugins.fterm"))                -- floating terming
     use(require("config.plugins.telescope"))
     use(require("config.plugins.notify"))
     use(require("config.plugins.noice"))
 
-    use(require("config.plugins.lspsaga")) -- an lsp plugin to help stuff
-    use(require("config.plugins.cmp")) -- A completion plugin for neovim coded in Lua.
+    use(require("config.plugins.lspsaga"))              -- an lsp plugin to help stuff
+    use(require("config.plugins.cmp"))                  -- A completion plugin for neovim coded in Lua.
     use(require("config.plugins.autopairs"))
+    use(require("config.plugins.trouble"))              -- A pretty diagnostics, references,tell the trouble your code is causing.
+    use(require("config.plugins.luasnip"))
 
+    use(require("config.plugins.copilot"))              -- copilot in nvim
+   --  use({
+   --      "zbirenbaum/copilot-cmp",
+   --      cmd = "InsertEnter",
+   --      after = { {"copilot"} , {"nvim-cmp"} },
+   --      config = function()
+   --          require("copilot-cmp").setup()
+   --      end,
+   --  })
+
+    use("ellisonleao/glow.nvim")
 
     -- use("simrat39/rust-tools.nvim")
 
 
+    -- use({ -- i guess another signature popup
+    --   "ray-x/lsp_signature.nvim",
+    --   event = "InsertEnter",
+    --   config = [[ require('plugins/lspsignature') ]],
+    -- })
+
+    -- -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
+
+    -- use({ -- A Neovim plugin that provides a colors for text diagnostics display.
+    --   "folke/lsp-colors.nvim",
+    --   config = [[ require('plugins/lsp-colors') ]],
+    -- })
     -- use({ ----- LUA NVIM DEVELOPMENT
     --   "folke/neodev.nvim",
     --   config = function()
@@ -122,7 +140,6 @@ return packer.startup({
     --   end,
     --   requires = { "nvim-lspconfig", "hrsh7th/nvim-cmp" },
     -- })
-
 
     -- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
     -- use({ -- A collection of common configurations for Neovim's built-in language server client
@@ -147,33 +164,6 @@ return packer.startup({
 	-- 			require('plugins/null-ls_nvim')
 	-- 		]],
     -- })
-
-    -- use({ -- i guess another signature popup
-    --   "ray-x/lsp_signature.nvim",
-    --   event = "InsertEnter",
-    --   config = [[ require('plugins/lspsignature') ]],
-    -- })
-
-    use(require("config.plugins.trouble")) -- A pretty diagnostics, references,tell the trouble your code is causing.
-
-
-
-    use(require("config.plugins.luasnip"))
-    use({
-      "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua" },
-      config = function()
-        require("copilot_cmp").setup()
-      end,
-    })
-    -- -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
-
-    -- use({ -- A Neovim plugin that provides a colors for text diagnostics display.
-    --   "folke/lsp-colors.nvim",
-    --   config = [[ require('plugins/lsp-colors') ]],
-    -- })
-    --
-    -- -- ━━━━━━━━━━━━━━━━❰ Telescope Plugins ❱━━━━━━━━━━━━━━━━ --
 
     -- -- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
 
