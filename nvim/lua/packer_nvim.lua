@@ -131,9 +131,9 @@ return packer.startup({
     --   event = "VimEnter",
     --   config = [[ require('plugins/copilot') ]],
     -- })
-    -- use({ -- vscode-like pictograms for neovim lsp completion items Topics
-    --   "onsails/lspkind-nvim",
-    -- })
+    use({ -- vscode-like pictograms for neovim lsp completion items Topics
+       "onsails/lspkind-nvim",
+     })
     -- -- ━━━━━━━━━━━━━━━━❰ TS Plugins ❱━━━━━━━━━━━━━━━━ --
     
     -- -- Uses winscroll and TS to give context as you scroll down a file
@@ -154,20 +154,20 @@ return packer.startup({
 
     -- -- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
 
-    -- use({ --  Add/change/delete surrounding delimiter pairs with ease.
-    --   "kylechui/nvim-surround",
-    --   config = function()
-    --     require("nvim-surround").setup({})
-    --   end,
-    -- })
-    -- use({ -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
-    --   "numToStr/Comment.nvim",
-    --   config = [[ require('plugins/Comment_nvim') ]],
-    -- })
+    use({ --  Add/change/delete surrounding delimiter pairs with ease.
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup({})
+      end,
+    })
+     use({ -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
+       "numToStr/Comment.nvim",
+       config = [[ require('plugins/Comment_nvim') ]],
+     })
 
-    -- use(require("config.plugins.indent-blankline"))
-    -- use(require("config.plugins.bufferline"))
-    -- use(require("config.plugins.lualine")) -- fancy status line
+    use(require("config.plugins.indent-blankline"))
+    use(require("config.plugins.bufferline"))
+    use(require("config.plugins.lualine")) -- fancy status line
 
     -- use({ -- Git signs written in pure lua
     --   "lewis6991/gitsigns.nvim",
@@ -176,16 +176,16 @@ return packer.startup({
     --   config = [[ require('plugins/gitsigns_nvim') ]],
     -- })
 
-    -- use({ -- fast and highly customizable greeter for neovim.
-    --   "goolord/alpha-nvim",
-    --   opt = true,
-    --   event = "BufWinEnter",
-    --   config = [[ require('plugins/alpha-nvim') ]],
-    -- })
-    -- use({ -- tmux easy yank/past and window switching
-    --   "aserowy/tmux.nvim",
-    --   config = [[ require('plugins/tmux') ]],
-    -- })
+    use({ -- fast and highly customizable greeter for neovim.
+      "goolord/alpha-nvim",
+      opt = true,
+      event = "BufWinEnter",
+      config = [[ require('plugins/alpha-nvim') ]],
+    })
+    use({ -- tmux easy yank/past and window switching
+      "aserowy/tmux.nvim",
+      config = [[ require('plugins/tmux') ]],
+    })
     -- -- use({
     -- --   "rmagatti/auto-session",
     -- --   config = function()

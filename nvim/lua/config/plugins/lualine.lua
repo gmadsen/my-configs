@@ -46,16 +46,22 @@ require("lualine").setup({
         {'fileformat'},
         { 'filetype', icon_only=true},
     },
-    lualine_y = {require('auto-session-library').current_session_name, 'progress','location'},
+    lualine_y = {
+        {
+            function()
+                return require('auto-session-library').current_session_name
+            end,
+          cond = function()
+            if package.loaded["auto-session-library"] then
+              return true
+            end
+          end,
+      },
+
+        {'progress'},
+        {'location'},
+},
     lualine_z = { "os.date('%b %d %Y %H:%M')", { clock, separator = { right = "" } }},
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
   },
   extensions = {'nvim-tree'},
 })

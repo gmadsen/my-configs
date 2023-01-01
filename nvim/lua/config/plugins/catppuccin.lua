@@ -1,5 +1,6 @@
 local M = {
     "catppuccin/nvim",
+    as = "catppuccin"
 }
 
 M.config = function()
