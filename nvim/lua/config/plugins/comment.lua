@@ -22,10 +22,10 @@ function M.setup()
 
 
 local helper = require("util.helpers")
-local ok, comment = helper.safe_require("comment")
+local ok, Comment = helper.safe_require("Comment")
 if not ok then return end
 
-comment.setup({
+Comment.setup({
 
 ---Add a space b/w comment and the line
     padding = true,

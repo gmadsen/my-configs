@@ -19,10 +19,10 @@ local M = {
 
 M.setup = function()
     local h = require("util.helpers")
-    local valid, fterm = h.safe_require("fterm")
+    local valid, FTerm = h.safe_require("FTerm")
     if not valid then return end
 
-fterm.setup({
+FTerm.setup({
 	-- Filetype of the terminal buffer
 	ft = 'FTerm',
 	-- Command to run inside the terminal. It could be a `string` or `table`
@@ -54,6 +54,7 @@ fterm.setup({
 	-- See `:h jobstart-options`
 	on_stderr = nil,
 })
+vim.api.nvim_create_user_command('FTermToggle', FTerm.toggle, { bang = true })
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
@@ -61,8 +62,8 @@ local map = vim.keymap.set
 local cmd = vim.cmd
 local options = { noremap = true, silent = true }
 -------------- floaterm------------------------------------
-map("n", "<A-i>", '<CMD>lua fterm.toggle()<CR>', options)
-map("t", "<A-i>", '<C-\\><C-n><CMD>lua fterm.toggle()<CR>', options)
+-- map("n", "<A-i>", '<CMD>lua FTerm.toggle()<CR>')
+-- map("t", "<A-i>", '<C-\\><C-n><CMD>lua FTerm.toggle()<CR>')
 
 end
 return M
