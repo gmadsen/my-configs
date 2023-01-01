@@ -23,7 +23,9 @@ local M = {
 }
 
 function M.setup()
-    local telescope = require("telescope")
+    local h = require("util.helpers")
+    local ok, telescope = h.safe_require("telescope")
+    if not ok then return end
 
     telescope.setup({
 

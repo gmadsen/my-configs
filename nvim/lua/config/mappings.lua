@@ -160,7 +160,9 @@ map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = tr
 map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
-
+------------------ Terminal---------------------------
+map("n", "<A-i>", '<CMD>lua fterm.toggle()<CR>', options)
+map("t", "<A-i>", '<C-\\><C-n><CMD>lua fterm.toggle()<CR>', options)
 
 
 -- local ht = require('haskell-tools')

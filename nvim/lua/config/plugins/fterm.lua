@@ -15,12 +15,11 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 local M = {
         "numToStr/FTerm.nvim",
-        opt = true,
     }
 
 M.setup = function()
     local h = require("util.helpers")
-    local valid, fterm = h.safe_require("FTerm")
+    local valid, fterm = h.safe_require("fterm")
     if not valid then return end
 
 fterm.setup({

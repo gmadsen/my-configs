@@ -1,17 +1,6 @@
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ───────────────────────────────────────────────── --
---   Plugin:    noice.nvim
---   Github:    github.com/folke/noice.nvim
--- ───────────────────────────────────────────────── --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
 local M = {
   "folke/noice.nvim",
-  requires = { "MunifTanjim/nui.nvim", "rarriga/nvim-notify" },
-  -- event = "VeryLazy",
+  event = "VeryLazy",
 }
 
 function M.config()
@@ -57,7 +46,7 @@ function M.config()
       bottom_search = true,
       command_palette = true,
       long_message_to_split = true,
-      inc_rename = false,
+      inc_rename = true,
       cmdline_output_to_split = false,
     },
     commands = {
@@ -79,15 +68,15 @@ function M.config()
     require("noice").redirect(vim.fn.getcmdline())
   end, { desc = "Redirect Cmdline" })
 
-  vim.keymap.set("n", "<leader>ml", function()
+  vim.keymap.set("n", "<leader>nl", function()
     require("noice").cmd("last")
   end, { desc = "Noice Last Message" })
 
-  vim.keymap.set("n", "<leader>mh", function()
+  vim.keymap.set("n", "<leader>nh", function()
     require("noice").cmd("history")
   end, { desc = "Noice History" })
 
-  vim.keymap.set("n", "<leader>ma", function()
+  vim.keymap.set("n", "<leader>na", function()
     require("noice").cmd("all")
   end, { desc = "Noice All" })
 

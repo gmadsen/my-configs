@@ -1,8 +1,13 @@
 local M = {
   "rcarriga/nvim-notify",
   }
+
 function M.config ()
-    require("notify").setup {
+    local h = require("util.helpers")
+    local ok, notify = h.safe_require("notify")
+    if not ok then return end
+
+    notify.setup {
     timeout = 3000,
     level = vim.log.levels.INFO,
     fps = 20,
@@ -12,8 +17,9 @@ function M.config ()
     max_width = function()
       return math.floor(vim.o.columns * 0.75)
     end,
-}
+    }
+
+    vim.notify = notify
 end
--- vim.notify = require("notify")
 
 return M

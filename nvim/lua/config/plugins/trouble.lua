@@ -11,10 +11,13 @@
 
 local M = {
   "folke/trouble.nvim",
-  require = "nvim-tree/nvim-web-devicons",
+  cmd = {"TroubleToggle", "Trouble"},
+  requires = "nvim-tree/nvim-web-devicons",
 }
 
 function M.setup()
+
+
   require("trouble").setup({
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 7, -- height of the trouble list when position is top or bottom

@@ -10,14 +10,27 @@ return {
     config = { default = true },
   },
 
- {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    config = {
-      auto_open = false,
-      use_diagnostic_signs = true, -- en
-    },
+
+
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      vim.g.navic_silence = true
+      require("nvim-navic").setup({ separator = " ", highlight = true, depth_limit = 5 })
+    end,
   },
+
+
+
+
+ -- {
+ --    "folke/trouble.nvim",
+ --    cmd = { "TroubleToggle", "Trouble" },
+ --    config = {
+ --      auto_open = false,
+ --      use_diagnostic_signs = true, -- en
+ --    },
+ --  },
 
 
   {
