@@ -56,9 +56,9 @@ return packer.startup({
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
     use(require("config.plugins"))
     use(require("config.plugins.catppuccin"))
-    -- vim.cmd("colorscheme catppuccin")
 
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
+    use(require("config.plugins.nvim-tree"))
     -- use(require("config.plugins.notify"))
     -- vim.notify = require("notify")
 
@@ -87,6 +87,9 @@ return packer.startup({
       config = [[ require('plugins/fterm_nvim') ]],
     })
     use(require("config.plugins.hlslens")) -- advanced search and search highlighing
+
+
+
     -- use("simrat39/rust-tools.nvim")
     -- ━━━━━━━━━━━━━━━━❰ LSP Plugins ❱━━━━━━━━━━━━━━━━ --
     -- use({ -- A collection of common configurations for Neovim's built-in language server client
@@ -132,14 +135,9 @@ return packer.startup({
     --   "onsails/lspkind-nvim",
     -- })
     -- -- ━━━━━━━━━━━━━━━━❰ TS Plugins ❱━━━━━━━━━━━━━━━━ --
-    -- use({
-    --     "nvim-treesitter/nvim-treesitter-context",
-    --     event = "BufReadPre",
-    --     config = true,
-    -- })
-    --     -- Nvim Treesitter configurations and abstraction layer
-    -- use(require("config.plugins.treesitter"))
+    
     -- -- Uses winscroll and TS to give context as you scroll down a file
+    use(require("config.plugins.treesitter"))
 
     -- use(require("config.plugins.luasnip"))
     -- use({
@@ -155,7 +153,6 @@ return packer.startup({
     -- use(require("config.plugins.telescope"))
 
     -- -- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
-    -- use(require("config.plugins.nvim-tree"))
 
     -- use({ --  Add/change/delete surrounding delimiter pairs with ease.
     --   "kylechui/nvim-surround",

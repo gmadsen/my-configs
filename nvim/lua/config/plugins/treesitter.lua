@@ -1,24 +1,25 @@
 return {
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 
-  {
-    "mfussenegger/nvim-treehopper",
-    keys = { { "m", mode = { "o", "x" } } },
-    config = function()
-      vim.cmd([[
-        omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-        xnoremap <silent> m :lua require('tsht').nodes()<CR>
-      ]])
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-treehopper",
+  --   keys = { { "m", mode = { "o", "x" } } },
+  --   config = function()
+  --     vim.cmd([[
+  --       omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+  --       xnoremap <silent> m :lua require('tsht').nodes()<CR>
+  --     ]])
+  --   end,
+  -- },
 
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "BufReadPost",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
+    -- requires = {
+      -- "nvim-treesitter/nvim-treesitter-textobjects",
+   -- },
+    -- after = "nvim-treesitter-textobjects",
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
@@ -122,33 +123,33 @@ return {
         matchup = {
             enable = true,
         },
-        textobjects = {
-          select = {
-            enable = false,
-            lookahead = true,
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-            },
-          },
-          move = {
-            enable = false,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-            goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-            goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-            goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
-          },
-          lsp_interop = {
-            enable = false,
-            peek_definition_code = {
-              ["gD"] = "@function.outer",
-            },
-          },
-        },
+        -- textobjects = {
+        --   select = {
+        --     enable = false,
+        --     lookahead = true,
+        --     keymaps = {
+        --       -- You can use the capture groups defined in textobjects.scm
+        --       ["af"] = "@function.outer",
+        --       ["if"] = "@function.inner",
+        --       ["ac"] = "@class.outer",
+        --       ["ic"] = "@class.inner",
+        --     },
+        --   },
+        --   move = {
+        --     enable = false,
+        --     set_jumps = true, -- whether to set jumps in the jumplist
+        --     goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+        --     goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+        --     goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+        --     goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+        --   },
+        --   lsp_interop = {
+        --     enable = false,
+        --     peek_definition_code = {
+        --       ["gD"] = "@function.outer",
+        --     },
+        --   },
+        -- },
       })
       local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
       parser_config.markdown.filetype_to_parsername = "octo"

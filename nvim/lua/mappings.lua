@@ -81,8 +81,7 @@ map("v", "K", ":m '<-2<CR>gv=gv", options)
 
 -------------------------------- Plugin Mappings
 ---------------------- Rename
-map("n", "<Space>R", "<cmd>Lspsaga rename<cr>")
-map("v", "<Space>R", "<cmd>Lspsaga rename<cr>")
+map({"n", "v"}, "<Space>R", "<cmd>Lspsaga rename<cr>")
 map("n", "<Space>f", "<ESC>:lua vim.lsp.buf.format()<CR>")
 
 
