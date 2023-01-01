@@ -7,10 +7,16 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-local import_tmux, tmux = pcall(require, "tmux")
-if not import_tmux then return end
+--
+--
 
-tmux.setup({
+local M = {
+    "aserowy/tmux.nvim"
+}
+
+function M.config()
+
+require("tmux").setup({
 	copy_sync = {
 		-- enables copy sync. by default, all registers are synchronized.
 		-- to control which registers are synced, see the `sync_*` options.
@@ -66,3 +72,6 @@ tmux.setup({
 		resize_step_y = 1,
 	},
 })
+end
+
+return M

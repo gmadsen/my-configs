@@ -12,11 +12,18 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+local M = {
+    "goolord/alpha-nvim",
+    event = "BufWinEnter",
+}
 
-local alpha_ok, alpha = pcall(require, "alpha")
+function M.setup()
+local h = require("util.helpers")
+
+local alpha_ok, alpha = h.safe_require("alpha")
 if not alpha_ok then return end
 
-local dashboard_ok, dashboard = pcall(require, "alpha.themes.dashboard")
+local dashboard_ok, dashboard = h.safe_require("alpha.themes.dashboard")
 if not dashboard_ok then return end
 
 local datetime_ok, datetime = pcall(os.date, "%I:%M:%p 🕔 %d-%m-%Y")
@@ -74,6 +81,9 @@ vim.cmd([[
     autocmd FileType alpha setlocal nofoldenable
 ]])
 
+end
+
+return M
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

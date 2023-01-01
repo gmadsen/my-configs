@@ -1,50 +1,60 @@
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ───────────────────────────────────────────────── --
---   Plugin:    hlargs.nvim
---   Github:    github.com/m-demare/hlargs.nvim
+--   Plugin:    copilot.nvim
+--   Github:    github.com
 -- ───────────────────────────────────────────────── --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
-local import_hlargs, hlargs = pcall(require, "hlargs")
-if not import_hlargs then return end
-
-hlargs.setup {
-    color = '#ef9062',
-    highlight = {},
-    excluded_filetypes = {},
-    disable = function(lang, bufnr) -- If changed, `excluded_filetypes` will be ignored
-      return vim.tbl_contains(bufnr.opts.excluded_filetypes, lang)
-    end,
-    paint_arg_declarations = true,
-    paint_arg_usages = true,
-    paint_catch_blocks = {
-      declarations = false,
-      usages = false
-    },
-    hl_priority = 10000,
-    excluded_argnames = {
-      declarations = {},
-      usages = {
-        python = { 'self', 'cls' },
-        lua = { 'self' }
-      }
-    },
-    performance = {
-      parse_delay = 1,
-      slow_parse_delay = 50,
-      max_iterations = 400,
-      max_concurrent_partial_parses = 30,
-      debounce = {
-        partial_parse = 3,
-        partial_insert_mode = 100,
-        total_parse = 700,
-        slow_parse = 5000
-      }
-    }
+--
+local M = {
+    "zbirenbaum/copilot.lua",
+    event = "VimEnter"
 }
 
+function M.config()
+local copilot = require("copilot")
+vim.defer_fn(function()
+	copilot.setup({
+		panel = {
+			enabled = true,
+			auto_refresh = false,
+			keymap = {
+				jump_prev = "[[",
+				jump_next = "]]",
+				accept = "<CR>",
+				refresh = "gr",
+				open = "<M-CR>",
+			},
+		},
+		suggestion = {
+			enabled = true,
+			auto_trigger = false,
+			debounce = 75,
+			keymap = {
+				accept = "<M-l>",
+				next = "<M-]>",
+				prev = "<M-[>",
+				dismiss = "<C-]>",
+			},
+		},
+		filetypes = {
+			yaml = false,
+			markdown = false,
+			help = false,
+			gitcommit = false,
+			gitrebase = false,
+			hgcommit = false,
+			svn = false,
+			cvs = false,
+			["."] = false,
+		},
+		copilot_node_command = "node", -- Node version must be < 18
+		plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
+		server_opts_overrides = {},
+	})
+end, 100)
+end
+
+return M

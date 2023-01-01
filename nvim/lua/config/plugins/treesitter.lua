@@ -80,7 +80,7 @@ return {
             end,
         },
         indent = { enable = false },
-        context_commentstring = { enable = true, enable_autocmd = false },
+        -- context_commentstring = { enable = true, enable_autocmd = false },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -90,18 +90,18 @@ return {
             node_decremental = "<C-bs>",
           },
         },
-        query_linter = {
-          enable = true,
-          use_virtual_text = true,
-          lint_events = { "BufWrite", "CursorHold" },
-        },
-        textsubjects = {
-          enable = true,
-          keymaps = {
-            ["."] = "textsubjects-smart",
-            [";"] = "textsubjects-container-outer",
-          },
-        },
+        -- query_linter = {
+        --   enable = true,
+        --   use_virtual_text = true,
+        --   lint_events = { "BufWrite", "CursorHold" },
+        -- },
+        -- textsubjects = {
+        --   enable = true,
+        --   keymaps = {
+        --     ["."] = "textsubjects-smart",
+        --     [";"] = "textsubjects-container-outer",
+        --   },
+        -- },
         playground = {
           enable = true,
           disable = {},
@@ -122,6 +122,11 @@ return {
         },
         matchup = {
             enable = true,
+        },
+		rainbow = {
+            enable = true,
+            extended_mode = true,
+            max_file_lines = 1000
         },
         -- textobjects = {
         --   select = {

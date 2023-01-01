@@ -2,7 +2,6 @@ return {
   "nvim-lua/plenary.nvim",
   "MunifTanjim/nui.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "folke/which-key.nvim",
 
 
   -- Theme: icons
@@ -21,7 +20,6 @@ return {
   },
 
 
-
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -29,11 +27,13 @@ return {
       vim.g.startuptime_tries = 10
     end,
   },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "BufReadPre",
-    config = true,
-  },
+
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   event = "BufReadPre",
+  --   config = true,
+  -- },
+
   {
     "andymass/vim-matchup",
     event = "BufReadPost",

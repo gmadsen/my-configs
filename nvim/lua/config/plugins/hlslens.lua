@@ -9,7 +9,9 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-M = {'kevinhwang91/nvim-hlslens'}
+M = {
+    'kevinhwang91/nvim-hlslens',
+}
 
 M.config = function()
     require('hlslens').setup {
@@ -17,24 +19,28 @@ M.config = function()
         nearest_only = true,
         nearest_float_when = 'always',
     }
-        -- nearest_float_when = 'multiline',
-        -- nearest_float_when = 'never',
-        -- special_treatments = {
-        --     ['*'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['`'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['/'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['?'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['\\'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['"'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ["'"] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['`'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['('] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     [')'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['['] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     [']'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['{'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['}'] = {hl_group = 'Search', text_hl_group = 'IncSearch', text = ''},
-        --     ['<'] = {hl_group'}
+
+local map = vim.keymap.set
+local cmd = vim.cmd
+local options = { noremap = true, silent = true }
+
+
+
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+-- hlslens , which makes search more fancy
+map("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
+map("n", "<Leader>l", ":noh<CR>", options)
+
+
+
 end
+
 return M
 

@@ -22,11 +22,10 @@ local M = {
 function M.config()
     local mocha = require("catppuccin.palettes").get_palette()
     mocha.none = "NONE"
-    -- safely import bufferline
-    local bufferline_imported, bufferline = pcall(require, "bufferline")
-    if not bufferline_imported then
-        return
-    end
+
+    local h = require("util.helpers")
+    local bufferline_imported, bufferline = h.safe_require("nvim-bufferline")
+    if not bufferline_imported then return end
 
     bufferline.setup({
         highlights = require("catppuccin.groups.integrations.bufferline").get({

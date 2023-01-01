@@ -8,28 +8,22 @@
 
 
 
-
+local M = {
+    "karb94/neoscroll.nvim",
+}
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━--
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+function M.setup()
+local h = require("util.helpers")
+local valid, neoscroll = h.safe_require("neoscroll")
+if not valid then return end
 
-require('neoscroll').setup({
+neoscroll.setup({
     easing_function = "quadratic" -- Default easing function
     -- Set any other options as needed
 })
 
-
-
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
---━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━--
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
-
-
-
-
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
---━━━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━━━--
---━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 local t = {}
 -- Syntax: t[keys] = {function, {function arguments}}
 t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
@@ -43,6 +37,8 @@ t['zz']    = {'zz', {'250'}}
 t['zb']    = {'zb', {'250'}}
 
 require('neoscroll.config').set_mappings(t)
+end
+return M
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 --━━━━━━━━━━━━━━━━━❰ end Mappings ❱━━━━━━━━━━━━━━━━--
 --━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--

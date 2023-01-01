@@ -125,9 +125,6 @@ map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>")
 --       --> show undo history
 map("n", "<leader>fu", "<cmd>Telescope undo<cr>")
 
--------------- floaterm------------------------------------
-map("n", "<A-i>", '<CMD>lua require("FTerm").toggle()<CR>')
-map("t", "<A-i>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 ---------------- LSP saga
 map("n", "<Space>r", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
@@ -164,14 +161,6 @@ map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = t
 map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
 
--- hlslens , which makes search more fancy
-map("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], options)
-map("n", "<Leader>l", ":noh<CR>", options)
 
 
 -- local ht = require('haskell-tools')

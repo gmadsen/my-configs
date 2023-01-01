@@ -12,8 +12,13 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+local M = {
+    "folke/which-key.nvim",
+}
 
-local import_whichkey, whichkey = pcall(require, "which-key")
+function M.setup()
+local h = require("util.helpers")
+local import_whichkey, whichkey = h.safe_require("which-key")
 if not import_whichkey then return end
 
 whichkey.setup {
@@ -84,7 +89,9 @@ whichkey.setup {
 	-- Disabled by deafult for Telescope
 	disable = {
 		buftypes = {},
-		filetypes = { "TelescopePrompt" },
+		-- filetypes = { "TelescopePrompt" },
 	},
 }
+end
+return M
 

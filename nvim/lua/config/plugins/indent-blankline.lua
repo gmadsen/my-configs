@@ -16,9 +16,12 @@ local M = {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
 }
-M.config = function()
-    local indent = require("indent_blankline")
-    indent.setup({
+function M.config()
+    local h = require("util.helpers")
+    local ok, inline = h.safe_require("indent_blankline")
+    if not ok then return end
+
+    inline.setup({
         show_end_of_line = false,
         space_char_blankline = " ",
         show_current_context = true,

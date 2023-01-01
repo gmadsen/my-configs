@@ -13,8 +13,17 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+local M = {
+        "numToStr/FTerm.nvim",
+        opt = true,
+    }
 
-require'FTerm'.setup({
+M.setup = function()
+    local h = require("util.helpers")
+    local valid, fterm = h.safe_require("FTerm")
+    if not valid then return end
+
+fterm.setup({
 	-- Filetype of the terminal buffer
 	ft = 'FTerm',
 	-- Command to run inside the terminal. It could be a `string` or `table`
@@ -46,8 +55,16 @@ require'FTerm'.setup({
 	-- See `:h jobstart-options`
 	on_stderr = nil,
 })
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━━━━━❰ Mappings ❱━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+local map = vim.keymap.set
+local cmd = vim.cmd
+local options = { noremap = true, silent = true }
+-------------- floaterm------------------------------------
+map("n", "<A-i>", '<CMD>lua fterm.toggle()<CR>', options)
+map("t", "<A-i>", '<C-\\><C-n><CMD>lua fterm.toggle()<CR>', options)
 
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+end
+return M
 

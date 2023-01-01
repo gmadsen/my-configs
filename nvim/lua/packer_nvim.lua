@@ -55,15 +55,68 @@ return packer.startup({
     use("wbthomason/packer.nvim") -- Packer can manage itself
     use("lewis6991/impatient.nvim") -- Speed up loading Lua modules in Neovim to improve startup time.
     use(require("config.plugins"))
+    use(require("config.plugins.whichkey"))
     use(require("config.plugins.catppuccin"))
 
     -- ━━━━━━━━━━━━━━━━❰ UI Plugins ❱━━━━━━━━━━━━━━━━ --
     use(require("config.plugins.nvim-tree"))
+
+    use("anuvyklack/hydra.nvim")
+    use("ellisonleao/glow.nvim")
+    use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
+    use(require("config.plugins.hlslens")) -- advanced search and search highlighing
+
+
+    use(require("config.plugins.copilot")) -- copilot in nvim
+    use("onsails/lspkind-nvim")
+
+
+    use({ --  Add/change/delete surrounding delimiter pairs with ease.
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup({})
+      end,
+    })
+   use({ -- make todo in comments as special tags
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup({})
+      end,
+    })
+    use({ --  Neovim motions on speed!
+      "phaazon/hop.nvim",
+      config = function()
+        require("hop").setup()
+      end,
+    })
+
+
+    use(require("config.plugins.comment")) -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
+    use(require("config.plugins.bufferline")) -- buffer line
+    use(require("config.plugins.lualine")) -- fancy status line
+    use(require("config.plugins.gitsigns")) -- Git signs written in pure lua
+    use(require("config.plugins.alpha")) -- fast and highly customizable greeter for neovim.
+    use(require("config.plugins.tmux")) -- tmux easy yank/past and window switching
+    use(require("config.plugins.neoscroll")) -- smooth scrolling for neovim
+    use(require("config.plugins.illuminate")) -- Highlight other uses of word under cursor
+
+
+    use(require("config.plugins.treesitter"))
+    --TODO it needs treesitter
+    use(require("config.plugins.indent-blankline"))
+
+    use(require("config.plugins.fterm")) -- floating terming
+    -- use(require("config.plugins.hlargs")) -- highlight arguments of a function call using treesitter
+    --
+    -- use(require("config.plugins.telescope"))
+    --
     -- use(require("config.plugins.notify"))
     -- vim.notify = require("notify")
 
     --use(require("config.plugins.noice"))
 
+    use(require("config.plugins.lspsaga")) -- an lsp plugin to help stuff
 
 
     -- use(require("config.plugins.autopairs"))
@@ -78,15 +131,21 @@ return packer.startup({
     --   requires = { "nvim-lspconfig", "hrsh7th/nvim-cmp" },
     -- })
 
-    use("anuvyklack/hydra.nvim")
-    use("ellisonleao/glow.nvim")
-    use({ "sindrets/diffview.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
-    use({ -- floating terming
-      "numToStr/FTerm.nvim",
-      config = [[ require('plugins/fterm_nvim') ]],
-    })
-    use(require("config.plugins.hlslens")) -- advanced search and search highlighing
+    -- -- use({
+    -- --   "rmagatti/auto-session",
+    -- --   config = function()
+    -- --     require("auto-session").setup({
+    -- --       log_level = "error",
+    -- --       auto_session_suppress_dirs = {
+    -- --         "~/",
+    -- --         "~/Projects",
+    -- --         "~/Downloads",
+    -- --         "/",
+    -- --       },
+    -- --     })
+    -- --   end,
+    -- -- })
 
 
 
@@ -122,22 +181,13 @@ return packer.startup({
     -- })
 
     -- use(require("config.plugins.trouble")) -- A pretty diagnostics, references,tell the trouble your code is causing.
+
     -- use({ -- A Neovim plugin that provides a colors for text diagnostics display.
     --   "folke/lsp-colors.nvim",
     --   config = [[ require('plugins/lsp-colors') ]],
     -- })
-    -- use({ -- copilot in nvim
-    --   "zbirenbaum/copilot.lua",
-    --   event = "VimEnter",
-    --   config = [[ require('plugins/copilot') ]],
-    -- })
-    use({ -- vscode-like pictograms for neovim lsp completion items Topics
-       "onsails/lspkind-nvim",
-     })
-    -- -- ━━━━━━━━━━━━━━━━❰ TS Plugins ❱━━━━━━━━━━━━━━━━ --
-    
-    -- -- Uses winscroll and TS to give context as you scroll down a file
-    use(require("config.plugins.treesitter"))
+    --
+
 
     -- use(require("config.plugins.luasnip"))
     -- use({
@@ -150,84 +200,12 @@ return packer.startup({
     -- -- ━━━━━━━━━━━━━━━━❰ Completion Plugins ❱━━━━━━━━━━━━━━━━ --
 
     -- -- ━━━━━━━━━━━━━━━━❰ Telescope Plugins ❱━━━━━━━━━━━━━━━━ --
-    -- use(require("config.plugins.telescope"))
 
     -- -- ━━━━━━━━━━━━━━━━❰ Editing Plugins ❱━━━━━━━━━━━━━━━━ --
 
-    use({ --  Add/change/delete surrounding delimiter pairs with ease.
-      "kylechui/nvim-surround",
-      config = function()
-        require("nvim-surround").setup({})
-      end,
-    })
-     use({ -- auto  commentstring, dot repeat, left-right/up-down motions, hooks, and more
-       "numToStr/Comment.nvim",
-       config = [[ require('plugins/Comment_nvim') ]],
-     })
 
-    use(require("config.plugins.indent-blankline"))
-    use(require("config.plugins.bufferline"))
-    use(require("config.plugins.lualine")) -- fancy status line
 
-    -- use({ -- Git signs written in pure lua
-    --   "lewis6991/gitsigns.nvim",
-    --   opt = true,
-    --   event = { "BufReadPost", "BufNewFile" },
-    --   config = [[ require('plugins/gitsigns_nvim') ]],
-    -- })
 
-    use({ -- fast and highly customizable greeter for neovim.
-      "goolord/alpha-nvim",
-      opt = true,
-      event = "BufWinEnter",
-      config = [[ require('plugins/alpha-nvim') ]],
-    })
-    use({ -- tmux easy yank/past and window switching
-      "aserowy/tmux.nvim",
-      config = [[ require('plugins/tmux') ]],
-    })
-    -- -- use({
-    -- --   "rmagatti/auto-session",
-    -- --   config = function()
-    -- --     require("auto-session").setup({
-    -- --       log_level = "error",
-    -- --       auto_session_suppress_dirs = {
-    -- --         "~/",
-    -- --         "~/Projects",
-    -- --         "~/Downloads",
-    -- --         "/",
-    -- --       },
-    -- --     })
-    -- --   end,
-    -- -- })
-
-    -- use({
-    --   "folke/todo-comments.nvim",
-    --   requires = "nvim-lua/plenary.nvim",
-    --   config = function()
-    --     require("todo-comments").setup({})
-    --   end,
-    -- })
-    -- use({ --  Neovim motions on speed!
-    --   "phaazon/hop.nvim",
-    --   config = [[ require('plugins/hop_nvim') ]],
-    -- })
-    -- use({ -- smooth scrolling for neovim
-    --   "karb94/neoscroll.nvim",
-    --   config = [[ require('plugins/neoscroll_nvim') ]],
-    -- })
-    -- -- use({ -- highlight arguments of a function call using treesitter
-    -- --   "m-demare/hlargs.nvim",
-    -- --   requires = { "nvim-treesitter/nvim-treesitter" },
-    -- -- })
-    -- use({ -- Highlight other uses of word under cursor
-    --   "RRethy/vim-illuminate",
-    --   config = [[ require('plugins/vim-illuminate') ]],
-    -- })
-    -- use({ -- an lsp plugin to help stuff
-    --   "glepnir/lspsaga.nvim",
-    --   config = [[ require('plugins/lspsaga_nvim') ]],
-    -- })
     -- ━━━━━━━━━━━━━━━━━❰ DEVELOPMENT ❱━━━━━━━━━━━━━━━━━ --
     -- ━━━━━━━━━━━━━━❰ end of DEVELOPMENT ❱━━━━━━━━━━━━━ --
     -- Automatically set up your configuration after cloning packer.nvim

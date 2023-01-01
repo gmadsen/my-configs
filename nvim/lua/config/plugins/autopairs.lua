@@ -20,7 +20,10 @@ local M = {
   }
 
 function M.setup()
-local autopairs = require("autopairs")
+local h = require("util.helpers")
+local valid, autopairs = h.safe_require("autopairs")
+if not valid then return end
+
 autopairs.setup({
 	enable_check_bracket_line = true, -- Don't add pairs if it already have a close pairs in same line
 	disable_filetype = { "TelescopePrompt", "vim" }, --

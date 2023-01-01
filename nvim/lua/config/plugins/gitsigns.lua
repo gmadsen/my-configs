@@ -9,10 +9,16 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
-local import_gitsigns, gitsigns = pcall(require, "gitsigns")
-if not import_gitsigns then
-	return
-end
+
+local M = {
+    "lewis6991/gitsigns.nvim",
+    event = {"BufReadPost", "BufNewFile"},
+}
+
+function M.setup()
+local h = require("util.helpers")
+local import_gitsigns, gitsigns = h.safe_require("gitsigns")
+if not import_gitsigns then return end
 
 gitsigns.setup({
 	signs = {
@@ -132,6 +138,8 @@ gitsigns.setup({
 		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 	end,
 })
+end
+return M
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━❰ end configs ❱━━━━━━━━━━━━━━━━━ --

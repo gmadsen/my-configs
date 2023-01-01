@@ -11,8 +11,14 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━--
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
+local M = {
+    "glepnir/lspsaga.nvim",
+}
+function M.setup()
+    local h = require("util.helpers")
+local valid, saga = h.safe_require("lspsaga")
+if not valid then return end
 
-local saga = require("lspsaga")
 saga.init_lsp_saga({
 -- Options with default value
 -- "single" | "double" | "rounded" | "bold" | "plus"
@@ -113,6 +119,8 @@ show_outline = {
 -- custom lsp kind
 custom_kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
 })
+end
+return M
 
 
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━--
