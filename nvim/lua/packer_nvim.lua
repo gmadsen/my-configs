@@ -11,6 +11,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  local packer_exists = fn.empty(fn.glob(install_path)) > 0
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({
       "git",
@@ -97,7 +98,6 @@ return packer.startup({
     use(require("config.plugins.tmux")) -- tmux easy yank/past and window switching
     use(require("config.plugins.neoscroll")) -- smooth scrolling for neovim
     use(require("config.plugins.illuminate")) -- Highlight other uses of word under cursor
-
 
     use(require("config.plugins.treesitter"))
 

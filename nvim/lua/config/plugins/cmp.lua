@@ -22,7 +22,8 @@ local M = {
 }
 
 function M.setup()
-    local has_words_before = function()
+
+  local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
       return false
     end
@@ -30,44 +31,26 @@ function M.setup()
     return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
   end
 
+
   vim.o.completeopt = "menuone,noselect"
 
+
+
   local h = require("util.helpers")
-  local ok, cmp = h.safe_require("nvim-cmp")
+  local ok, cmp = h.safe_require("cmp")
   if not ok then return end
-
-
   cmp.setup({
     completion = {
       completeopt = "menu,menuone,noinsert",
     },
-
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
       end,
     },
-
-    -- local lspkind = require("lspkind")
     formatting = {
         format = require("config.plugins.lsp.kind").cmp_format(),
     },
-      -- fields = { "kind", "abbr", "menu" },
-      -- format = lspkind.cmp_format({
-      --   mode = "symbol_text",
-      --   maxwidth = 35,
-      --   ellipsis_char = "...",
-      --   menu = {
-      --     nvim_lsp = "[LSP]     ",
-      --     nvim_lua = "[Lua]     ",
-      --     copilot = "[Pilot]   ",
-      --     luasnip = "[LuaSnip] ",
-      --     buffer = "[Buff]    ",
-      --     path = "[Path]    ",
-      --     cmdline = "[Cmd]     ",
-      --   },
-      -- }),
-    -- },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-n>"] = cmp.mapping.select_next_item(),

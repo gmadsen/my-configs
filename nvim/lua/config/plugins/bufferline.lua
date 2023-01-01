@@ -10,7 +10,7 @@
 
 local M = {
     "akinsho/nvim-bufferline.lua",
-    event = "BufAdd",
+    -- event = "BufAdd",
     after = "catppuccin",
 
     requires = {
@@ -20,11 +20,11 @@ local M = {
 }
 
 function M.config()
-    local mocha = require("catppuccin.palettes").get_palette()
-    mocha.none = "NONE"
+    local cat = require("catppuccin.palettes").get_palette()
+    cat.none = "NONE"
 
     local h = require("util.helpers")
-    local bufferline_imported, bufferline = h.safe_require("nvim-bufferline")
+    local bufferline_imported, bufferline = h.safe_require("bufferline")
     if not bufferline_imported then return end
 
     bufferline.setup({
@@ -32,13 +32,11 @@ function M.config()
             styles = { "italic", "bold" },
             custom = {
                 -- all = { fill = { bg = "#000000" } },
-                mocha = { background = { fg = mocha.text } },
+                mocha = { background = { fg = cat.text } },
                 -- latte = { background = { fg = "#000000" } },
             },
         }),
-    })
 
-    bufferline.setup({
 
         options = {
             -- mode = "buffers", -- set to "tabs" to only show tabpages instead
