@@ -1,33 +1,30 @@
 
---    Author:     Garrett Madsen  , inspired by Ali Shahid
---    Github:     github.com/shaeinst
-
-
+--    Author:     Garrett Madsen   
 -- ───────────────────────────────────────────────── --
--- ────────────────❰ Leader Mapping ❱─────────────── --
--- mapping leader here. it will work for every mapped
--- require('util.debug')
-vim.g.mapleader = ';'
-vim.g.maplocalleader = ';'
--- ───────────────────────────────────────────────── --
+-- local debug = require("util.debug")
+-- 
+-- if vim.env.VIMCONFIG then
+--   return debug.switch(vim.env.VIMCONFIG)
+-- end
 
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
-require('config.options')                  -- global options
-require('config.commands')                 -- auto commands
-require('config.mappings')                 -- key mappings
+require("garevim.config.options")
+require("garevim.config.lazy")
+require("garevim.config.commands")
+require("garevim.config.mappings")
 
-require('archive_plugins.impatient_nvim')   -- impatient needs to be setup before any other
-require('packer_nvim')              -- loading plugins and plugin configs
+-- require("util.dashboard").setup()
 
 vim.api.nvim_create_autocmd("User", {
-  pattern = "PackerSync",
+  pattern = "VeryLazy",
   callback = function()
-    require("util").version()
-    require("config.comands")
-    require("config.mappings")
+    require("garevim.util").version()
+    require("garevim.config.commands")
+    require("garevim.config.mappings")
   end,
 })
+-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
+-- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
+
+
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-
