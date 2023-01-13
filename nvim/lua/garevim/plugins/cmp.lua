@@ -12,6 +12,7 @@ local M = {
   event = "InsertEnter",
   dependencies = {
     { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-nvim-lua" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-emoji" },
     { "hrsh7th/cmp-cmdline" },
@@ -68,8 +69,9 @@ function M.setup()
       end),
     }),
     sources = cmp.config.sources({
-      { name = "copilot", keyword_length = 1 },
-      { name = "nvim_lsp", keyword_length = 1 },
+      { name = "copilot" },
+      { name = "nvim_lsp" },
+      { name = "lua" },
       { name = "luasnip", keyword_length = 1 },
       { name = "buffer", keyword_length = 3 },
       { name = "path", keyword_length = 1 },

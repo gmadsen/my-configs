@@ -11,12 +11,11 @@
     :end of NOTE
 --]]
 
-
 -------- Variables --------------
 vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
 
-cache_dir = vim.fn.stdpath("data") .. "/.cache"
+local cache_dir = vim.fn.stdpath("data") .. "/.cache"
 vim.g.python3_host_prog = "$HOME/venvs/neovim/bin/python3"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -35,7 +34,7 @@ vim.o.backupdir = cache_dir .. "/backedUP" -- where to put backup files
 vim.o.breakindent = true -- wrap lines with indent
 vim.o.clipboard = "unnamedplus" -- copy & paste
 vim.o.cmdheight = 0 -- hide cmd bar
-   -- opt.colorcolumn = "79", -- vertical word limit line
+-- opt.colorcolumn = "79", -- vertical word limit line
 vim.o.completeopt = "menu,menuone,noselect" -- completion options
 vim.o.conceallevel = 3
 vim.o.confirm = true -- do not confirm to save on
@@ -66,7 +65,7 @@ vim.o.number = true -- show line numbers
 vim.o.numberwidth = 4 -- number width
 vim.o.pumblend = 10 -- pop up blend
 vim.o.pumheight = 10 -- maximum items in a popup menu
-  --o.pumwidth = 30 --- min width of popup
+--o.pumwidth = 30 --- min width of popup
 vim.o.relativenumber = true -- show relative line number
 vim.o.scrolloff = 10 -- when scrolling, keep cursor 1 lines away from screen border
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions" --- settings to save for sessions
@@ -74,7 +73,7 @@ vim.o.shada = "'100,<50,f50,n" .. cache_dir .. "/shada/shada"
 vim.o.shell = "fish" -- shell to use for `!`, `:!`, `system()` etc.
 vim.o.shiftround = true -- make all indents a multiple of shiftwidth
 vim.o.shiftwidth = indent -- spaces per tab (when shifting), when using the >> or << commands, shift lines by 4 spaces
-  -- o.shortmess = "sAIcCqS" -- short duration messages
+-- o.shortmess = "sAIcCqS" -- short duration messages
 vim.o.showmatch = true -- show the matching part of the pair for [] {} and ()
 vim.o.sidescrolloff = 4 -- keep 30 columns visible left and right of the cursor at all times
 vim.o.signcolumn = "yes" -- always show sign column
@@ -96,7 +95,7 @@ vim.o.undofile = true -- persistent undos - undo after you re-open the file
 vim.o.undolevels = 10000
 vim.o.updatetime = 200 -- CursorHold interval
 vim.o.viewdir = cache_dir .. "/view" -- where to store files for :mkview
- -- o.wildmenu.enable = true
+-- vim.o.wildmenu.enable = true
 vim.opt.wildignore:append({ "*.o", "*.rej", "*.so" }) -- patterns to ignore during file-navigation
 vim.o.wildmode = "longest:full,full" -- command-line completion mode
 vim.o.wrap = false --  automatically wrap on load

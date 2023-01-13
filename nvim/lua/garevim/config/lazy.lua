@@ -28,7 +28,7 @@ require("lazy").setup("garevim.plugins", {
         "tutor",
         "zipPlugin",
         "haskell-tools",
-        "noice.nvim",
+        "Noice.nvim",
       },
     },
   },

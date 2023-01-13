@@ -2,24 +2,32 @@ local M = {
   "folke/noice.nvim",
   event = "VeryLazy",
   keys = {
-  {"<leader>ml", function()
-    require("noice").cmd("last")
-  end, { desc = "Noice Last Message" }},
+    {
+      "<leader>ml",
+      function()
+        require("noice").cmd("last")
+      end,
+      { desc = "Noice Last Message" },
+    },
 
-  {"<leader>mh", function()
-    require("noice").cmd("history")
-  end, { desc = "Noice History" }},
+    {
+      "<leader>mh",
+      function()
+        require("noice").cmd("history")
+      end,
+      { desc = "Noice History" },
+    },
 
-  {"<leader>ma", function()
-    require("noice").cmd("all")
-  end, { desc = "Noice All" }},
-},
+    {
+      "<leader>ma",
+      function()
+        require("noice").cmd("all")
+      end,
+      { desc = "Noice All" },
+    },
+  },
 }
 
-  -- vim.keymap.set("c", "<S-Enter>", function()
-  --   require("noice").redirect(vim.fn.getcmdline())
-  -- end, { desc = "Redirect Cmdline" })
-  --
 function M.config()
   local focused = true
   vim.api.nvim_create_autocmd("FocusGained", {
@@ -32,7 +40,6 @@ function M.config()
       focused = false
     end,
   })
-
 
   require("noice").setup({
     debug = false,
@@ -82,19 +89,5 @@ function M.config()
       },
     },
   })
-
-  ------------------ KeyMaps -----------------------
-
-
-
-  -- vim.api.nvim_create_autocmd("FileType", {
-  --   pattern = "markdown",
-  --   callback = function(event)
-  --     vim.schedule(function()
-  --       require("noice.text.markdown").keys(event.buf)
-  --     end)
-  --   end,
-  -- })
 end
-
 return M
