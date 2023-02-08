@@ -13,7 +13,7 @@ local M = {
   event = "BufWinEnter",
 }
 
-function M.setup()
+function M.config()
   local comment = require("Comment")
 
   comment.setup({

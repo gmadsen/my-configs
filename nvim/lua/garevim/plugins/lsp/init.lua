@@ -15,7 +15,7 @@ return {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", config = true },
       "williamboman/mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
+      { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()

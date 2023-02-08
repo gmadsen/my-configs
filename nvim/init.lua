@@ -1,8 +1,7 @@
-
---    Author:     Garrett Madsen   
+--    Author:     Garrett Madsen
 -- ───────────────────────────────────────────────── --
 -- local debug = require("util.debug")
--- 
+--
 -- if vim.env.VIMCONFIG then
 --   return debug.switch(vim.env.VIMCONFIG)
 -- end
@@ -24,7 +23,6 @@ vim.api.nvim_create_autocmd("User", {
 })
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
-
 
 -- ━━━━━━━━━━━━━━━━━❰ end of Load ❱━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --

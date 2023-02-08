@@ -22,7 +22,7 @@ local M = {
     { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
   },
 }
-function M.setup()
+function M.config()
   vim.o.completeopt = "menuone,noselect"
 
   local has_words_before = function()
@@ -35,6 +35,10 @@ function M.setup()
 
   local cmp = require("cmp")
   cmp.setup({
+    view = {
+      -- entries = "native",
+    },
+
     completion = {
       completeopt = "menu,menuone,noinsert",
     },
@@ -47,7 +51,7 @@ function M.setup()
       format = function(_, item)
         local icons = require("garevim.config.icons").kinds
         if icons[item.kind] then
-          item.kind = icons[item.kind] .. item.kind
+          item.kind = icons[item.kind] .. " " .. item.kind
         end
         return item
       end,

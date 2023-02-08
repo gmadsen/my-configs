@@ -17,7 +17,7 @@ local M = {
   },
 }
 
-M.setup = function()
+M.config = function()
   local FTerm = require("FTerm")
   FTerm.setup({
     -- Filetype of the terminal buffer

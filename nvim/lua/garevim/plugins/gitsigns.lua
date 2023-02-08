@@ -15,7 +15,7 @@ local M = {
 }
 
 --text = "│",
-function M.setup()
+function M.config()
   local gitsigns = require("gitsigns")
 
   gitsigns.setup({

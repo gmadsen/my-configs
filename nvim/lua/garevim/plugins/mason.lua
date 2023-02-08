@@ -1,9 +1,8 @@
 local M = {
   "williamboman/mason.nvim",
   dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-
-  }
+    "williamboman/mason-lspconfig.nvim",
+  },
 }
 
 M.tools = {
@@ -21,7 +20,6 @@ M.tools = {
 }
 
 function M.check()
-
   local mr = require("mason-registry")
 
   for _, tool in ipairs(M.tools) do
@@ -37,11 +35,6 @@ function M.config()
   mason.setup()
 
   M.check()
- local  mlspconfig = require("mason-lspconfig")
-
-  mlspconfig.setup({
-    automatic_installation = true,
-  })
 end
 
 return M

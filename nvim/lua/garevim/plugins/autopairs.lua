@@ -16,7 +16,7 @@ local M = {
   dependencies = "hrsh7th/nvim-cmp",
 }
 
-function M.setup()
+function M.config()
   local autopairs = require("nvim-autopairs")
 
   autopairs.setup({

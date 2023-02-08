@@ -32,7 +32,7 @@ local M = {
   },
 }
 
-function M.setup()
+function M.config()
   local illuminate = require("illuminate")
   illuminate.configure({
     -- providers: provider used to get references in the buffer, ordered by priority

@@ -16,7 +16,7 @@ local M = {
   keys = { "<leader>xt>", "<cmd>TroubleToggle<cr>" },
 }
 
-function M.setup()
+function M.config()
   local trouble = require("trouble")
 
   trouble.setup({

@@ -1,7 +1,7 @@
 local M = {}
 local ns = vim.api.nvim_create_namespace("dashboard")
 
-function M.setup()
+function M.config()
   if not M.dont_show() then
     vim.api.nvim_create_autocmd("User", {
       pattern = "LazyVimStarted",

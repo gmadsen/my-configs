@@ -14,7 +14,7 @@ local M = {
   event = "VeryLazy",
 }
 
-function M.setup()
+function M.config()
   local whichkey = require("which-key")
 
   whichkey.setup({

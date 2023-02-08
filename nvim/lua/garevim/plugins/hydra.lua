@@ -12,7 +12,7 @@ local M = {
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
-function M.setup()
+function M.config()
   local Hydra = require("hydra")
 
   -- This Hydra lets you scroll sideways is a sane way

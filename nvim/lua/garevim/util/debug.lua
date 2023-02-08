@@ -89,7 +89,7 @@ _G.dd = function(...)
   M.dump(M.get_value(...), { schedule = true })
 end
 
-function M.setup()
+function M.config()
   M.notify.setup()
   -- make all keymaps silent by default
   local keymap_set = vim.keymap.set
@@ -100,6 +100,6 @@ function M.setup()
     return keymap_set(mode, lhs, rhs, opts)
   end
 end
-M.setup()
+M.config()
 
 return M

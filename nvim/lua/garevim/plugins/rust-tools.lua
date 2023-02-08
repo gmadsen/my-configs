@@ -13,7 +13,7 @@ local M = {
   "simrat39/rust-tools.nvim",
 }
 
-function M.setup(options)
+function M.config(options)
 
   require("rust-tools").setup(options)
 end
