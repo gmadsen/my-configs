@@ -56,6 +56,11 @@ local M = {
       desc = " show all files from current working directory",
     },
 
+    {
+      "<leader>xd",
+      "Telescope diagnostics",
+      desc = "Telescope Diagnostics",
+    },
     -- { "<leader>fu", "<cmd>Telescope undo<cr>", desc = " show undo history" },
   },
 }

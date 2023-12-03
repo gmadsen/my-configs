@@ -25,7 +25,7 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
       vim.diagnostic.config({
-        underline = true,
+        underline = false,
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,

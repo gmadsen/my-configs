@@ -40,7 +40,7 @@ function M.config()
     },
 
     completion = {
-      completeopt = "menu,menuone,noinsert",
+      completeopt = "menu,menuone,noinsert, noselect",
     },
     snippet = {
       expand = function(args)
@@ -81,6 +81,11 @@ function M.config()
       { name = "path", keyword_length = 1 },
       -- { name = "cmdline" },
     }),
+    {
+      formatters = {
+        insert_text = require("copilot_cmp.format").remove_existing,
+      },
+    },
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -91,16 +96,6 @@ function M.config()
       { name = "cmdline" },
     }),
   })
-
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  -- cmp.setup.cmdline({ "/", "?" }, {
-  --   mapping = cmp.mapping.preset.cmdline(),
-  --   sources = cmp.config.sources({
-  --     { name = "buffer" },
-  --   }),
-  -- })
-
-  -- fancy tab
 end
 
 return M

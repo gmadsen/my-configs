@@ -99,8 +99,10 @@ map("n", "<Leader>9", ":BufferLineGoToBuffer 9<CR>", options)
 map("n", "<Leader>bq", ":BufferClose<CR>", options)
 
 ------------------ Terminal---------------------------
-map("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", options)
-map("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", options)
+-- map("n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>", options)
+map("n", "<Leader>i", "<CMD>lua require('FTerm').toggle()<CR>", options)
+-- map("t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", options)
+map("t", "<Leader>i", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", options)
 
 -------------------Trouble-----------------------------
 map("n", "<leader>xt", "<cmd>TroubleToggle<cr>")

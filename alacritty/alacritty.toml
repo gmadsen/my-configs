@@ -1,0 +1,43 @@
+import = ["/home/madsen/.config/alacritty/fonts.toml"]
+live_config_reload = true
+
+[cursor]
+unfocused_hollow = false
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[debug]
+highlight_damage = false
+
+[font]
+builtin_box_drawing = false
+size = 10
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+args = ["--login"]
+program = "/usr/bin/fish"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+dynamic_title = true
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.dimensions]
+columns = 160
+lines = 80
+
+[window.padding]
+x = 1
+y = 1
+
+[window.position]
+x = 0
+y = 0
