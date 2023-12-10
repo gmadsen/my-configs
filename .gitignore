@@ -2,3 +2,4 @@ nvim/plugin/packer_compiled.lua
 nvim/sessions/
 lazygit/state*
 lazygit/state.yml
+nvim/node_modules
