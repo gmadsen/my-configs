@@ -1,3 +1,3 @@
-function ll --wraps exa --description 'alias ll=exa -la --header'
-    exa -la --header $argv
+function ll --wraps eza --description 'alias ll=exa -la --header'
+    eza -la --header $argv
 end

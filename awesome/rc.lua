@@ -316,8 +316,8 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
+    --
     awful.key({ modkey }, "r", function () awful.spawn("rofi -show run") end,
-    -- awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -330,9 +330,19 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- XPS System keys
+    awful.key( {}, "#121", function() awful.util.spawn("amixer set Master toggle") end  ),
+    awful.key( {}, "#122", function() awful.util.spawn("amixer set Master 5-") end  ),
+    awful.key( {}, "#123", function() awful.util.spawn("amixer set Master 5+") end  ),
+    awful.key({ }, "#233", function () awful.util.spawn("xbacklight -inc 10") end,
+              {description = "raise screen brightness", group = "awesome"}),
+    awful.key({ }, "#232", function () awful.util.spawn("xbacklight -dec 10") end,
+              {description = "lower screen brightness", group = "awesome"})
 )
 
 clientkeys = gears.table.join(

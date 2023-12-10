@@ -11,7 +11,9 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-
+--
+-- Spawn a fish shell in login mode
+config.default_prog = { '/usr/bin/fish', '-l' }
 -- For example, changing the color scheme:
 config.color_scheme = 'AdventureTime'
 
