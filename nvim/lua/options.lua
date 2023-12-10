@@ -15,7 +15,7 @@ local g = vim.g -- global editor variables
 local o = vim.o -- options, non-list
 local opt = vim.opt -- options, list
 
-g.python3_host_prog = "$HOME/venvs/neovim/bin/python3"
+g.python3_host_prog = "$HOME/.virtualenvs/neovim/bin/python3"
 -- backup related options
 -- neovim backup directory
 local backup_dir = vim.fn.stdpath("data") .. "/.cache"
