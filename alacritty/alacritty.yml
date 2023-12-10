@@ -3,7 +3,7 @@
 # Import additional configuration files
 import:
   - /home/madsen/.config/alacritty/fonts.yml
-  - /home/madsen/external_pkgs/alacritty-theme/themes/gruvbox_material.yaml
+  # - /home/madsen/external_pkgs/alacritty-theme/themes/gruvbox_material.yaml
 
 shell:
   program: /usr/bin/fish
@@ -42,7 +42,7 @@ cursor:
   unfocused_hollow: false # true
 
 font:
-  size: 12
+  size: 10
   builtin_box_drawing: false
   draw_bold_text_with_bright_colors: false
 
