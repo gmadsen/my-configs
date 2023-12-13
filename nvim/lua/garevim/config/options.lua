@@ -47,6 +47,7 @@ vim.opt.fillchars = {
   diff = "/",
   foldopen = "",
   foldclose = "",
+  eob = " ",
 }
 vim.o.formatoptions = "jcroqlnt"
 vim.o.grepformat = "%f:%l:%c:%m"

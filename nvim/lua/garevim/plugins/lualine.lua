@@ -9,7 +9,7 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 local M = {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "SmiteshP/nvim-navic" },
+  dependencies = { "SmiteshP/nvim-navic", "EastEden/nightfox.nvim" },
   event = "VeryLazy",
 }
 
@@ -21,7 +21,7 @@ function M.config()
   require("lualine").setup({
     options = {
       icons_enabled = true,
-      theme = "catppuccin",
+      theme = "nightfox",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       disabled_filetypes = {

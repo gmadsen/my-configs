@@ -18,6 +18,7 @@ return {
       { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
+    opts = { inlay_hints = { enabled = true } },
     config = function()
       -- diagnostics
       for name, icon in pairs(require("garevim.config.icons").diagnostics) do

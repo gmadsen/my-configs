@@ -12,25 +12,12 @@ local M = {
   "akinsho/nvim-bufferline.lua",
   event = "BufAdd",
   dependencies = {
-    { "catppuccin" },
     { "nvim-tree/nvim-web-devicons" },
   },
 }
 
 function M.config()
-  local cat = require("catppuccin.palettes").get_palette()
-  cat.none = "NONE"
-
   require("bufferline").setup({
-    highlights = require("catppuccin.groups.integrations.bufferline").get({
-      styles = { "italic", "bold" },
-      custom = {
-        -- all = { fill = { bg = "#000000" } },
-        mocha = { background = { fg = cat.text } },
-        -- latte = { background = { fg = "#000000" } },
-      },
-    }),
-
     options = {
       -- mode = "buffers", -- set to "tabs" to only show tabpages instead
       -- numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string

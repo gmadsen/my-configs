@@ -1,6 +1,7 @@
 local M = {
   "rcarriga/nvim-notify",
   event = "VeryLazy",
+  dependencies = "EdenEast/nightfox.nvim",
   opts = {
     timeout = 3000,
     level = vim.log.levels.INFO,
