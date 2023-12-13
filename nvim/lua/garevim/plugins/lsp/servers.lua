@@ -89,8 +89,6 @@ local servers = {
   --     },
   --   },
   -- },
-  teal_ls = {},
   vimls = {},
-  -- tailwindcss = {},
 }
 return servers

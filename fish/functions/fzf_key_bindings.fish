@@ -1,1 +1,0 @@
-/home/madsen/.fzf/shell/key-bindings.fish
