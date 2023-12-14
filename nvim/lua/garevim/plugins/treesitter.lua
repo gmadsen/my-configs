@@ -2,9 +2,8 @@ local M = {
   "nvim-treesitter/nvim-treesitter",
   build = function()
     require("nvim-treesitter.install").update({ with_sync = true })()
-  end
+  end,
 }
-
 
 function M.config()
   local configs = require("nvim-treesitter.configs")
@@ -64,12 +63,12 @@ function M.config()
         node_decremental = "<C-bs>",
       },
     },
-    -- matchup = { enable = true },
+    matchup = { enable = true },
     rainbow = {
       enable = true,
       extended_mode = true,
       max_file_lines = 1000,
-    }
+    },
   })
 end
 

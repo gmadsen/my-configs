@@ -31,16 +31,16 @@ function M.config()
       -- NOTE: this plugin is designed with this icon in mind,
       -- and so changing this is NOT recommended, this is intended
       -- as an escape hatch for people who cannot bear it for whatever reason
-      -- indicator = {
-      -- 	icon = "▎", -- this should be omitted if indicator style is not 'icon'
-      -- 	style = "icon", -- 'icon' | 'underline' | 'none',
-      -- },
+      indicator = {
+        icon = "▎", -- this should be omitted if indicator style is not 'icon'
+        style = "icon", -- 'icon' | 'underline' | 'none',
+      },
 
-      -- buffer_close_icon = "",
-      -- modified_icon = "●",
-      -- close_icon = "",
-      -- left_trunc_marker = "",
-      -- right_trunc_marker = "",
+      buffer_close_icon = "󰅖",
+      modified_icon = "●",
+      close_icon = "",
+      left_trunc_marker = "",
+      right_trunc_marker = "",
 
       max_name_length = 18,
       max_prefix_length = 18, -- prefix used when a buffer is de-duplicate
@@ -52,7 +52,7 @@ function M.config()
       show_close_icon = true,
       show_buffer_icons = true, -- disable filetype icons for buffers
       show_buffer_close_icons = false,
-      separator_style = "thick", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
+      -- separator_style = "thick", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
       offsets = {
         {
           filetype = "NvimTree",

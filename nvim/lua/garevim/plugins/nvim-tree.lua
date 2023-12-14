@@ -24,8 +24,8 @@ local M = {
 
 function M.config()
   -- auto switches dark and light background
-  -- vim.cmd('autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None')
-  -- vim.cmd('autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg')
+  vim.cmd("autocmd ColorScheme * highlight highlight NvimTreeBg guibg=None")
+  vim.cmd("autocmd FileType NvimTree setlocal winhighlight=Normal:NvimTreeBg")
 
   require("nvim-tree").setup({
     disable_netrw = true,

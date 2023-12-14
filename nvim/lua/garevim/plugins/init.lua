@@ -13,7 +13,10 @@ return {
   "nvim-lua/plenary.nvim",
   "MunifTanjim/nui.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "nvim-tree/nvim-web-devicons",
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+  },
   {
     "SmiteshP/nvim-navic",
     config = function()
@@ -68,12 +71,12 @@ return {
   { "ellisonleao/glow.nvim" },
   { "simrat39/rust-tools.nvim", dependencies = "lspconfig" },
 
-  -- {
-  --   "andymass/vim-matchup",
-  --   config = function()
-  --     vim.g.matchup_matchparen_offscreen = { method = "popup" }
-  --   end,
-  -- },
+  {
+    "andymass/vim-matchup",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
   -- buffer remove
   {
     "echasnovski/mini.bufremove",

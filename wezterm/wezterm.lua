@@ -14,7 +14,9 @@ end
 
 config.default_prog = { "/usr/bin/fish", "-l" }
 
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("PragmataPro Mono")
+-- config.font = wezterm.font("JetBrains Mono")
+config.font_size = 16
 config.color_scheme = "nightfox"
 
 config.hide_tab_bar_if_only_one_tab = true

@@ -26,7 +26,8 @@ function M.config()
     icons = true, -- use devicons for filenames
     mode = "workspace_diagnostics", -- lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
     fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
+    fold_closed = "",
+    -- fold_closed = "", -- icon used for closed folds
 
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = false, -- automatically open the list when you have diagnostics
@@ -35,11 +36,11 @@ function M.config()
     auto_fold = false, -- automatically fold a file trouble list at creation
     signs = {
       -- icons / text used for a diagnostic
-      error = "",
+      error = "󰅚",
       warning = "",
-      hint = "",
+      hint = "󰌶",
       information = "",
-      other = "﫠",
+      other = "󰗡",
     },
     use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 
