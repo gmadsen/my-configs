@@ -11,6 +11,7 @@
 
 local M = {
   "nvim-tree/nvim-tree.lua",
+  dependencies = "nvim-tree/nvim-web-devicons",
   cmd = {
     "NvimTreeToggle",
     "NvimTreeOpen",
@@ -52,10 +53,17 @@ function M.config()
         enable = false, -- show indent markers when folders are open
       },
       highlight_opened_files = "all",
+      icons = {
+        glyphs = {
+          folder = {
+            arrow_closed = " ",
+          },
+        },
+      },
     },
 
     view = {
-      width = 25,
+      width = { min = 30, padding = 0 },
       side = "left",
       signcolumn = "yes",
     },

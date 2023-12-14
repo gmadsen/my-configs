@@ -25,6 +25,7 @@ vim.g.loaded_matchit = 1
 
 local indent = 2
 ----------- Global Options -----------------
+vim.opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 vim.o.autoindent = true -- maintain indent of current line
 vim.o.autowrite = true
 vim.opt.backspace = { "indent", "start", "eol" } -- make backspace behave like normal again
@@ -46,7 +47,7 @@ vim.o.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.fillchars = {
   diff = "/",
   foldopen = "",
-  foldclose = "",
+  foldclose = " ", -- ",
   eob = " ",
 }
 vim.o.formatoptions = "jcroqlnt"
@@ -88,7 +89,6 @@ vim.o.splitright = true -- open vertical splits to the right of the current wind
 vim.o.swapfile = false
 
 vim.o.tabstop = indent -- spaces per tab
-vim.opt.termguicolors = true -- Enable GUI colors for the terminal to get truecolor
 vim.o.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
 
 vim.o.undodir = cache_dir .. "/undos" -- where to put undo files

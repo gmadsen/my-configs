@@ -8,29 +8,22 @@
 -- ━━━━━━━━━━━━━━━━━━━❰ configs ❱━━━━━━━━━━━━━━━━━━━ --
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 
+-- To view the active highlight groups run `:so $VIMRUNTIME/syntax/hitest.vim`
 local M = {
   "akinsho/nvim-bufferline.lua",
   event = "BufAdd",
   dependencies = {
-    { "nvim-tree/nvim-web-devicons" },
+    { "nvim-tree/nvim-web-devicons", "EastEden/nightfox.nvim" },
   },
 }
 
 function M.config()
+  vim.cmd([[set termguicolors]])
   require("bufferline").setup({
     options = {
-      -- mode = "buffers", -- set to "tabs" to only show tabpages instead
-      -- numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string
+      themable = true,
       always_show_bufferline = true, -- don't show bufferline if there is only one file is opened
 
-      -- close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-      -- right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-      -- left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-      -- middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-
-      -- NOTE: this plugin is designed with this icon in mind,
-      -- and so changing this is NOT recommended, this is intended
-      -- as an escape hatch for people who cannot bear it for whatever reason
       indicator = {
         icon = "▎", -- this should be omitted if indicator style is not 'icon'
         style = "icon", -- 'icon' | 'underline' | 'none',
@@ -52,14 +45,14 @@ function M.config()
       show_close_icon = true,
       show_buffer_icons = true, -- disable filetype icons for buffers
       show_buffer_close_icons = false,
-      -- separator_style = "thick", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
+      separator_style = "thin", -- options "slant" | "thick" | "thin" | { 'any', 'any' },
       offsets = {
         {
           filetype = "NvimTree",
-          text = "File Explorer",
+          text = "Tree",
           highlight = "Directory",
-          text_align = "left",
-          separator = true,
+          text_align = "center",
+          separator = false,
         },
       },
     },
