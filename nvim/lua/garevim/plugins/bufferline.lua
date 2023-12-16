@@ -13,7 +13,7 @@ local M = {
   "akinsho/nvim-bufferline.lua",
   event = "BufAdd",
   dependencies = {
-    { "nvim-tree/nvim-web-devicons", "EastEden/nightfox.nvim" },
+    { "nvim-tree/nvim-web-devicons", "EdenEast/nightfox.nvim" },
   },
 }
 

@@ -1,0 +1,5 @@
+nvim@ /home/madsen/projects/my-configs/nvim
+├── neovim@4.10.1
+├── tree-sitter-cli@0.20.8
+└── tree-sitter@0.20.6
+

@@ -9,7 +9,7 @@
 -- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
 local M = {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "SmiteshP/nvim-navic", "EastEden/nightfox.nvim" },
+  dependencies = { "SmiteshP/nvim-navic", "EdenEast/nightfox.nvim" },
   event = "VeryLazy",
 }
 

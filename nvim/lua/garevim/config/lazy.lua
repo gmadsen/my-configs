@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup("garevim.plugins", {
   -- spec = "garevim.plugins",
   defaults = { lazy = true, version = "*" },
-  install = { colorscheme = { "nightfox" }},
+  -- install = { colorscheme = { "nightfox" }},
   checker = { enabled = true },
   performance = {
     rtp = {
