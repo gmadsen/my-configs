@@ -1,4 +1,5 @@
 return {
+  ---------- UI --------------------------------
 
   {
     "EdenEast/nightfox.nvim",
@@ -9,10 +10,8 @@ return {
       vim.cmd([[colorscheme nightfox]])
     end,
   },
-
   "nvim-lua/plenary.nvim",
   "MunifTanjim/nui.nvim",
-  "williamboman/mason-lspconfig.nvim",
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
@@ -28,22 +27,7 @@ return {
       })
     end,
   },
-  { --  Add/change/delete surrounding delimiter pairs with ease.
-    "kylechui/nvim-surround",
-    event = "BufWinEnter",
-    config = true,
-  },
-  { -- make todo in comments as special tags
-    "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = true,
-  },
-  { --  Neovim motions on speed!
-    "phaazon/hop.nvim",
-    config = true,
-  },
-
-  -- better vim.ui
+  -- better vim.ui i think
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
@@ -60,6 +44,25 @@ return {
       end
     end,
   },
+
+  ---------------------------------------------------------------------------
+
+  "williamboman/mason-lspconfig.nvim",
+
+  { --  Add/change/delete surrounding delimiter pairs with ease.
+    "kylechui/nvim-surround",
+    event = "BufWinEnter",
+    config = true,
+  },
+  { -- make todo in comments as special tags
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+  },
+  { --  Neovim motions on speed!
+    "phaazon/hop.nvim",
+    config = true,
+  },
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -70,6 +73,14 @@ return {
 
   { "ellisonleao/glow.nvim" },
   { "simrat39/rust-tools.nvim", dependencies = "lspconfig" },
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = {
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
 
   {
     "andymass/vim-matchup",
@@ -77,6 +88,9 @@ return {
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
   },
+
+  { "JoosepAlviste/nvim-ts-context-commentstring" },
+
   -- buffer remove
   {
     "echasnovski/mini.bufremove",
@@ -97,6 +111,5 @@ return {
         desc = "Delete Buffer (Force)",
       },
     },
-    { "JoosepAlviste/nvim-ts-context-commentstring" },
   },
 }

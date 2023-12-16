@@ -12,5 +12,5 @@ PS1='[\u@\h \W]\$ '
 
 source /usr/share/nvm/init-nvm.sh
 eval "$(zoxide init bash)
-
+eval "$(starship init bash)
 source /home/madsen/.config/broot/launcher/bash/br

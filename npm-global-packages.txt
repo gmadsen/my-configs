@@ -1,0 +1,5 @@
+/home/madsen/.local/share/nvm/v20.10.0/lib
+├── all-the-package-names@2.0.1197
+├── corepack@0.22.0
+└── npm@10.2.3
+
