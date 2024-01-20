@@ -20,6 +20,8 @@ require("awful.hotkeys_popup.keys")
 
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -246,6 +248,7 @@ awful.screen.connect_for_each_screen(function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
+			volume_widget(),
 			mykeyboardlayout,
 			wibox.widget.systray(),
 			mytextclock,
@@ -351,6 +354,10 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "r", function()
 		awful.spawn("rofi -show run")
 	end, { description = "run prompt", group = "launcher" }),
+
+	awful.key({ modkey }, "e", function()
+		awful.spawn("thunar")
+	end, { description = "run file explorer", group = "launcher" }),
 
 	awful.key({ modkey, "Control" }, "x", function()
 		awful.prompt.run({

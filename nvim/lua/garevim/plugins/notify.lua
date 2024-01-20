@@ -4,7 +4,7 @@ local M = {
   dependencies = "EdenEast/nightfox.nvim",
   opts = {
     timeout = 3000,
-    level = vim.log.levels.INFO,
+    level = vim.log.levels.ERROR,
     fps = 20,
     max_height = function()
       return math.floor(vim.o.lines * 0.75)
